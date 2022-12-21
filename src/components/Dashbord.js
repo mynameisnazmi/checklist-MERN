@@ -1,7 +1,8 @@
+import { Link } from "react-router-dom";
 import logo from "../Asset/logo.png";
 import centang from "../Asset/centang.png";
-import review from "../Asset/review.png";
-import { HomeModernIcon } from "@heroicons/react/24/solid";
+//import review from "../Asset/review.png";
+//import { HomeModernIcon } from "@heroicons/react/24/solid";
 function Dashbord() {
   return (
     <>
@@ -35,9 +36,13 @@ function Dashbord() {
           <div className=" col-span-2 grid grid-rows-5 place-content-center">
             <div></div>
             <div>
-              <button className="w-full bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-md">
-                Logout
-              </button>
+              <Link
+                className="w-full bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-md"
+                to="/login"
+              >
+                {" "}
+                Sign Out
+              </Link>
             </div>
 
             <div></div>

@@ -1,15 +1,17 @@
 import logo from "../Asset/logo.png";
+import { Link } from "react-router-dom";
+
 function Login() {
   return (
     <>
       <div className="grid grid-cols-2 h-screen max-sm:grid-cols-1">
-        <div className="grid bg-slate-50 h-full w-full place-content-center max-sm:grid-rows-4">
+        <div className="grid h-full w-full place-content-center max-sm:grid-rows-4">
           <div
             className="h-1/2 bg-no-repeat bg-contain bg-center mt-auto"
             style={{ backgroundImage: "url(" + logo + ")" }}
           ></div>
           <form>
-            <div className="flex flex-col h-full w-full bg-blue-100 gap-1 border-2 border-blue-500 rounded-md">
+            <div className="flex flex-col h-full w-full bg-[#E0F2FE] gap-1 border-2 border-[#173D6E] rounded-md">
               <label className="self-center py-2">Log in</label>
 
               <input
@@ -23,16 +25,18 @@ function Login() {
                 placeholder="Password"
                 type="password"
               ></input>
-
-              <button
-                type="button"
-                className=" self-center max-w-fit max-h-fit text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-md text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+              <Link
+                className="self-center max-w-fit max-h-fit text-white bg-[#173D6E] hover:bg-[#9BB6D5] font-medium rounded-md text-sm px-5 py-2.5 mr-2 mb-2"
+                to="/dashbord"
               >
                 Sign In
-              </button>
-              {/* <a className="self-center mb-1 -mt-3 px-1 py-2" href="#">
+              </Link>
+              {/* <Link
+                className="self-center max-w-fit max-h-fit text-white bg-[#173D6E] hover:bg-[#9BB6D5] font-medium rounded-md text-sm px-5 py-2.5 mr-2 mb-2"
+                to="/register"
+              >
                 Sign Up
-              </a> */}
+              </Link> */}
             </div>
           </form>
         </div>
