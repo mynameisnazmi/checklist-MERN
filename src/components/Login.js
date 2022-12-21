@@ -3,13 +3,13 @@ function Login() {
   return (
     <>
       <div className="grid grid-cols-2 h-screen max-sm:grid-cols-1">
-        <div className="grid bg-blue-300 h-full w-full place-content-center max-sm:grid-rows-4">
+        <div className="grid bg-slate-50 h-full w-full place-content-center max-sm:grid-rows-4">
           <div
             className="h-1/2 bg-no-repeat bg-contain bg-center mt-auto"
             style={{ backgroundImage: "url(" + logo + ")" }}
           ></div>
           <form>
-            <div className="flex flex-col h-full w-full bg-red-200 gap-1 rounded-md">
+            <div className="flex flex-col h-full w-full bg-blue-100 gap-1 border-2 border-blue-500 rounded-md">
               <label className="self-center py-2">Log in</label>
 
               <input
@@ -37,7 +37,7 @@ function Login() {
           </form>
         </div>
 
-        <div className="bg-sky-300/50 h-full max-sm:hidden">
+        <div className="bg-sky-100 h-full max-sm:hidden">
           <div
             className="h-full bg-no-repeat bg-contain bg-center mx-5 max-sm:hidden"
             style={{ backgroundImage: "url(" + logo + ")" }}
