@@ -44,23 +44,39 @@ function Dashbord() {
             <div></div>
           </div>
         </div>
-        <div className="grid grid-cols-10 bg-black gap-1">
-          <div></div>
-          <div></div>
-          <div className="grid grid-rows-6 col-span-3 w-full">
-            <div className="grid row-span-4 justify-items-center ">
+        <div className="grid  bg-white ">
+          <div className="grid grid-cols-10">
+            <div></div>
+            <div></div>
+            <div className="grid col-span-3 grid-rows-2 h-full border-2 rounded-2xl">
               <img
+                className="h-full w-full"
                 src={centang}
                 alt=""
-                className="w-5/6 h-5/6 self-center"
+                width="20%"
+                height="20%"
               ></img>
+              <button className="h-full w-full rounded-xl font-medium">
+                Update Checklist
+              </button>
             </div>
-            <div></div>
-            <div></div>
+            <input className="h-1/6 mb-2 self-center" type={"radio"}></input>
           </div>
-          <div className="col-span-3"></div>
-          <div></div>
-          <div></div>
+          <div className="grid">
+            <div className="grid grid-rows-2 h-2/6 border-2 rounded-2xl">
+              <img
+                className="h-5/6 w-full"
+                src={review}
+                alt=""
+                width="20%"
+                height="20%"
+              ></img>
+              <button className="w-full rounded-xl font-medium">
+                Review Checklist
+              </button>
+            </div>
+            <input className="w-full self-center" type={"radio"}></input>
+          </div>
         </div>
         <div className="grid">
           <div className="grid grid-row-8 h-full w-full">
