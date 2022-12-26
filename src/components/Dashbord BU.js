@@ -90,6 +90,47 @@ function Dashbord() {
           </div>
         </div>
       </div>
+
+      <div className="flex bg-zinc-300 flex-row felx-wrap place-content-center max-sm:flex-col">
+        <div className="pt-[3%] border-2 w-[30%] max-sm:mx-auto">
+          <div className="flex flex-col">
+            <div className="h-3/5">
+              <img
+                className="mx-auto"
+                src={centang}
+                alt=""
+                width="45%"
+                height="auto"
+              ></img>
+            </div>
+            <div className="mt-[5%] flex justify-center h-1/5">
+              Update checklist
+            </div>
+            <div className="flex justify-center h-1/5">
+              <input className="" type="radio" name="mode"></input>
+            </div>
+          </div>
+        </div>
+        <div className="pt-[3%] border-2 w-[30%] max-sm:mx-auto">
+          <div className="flex flex-col mt-[0%]">
+            <div className="h-3/5">
+              <img
+                className="mx-auto"
+                src={review}
+                alt=""
+                width="45%"
+                height="auto"
+              ></img>
+            </div>
+            <div className="mt-[5%] flex justify-center h-1/5">
+              Update checklist
+            </div>
+            <div className="flex justify-center h-1/5">
+              <input className="" type="radio" name="mode"></input>
+            </div>
+          </div>
+        </div>
+      </div>
     </>
   );
 }
