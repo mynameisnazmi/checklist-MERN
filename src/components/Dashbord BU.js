@@ -44,7 +44,7 @@ function Dashbord() {
             <div></div>
           </div>
         </div>
-        <div className="grid  bg-white ">
+        <div className="grid bg-white ">
           <div className="grid grid-cols-10">
             <div></div>
             <div></div>
