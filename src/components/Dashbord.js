@@ -8,7 +8,7 @@ function Dashbord() {
     <>
       <div className="grid grid-rows-8 h-screen bg-slate-100">
         <SectionHeader />
-
+ 
         <div
           name="section-mid-1"
           className="row-span-4 flex flex-row bg-slate-100"

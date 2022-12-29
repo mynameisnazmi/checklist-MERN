@@ -6,10 +6,10 @@ function SectionHeader() {
     <>
       <div
         name="section-head"
-        className="row-span-1 flex flex-col bg-[#E0F2FE] border-2 border-blue-900 sm:flex-row"
+        className="row-span-1 h-[33vh] flex flex-col bg-[#E0F2FE] border-2 border-blue-900 sm:flex-row sm:h-[23vh]"
       >
         {/* Row1 */}
-        <div className="basis-3/12 flex flex-col ">
+        <div className="basis-3/12 flex flex-col py-2">
           <div className="basis-3/5 flex">
             <img
               className="mx-auto w-1/3 h-auto self-center sm:w-2/3 md:w-10/12"
