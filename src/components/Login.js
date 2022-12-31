@@ -1,7 +1,44 @@
 import logo from "../Asset/logo.png";
 import { Link } from "react-router-dom";
+import React, { useState } from "react";
 
 function Login() {
+  const [nik, setnik] = useState("");
+  const [password, setpassword] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    let datauser;
+
+    if (nik.length < 1) {
+      alert("NIK Empty !");
+    }
+    if (password.length < 1) {
+      alert("Password Empty !");
+    }
+    if (nik.length > 1 && password.length > 1) {
+      datauser = {
+        nik: nik,
+        password: password,
+      };
+    }
+    console.log(datauser);
+    sendAuthdata(datauser);
+  };
+
+  async function sendAuthdata(data) {
+    const response = await fetch("http://localhost:3000/loginAuth", {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    });
+    const dataresponse = await response.json();
+    console.log(dataresponse);
+  }
+
   return (
     <>
       <div className="grid grid-cols-2 h-screen max-sm:grid-cols-1">
@@ -10,25 +47,39 @@ function Login() {
             className="h-1/2 bg-no-repeat bg-contain bg-center mt-auto"
             style={{ backgroundImage: "url(" + logo + ")" }}
           ></div>
-          <form>
-            <div className="flex flex-col h-full w-full bg-[#E0F2FE] gap-1 border-2 border-[#173D6E] rounded-md">
-              <label className="self-center py-2">Log in</label>
+          <form
+            onSubmit={handleSubmit}
+            className="flex flex-col h-full w-full bg-[#E0F2FE] gap-2 border-2 border-[#173D6E] rounded-md"
+          >
+            <p className="self-center py-2">Log in</p>
+            <input
+              type="number"
+              value={nik}
+              onChange={(e) => setnik(e.target.value)}
+              className="mx-2 my-2 px-2 py-2 rounded-md"
+              placeholder="NIK Number"
+            />
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setpassword(e.target.value)}
+              className="mx-2 my-2 px-2 py-2 rounded-md"
+              placeholder="Password"
+            />
 
-              <input className="mx-2 my-2 px-2 py-2 rounded-md" placeholder="Username" type="text"/>
-              <input className="mx-2 my-2 px-2 py-2 rounded-md" placeholder="Password" type="password"/>
-              
-              <Link className="self-center max-w-fit max-h-fit text-white bg-[#173D6E] hover:bg-[#9BB6D5] font-medium rounded-md text-sm px-5 py-2.5 mr-2 mb-2"
-                to="/dashbord">
-                Sign In
-              </Link>
-              
-              {/* <Link
-                className="self-center max-w-fit max-h-fit text-white bg-[#173D6E] hover:bg-[#9BB6D5] font-medium rounded-md text-sm px-5 py-2.5 mr-2 mb-2"
-                to="/register"
-              >
-                Sign Up
-              </Link> */}
-            </div>
+            <button
+              className="self-center max-w-fit max-h-fit text-white bg-[#173D6E] hover:bg-[#9BB6D5] font-medium rounded-md text-base px-5 py-2.5 mr-2 mb-2"
+              to="/dashbord"
+            >
+              Sign In
+            </button>
+
+            <Link
+              className="self-center max-w-fit max-h-fit text-white bg-[#173D6E] hover:bg-[#9BB6D5] font-medium rounded-md text-sm px-5 py-2.5 mr-2 mb-2"
+              to="/register"
+            >
+              Register
+            </Link>
           </form>
         </div>
 

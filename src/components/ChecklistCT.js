@@ -5,7 +5,7 @@ function ChecklistCT() {
     <>
       <div className="flex flex-col h-screen bg-slate-100">
         <div className="basis-[16%] flex-col">
-          <SectionHeader/>
+          <SectionHeader />
           <div className="flex flex-col  text-xl  items-center justify-center h-fit m-2 self-center sm:flex-row sm:text-4xl">
             <span>Coating-1</span>
             {/* <select className="border-2 mx-10">
@@ -23,7 +23,9 @@ function ChecklistCT() {
           <table className=" table-fixed text-center border-2 whitespace-nowrap text-[100%] sm:text-lg md:text-2xl lg:text-base">
             <thead className="border-b-2 border-collapse w-screen">
               <tr>
-                <th className="sticky left-0 bg-white w-[4%] px-0 sm:px-4 md:px-4 lg:px-0">No</th>
+                <th className="sticky left-0 bg-white w-[4%] px-0 sm:px-4 md:px-4 lg:px-0">
+                  No
+                </th>
                 <th className="w-[14%] px-2 sm:px-4 md:px-4 lg:px-0">Motor</th>
                 <th className="w-[8%] px-4 sm:px-4 md:px-4 lg:px-0">
                   Stetoskop
@@ -51,7 +53,9 @@ function ChecklistCT() {
             </thead>
             <tbody>
               <tr className=" h-10">
-                <td className="sticky left-0 max-w-[40px] min-w-[40px] bg-white">1</td>
+                <td className="sticky left-0 max-w-[40px] min-w-[40px] bg-white">
+                  1
+                </td>
                 <td className="">Fan Turret Unwind Fan Turret Unwind</td>
                 <td className="">
                   <select>
@@ -95,16 +99,16 @@ function ChecklistCT() {
           </table>
         </div>
         <div className="flex flex-col basis-[5%] h-full bg-slate-1004">
-          <div className="flex flex-row justify-center pt-3 py-3">
-            <button className=" w-20 text-white bg-[#173D6E] hover:bg-[#9BB6D5] font-medium rounded-md text-sm px-5 py-2.5 mr-2">
+          <div className="flex flex-row justify-center pt-3 py-3 text-base sm:text-lg md:text-xl">
+            <button className=" w-fit text-white bg-[#173D6E] hover:bg-[#9BB6D5] font-medium rounded-md px-5 py-2.5 mr-2">
               Reset
             </button>
-            <button className=" w-20 text-white bg-[#173D6E] hover:bg-[#9BB6D5] font-medium rounded-md text-sm px-5 py-2.5 ml-2">
+            <button className=" w-fit text-white bg-[#173D6E] hover:bg-[#9BB6D5] font-medium rounded-md px-5 py-2.5 ml-2">
               Submit
             </button>
           </div>
-        
-          <SectionFooter/>
+
+          <SectionFooter />
         </div>
       </div>
     </>

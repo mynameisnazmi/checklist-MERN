@@ -2,15 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 import { ArrowLeftOnRectangleIcon } from "@heroicons/react/24/solid";
 import logo from "../Asset/logo.png";
 function SectionHeader() {
-  function Locationview() {
-    const loc = useLocation();
-    //console.log(loc.pathname);
-    if (loc.pathname === "/dashbord") {
-      return true;
-    } else {
-      return false;
-    }
-  }
+  const loc = useLocation();
 
   return (
     <>
@@ -43,11 +35,11 @@ function SectionHeader() {
         {/* Row1 end */}
 
         <div className="basis-1/5 sm:basis-3/5 flex w-full border font-semibold text-xl lg:h-full sm:text-4xl lg:text-6xl sm:border-x-blue-900 border-y-[#E0F2FE]">
-                    <p className="mx-auto self-center">Online&nbsp;Checklist</p>
-         </div>
+          <p className="mx-auto self-center">Online&nbsp;Checklist</p>
+        </div>
 
         <div className="absolute sm:static basis-1/6 right-0 top-[30%]">
-          <Link to={Locationview() ? "/login" : "/dashbord"}>
+          <Link to={loc.pathname === "/dashbord" ? "/login" : "/dashbord"}>
             <div className="flex w-full h-full self center">
               <ArrowLeftOnRectangleIcon className="mx-auto h-auto w-2/3 max-sm:h-16" />
             </div>
