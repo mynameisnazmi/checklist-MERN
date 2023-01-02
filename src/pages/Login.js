@@ -49,15 +49,15 @@ function Login() {
           ></div>
           <form
             onSubmit={handleSubmit}
-            className="flex flex-col h-full w-full bg-[#E0F2FE] gap-2 border-2 border-[#173D6E] rounded-md"
+            className="flex flex-col h-full w-full bg-[#E0F2FE] gap-2 border-2 border-[#173D6E] rounded-md p-4"
           >
-            <p className="self-center py-2">Log in</p>
+            <span className="self-center py-2 text-lg font-bold text-[#173D6E]">Login</span>
             <input
               type="number"
               value={nik}
               onChange={(e) => setnik(e.target.value)}
               className="mx-2 my-2 px-2 py-2 rounded-md"
-              placeholder="NIK Number"
+              placeholder="NIK"
             />
             <input
               type="password"
@@ -66,20 +66,21 @@ function Login() {
               className="mx-2 my-2 px-2 py-2 rounded-md"
               placeholder="Password"
             />
-
+            <div className="flex flex-row justify-center">  
             <button
-              className="self-center max-w-fit max-h-fit text-white bg-[#173D6E] hover:bg-[#9BB6D5] font-medium rounded-md text-base px-5 py-2.5 mr-2 mb-2"
+              className="self-center text-white bg-[#173D6E] hover:bg-[#9BB6D5] font-medium rounded-md text-sm px-5 py-2.5 mr-2 mb-2"
               to="/dashbord"
             >
               Sign In
             </button>
 
             <Link
-              className="self-center max-w-fit max-h-fit text-white bg-[#173D6E] hover:bg-[#9BB6D5] font-medium rounded-md text-sm px-5 py-2.5 mr-2 mb-2"
+              className="self-center text-white bg-[#173D6E] hover:bg-[#9BB6D5] font-medium rounded-md text-sm px-5 py-2.5 ml-2 mb-2"
               to="/register"
             >
               Register
-            </Link>
+            </Link></div>
+          
           </form>
         </div>
 

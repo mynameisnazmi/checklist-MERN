@@ -11,6 +11,8 @@ export default function App() {
         <Route path="login" element={<Login />} />
         <Route path="dashbord" element={<Dashbord />} />
         <Route path="checklistCT" element={<ChecklistCT />} />
+        <Route path="register" element={<Register />} />
+        <Route path="checklistLine" element={<ChecklistLine />} />
       </Routes>
     </>
   );
