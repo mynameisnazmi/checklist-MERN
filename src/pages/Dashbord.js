@@ -1,8 +1,8 @@
 import checklist from "../Asset/centang.png";
 import review from "../Asset/review.png";
-import SectionHeader from "./SectionHeader";
 import { Link } from "react-router-dom";
-import SectionFooter from "./SectionFooter";
+import SectionHeader from "../components/SectionHeader";
+import SectionFooter from "../components/SectionFooter";
 
 function Dashbord() {
   return (

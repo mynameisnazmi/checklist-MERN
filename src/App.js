@@ -1,6 +1,6 @@
-import Dashbord from "./components/Dashbord";
-import Login from "./components/Login";
-import ChecklistCT from "./components/ChecklistCT";
+import Dashbord from "./pages/Dashbord";
+import Login from "./pages/Login";
+import ChecklistCT from "./pages/ChecklistCT";
 import { Routes, Route } from "react-router-dom";
 
 export default function App() {

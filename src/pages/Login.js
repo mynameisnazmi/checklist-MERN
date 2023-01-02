@@ -23,7 +23,7 @@ function Login() {
       };
     }
     console.log(datauser);
-    sendAuthdata(datauser);
+    //sendAuthdata(datauser);
   };
 
   async function sendAuthdata(data) {
