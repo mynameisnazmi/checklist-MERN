@@ -2,6 +2,8 @@ import Dashbord from "./pages/Dashbord";
 import Login from "./pages/Login";
 import ChecklistCT from "./pages/ChecklistCT";
 import { Routes, Route } from "react-router-dom";
+import Register from "./pages/Register";
+import ChecklistLine from "./pages/ChecklistLine";
 
 export default function App() {
   return (

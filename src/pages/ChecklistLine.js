@@ -1,5 +1,5 @@
-import SectionHeader from "./SectionHeader";
-import SectionFooter from "./SectionFooter";
+import SectionHeader from "../components/SectionHeader";
+import SectionFooter from "../components/SectionFooter";
 function ChecklistCT() {
   return (
     <>
