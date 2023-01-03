@@ -19,7 +19,7 @@ function Dashbord() {
           >
             <div
               name="border"
-              className="flex flex-col w-[90%] h-auto ml-[3vw] border border-blue-900 rounded-lg sm:ml-[15vw] sm:w-2/3 lg:ml-[50vh] lg:w-[40vh]"
+              className="flex flex-col w-[90%] h-auto ml-[3vw] border border-blue-900 rounded-lg sm:ml-[15vw] sm:w-2/3 lg:mr-[0vw] lg:w-[40vh]"
             >
               <label htmlFor="checklist" className="basis-1/2 ">
                 <img
@@ -48,7 +48,7 @@ function Dashbord() {
           >
             <div
               name="border"
-              className="flex flex-col w-[90%] h-auto mr-[3vw] border border-blue-900 rounded-lg sm:mr-[15vw] sm:w-2/3 lg:mr-[50vh] lg:w-[40vh]"
+              className="flex flex-col w-[90%] h-auto mr-[3vw] border border-blue-900 rounded-lg sm:mr-[15vw] sm:w-2/3 lg:ml-[0vw] lg:w-[40vh]"
             >
               <label htmlFor="review" className="basis-1/2 ">
                 <img className="mx-auto w-4/5 mt-3" alt="review" src={review} />
