@@ -15,11 +15,11 @@ function Dashbord() {
         >
           <div
             name="section-sub1"
-            className="basis-1/2 self-center flex justify-start"
+            className="basis-1/2 self-center flex justify-end"
           >
             <div
               name="border"
-              className="flex flex-col w-[90%] h-auto ml-[3vw] border border-blue-900 rounded-lg sm:ml-[15vw] sm:w-2/3 lg:mr-[0vw] lg:w-[40vh]"
+              className="flex flex-col w-[90%] h-auto ml-[3vw] border border-blue-900 rounded-lg sm:ml-[15vw] sm:w-2/3 lg:mr-[4vw] lg:w-[40vh]"
             >
               <label htmlFor="checklist" className="basis-1/2 ">
                 <img
@@ -44,11 +44,11 @@ function Dashbord() {
           </div>
           <div
             name="section-sub2"
-            className="basis-1/2 self-center flex justify-end"
+            className="basis-1/2 self-center flex justify-start"
           >
             <div
               name="border"
-              className="flex flex-col w-[90%] h-auto mr-[3vw] border border-blue-900 rounded-lg sm:mr-[15vw] sm:w-2/3 lg:ml-[0vw] lg:w-[40vh]"
+              className="flex flex-col w-[90%] h-auto mr-[3vw] border border-blue-900 rounded-lg sm:mr-[15vw] sm:w-2/3 lg:ml-[4vw] lg:w-[40vh]"
             >
               <label htmlFor="review" className="basis-1/2 ">
                 <img className="mx-auto w-4/5 mt-3" alt="review" src={review} />
@@ -71,12 +71,7 @@ function Dashbord() {
                 className="flex flex-col w-full text-base sm:text-base md:text-xl"
               >
                 <span className="self-center">Line</span>
-                <select
-                  className="border"
-                  onFocus="this.size=5;"
-                  onChange="this.size=1; this.blur();"
-                  onBlur="this.size=1"
-                >
+                <select className="border">
                   <option>Line OPP 4</option>
                   <option>Line OPP 5</option>
                   <option>Line OPP 6</option>

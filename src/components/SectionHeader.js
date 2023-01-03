@@ -1,8 +1,40 @@
 import { Link, useLocation } from "react-router-dom";
 import { ArrowLeftOnRectangleIcon } from "@heroicons/react/24/solid";
 import logo from "../Asset/logo.png";
+import { useEffect, useState } from "react";
 function SectionHeader() {
   const loc = useLocation();
+  const [time, setTime] = useState(new Date());
+  useEffect(() => {
+    setInterval(() => setTime(new Date()), 1000);
+  }, []);
+
+  // let h = curdate.getHours();
+  // let min = curdate.getMinutes();
+  // let d = curdate.getDate();
+  // let mon = curdate.getMonth() + 1;
+  // let y = curdate.getFullYear();
+
+  const addZero = (i) => {
+    if (i < 10) i = "0" + i;
+    return i;
+  };
+
+  const realTime =
+    addZero(time.getHours()) +
+    ":" +
+    addZero(time.getMinutes()) +
+    ":" +
+    addZero(time.getSeconds()) +
+    " " +
+    addZero(time.getDate()) +
+    "/" +
+    addZero(time.getMonth() + 1) +
+    "/" +
+    time.getFullYear();
+
+  //setInterval(realTime, 1000);
+  //console.log(time);
 
   return (
     <>
@@ -28,7 +60,7 @@ function SectionHeader() {
 
           <div className="basis-1/5 mx-auto flex">
             <p className="self-center text-sm sm:text-base md:text-xl">
-              11:11 11-11-1111
+              {realTime}
             </p>
           </div>
         </div>

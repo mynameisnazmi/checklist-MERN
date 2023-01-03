@@ -6,9 +6,9 @@ function ChecklistCT() {
       <div className="flex flex-col h-screen bg-slate-100">
         <div className="basis-[16%] flex-col">
           <SectionHeader />
-          <div className="flex flex-col  text-xl  items-center justify-center h-fit m-2 self-center sm:flex-row sm:text-4xl">
+          <div className="flex text-xl items-center justify-center h-fit m-2 self-center sm:flex-row sm:text-4xl">
             <span>Line-4</span>
-            <select className="border-2 mx-10">
+            <select className="border-2 mx-2 rounded-lg text-center">
               <option>Grinder</option>
               <option>Casting</option>
               <option>MDO</option>
@@ -19,83 +19,115 @@ function ChecklistCT() {
             </select>
           </div>
         </div>
-        <div className="relative basis-[69%] bg-white items-start justify-center w-screen overflow-x-auto ">
-          <table className=" table-fixed text-center border-2 whitespace-nowrap text-[100%] sm:text-lg md:text-2xl lg:text-base">
-            <thead className="border-b-2 border-collapse w-auto">
+        <div className="relative basis-[69%] bg-white items-start justify-center w-screen overflow-x-auto">
+          <table className="table-fixed text-center border-2 whitespace-nowrap text-[80%] sm:text-lg md:text-2xl lg:text-base">
+            <thead className="border-collapse w-auto">
               <tr>
-                <th className="sticky left-0 bg-white w-40 px-0 sm:px-4 md:px-4 lg:px-0">
+                <th
+                  rowSpan="3"
+                  className="sticky left-0 bg-white w-fit px-0 sm:px-4 md:px-4 lg:px-0 border-2"
+                >
                   No
                 </th>
-                <th className="px-2">Grinder</th>
-                <th className="px-4 sm:px-4 md:px-4"> Vib &#8597; DE mm/s</th>
-                <th className="px-4 sm:px-4 md:px-4">Vib &#8597; DE gE</th>
-                <th className="">Vib &harr; DE mm/s</th>
-                <th className=" ">Vib &harr; DE gE</th>
-                <th className=" ">Vib &#8597; NDE mm/s</th>
-                <th className=" ">Vib &#8597; NDE gE</th>
-                <th className=" ">Vib &harr; NDE mm/s</th>
-                <th className=" ">Vib &harr; NDE gE</th>
-                <th className=" ">Temp</th>
-                <th className=" ">Arus R</th>
-                <th className=" ">Arus S</th>
-                <th className=" ">Arus T</th>
-                <th className="">Keterangan</th>
+                <th rowSpan="3" className="px-4 border-2 w-[20%]">
+                  Grinder
+                </th>
+                <th colSpan="8 " className="border-2">
+                  Vibrasi Motor
+                </th>
+                <th rowSpan="3" className="border-2 w-[11%]">
+                  Temperature
+                </th>
+                <th rowSpan="2" colSpan="3" className="border-2">
+                  Arus
+                </th>
+                <th rowSpan="3" className="border-2">
+                  Keterangan
+                </th>
+              </tr>
+              <tr>
+                <th colSpan="2" className="border-2">
+                  Vertical
+                </th>
+                <th colSpan="2" className="border-2">
+                  Horizontal
+                </th>
+                <th colSpan="2" className="border-2">
+                  Vertical
+                </th>
+                <th colSpan="2" className="border-2">
+                  Horizontal
+                </th>
+              </tr>
+              <tr>
+                <th className="w-[5%] px-4 sm:px-4 md:px-2 border-2">
+                  DE mm/s
+                </th>
+                <th className="w-[5%] px-4 sm:px-4 md:px-2 border-2">DE gE</th>
+                <th className="w-[5%] px-4 sm:px-4 md:px-2 border-2">
+                  DE mm/s
+                </th>
+                <th className="w-[5%] px-4 sm:px-4 md:px-2 border-2">DE gE</th>
+                <th className="w-[5%] px-4 sm:px-4 md:px-2 border-2">
+                  NDE mm/s
+                </th>
+                <th className="w-[5%] px-4 sm:px-4 md:px-2 border-2">NDE gE</th>
+                <th className="w-[5%] px-4 sm:px-4 md:px-2 border-2">
+                  NDE mm/s
+                </th>
+                <th className="w-[5%] px-4 sm:px-4 md:px-2 border-2">NDE gE</th>
+                <th className="w-[5%] px-4 sm:px-4 md:px-2 border-2">R</th>
+                <th className="w-[5%] px-4 sm:px-4 md:px-2 border-2">S</th>
+                <th className="w-[5%] px-4 sm:px-4 md:px-2 border-2">T</th>
               </tr>
             </thead>
-            <tbody>
-              <tr className=" h-10">
-                <td className="sticky left-0 max-w-[40px] min-w-[40px] bg-white">
+            <tbody className="border-collapse">
+              <tr className="h-10">
+                <td className="sticky left-0 max-w-[40px] min-w-[40px] bg-white border">
                   1
                 </td>
-                <td className="">Transfer Waste Grinder</td>
-                <td className=" ">
-                  <input className="w-full border" type="number"></input>
+                <td className=" border px-2">Transfer Waste Grinder</td>
+                <td className=" border">
+                  <input className="w-[90%] border" type="number"></input>
                 </td>
-                <td className=" ">
-                  <input className="w-full border" type="number"></input>
+                <td className="border">
+                  <input className="w-[90%] border" type="number"></input>
                 </td>
-                <td className=" ">
-                  <input className="w-full border" type="number"></input>
-                </td>
-
-                <td className=" ">
-                  <input className="w-full border" type="number"></input>
-                </td>
-                <td className=" ">
-                  <input className="w-full border" type="number"></input>
+                <td className="border">
+                  <input className="w-[90%] border" type="number"></input>
                 </td>
 
-                <td className=" ">
-                  <input className="w-full border" type="number"></input>
+                <td className="border">
+                  <input className="w-[90%] border" type="number"></input>
                 </td>
-                <td className=" ">
-                  <input className="w-full border" type="number"></input>
-                </td>
-
-                <td className=" ">
-                  <input className="w-full border" type="number"></input>
-                </td>
-                <td className=" ">
-                  <input className="w-full border" type="number"></input>
-                </td>
-                <td className=" ">
-                  <input className="w-full border" type="number"></input>
-                </td>
-                <td className=" ">
-                  <input className="w-full border" type="number"></input>
-                </td>
-                <td className=" ">
-                  <input className="w-full border" type="number"></input>
-                </td>
-                <td className=" ">
-                  <input className="w-full border" type="number"></input>
-                </td>
-                <td className=" ">
-                  <input className="w-full border" type="number"></input>
+                <td className="border">
+                  <input className="w-[90%] border" type="number"></input>
                 </td>
 
-                <td className=" ">
-                  <input className="w-full border" type="text"></input>
+                <td className="border">
+                  <input className="w-[90%] border" type="number"></input>
+                </td>
+                <td className="border">
+                  <input className="w-[90%] border" type="number"></input>
+                </td>
+
+                <td className="border">
+                  <input className="w-[90%] border" type="number"></input>
+                </td>
+                <td className="border">
+                  <input className="w-[90%] border" type="number"></input>
+                </td>
+                <td className="border">
+                  <input className="w-[90%] border" type="number"></input>
+                </td>
+                <td className="border">
+                  <input className="w-[90%] border" type="number"></input>
+                </td>
+                <td className="border">
+                  <input className="w-[90%] border" type="number"></input>
+                </td>
+                <td className="border">
+                  <input className="w-[90%] border" type="number"></input>
                 </td>
               </tr>
             </tbody>

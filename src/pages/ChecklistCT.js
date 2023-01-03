@@ -23,32 +23,20 @@ function ChecklistCT() {
           <table className=" table-fixed text-center border-2 whitespace-nowrap text-[100%] sm:text-lg md:text-2xl lg:text-base">
             <thead className="border-b-2 border-collapse w-screen">
               <tr>
-                <th className="sticky left-0 bg-white w-[4%] px-0 sm:px-4 md:px-4 lg:px-0">
+                <th className="sticky left-0 bg-white w-fit px-0 sm:px-4 md:px-4 lg:px-0">
                   No
                 </th>
-                <th className="w-[14%] px-2 sm:px-4 md:px-4 lg:px-0">Motor</th>
-                <th className="w-[8%] px-4 sm:px-4 md:px-4 lg:px-0">
-                  Stetoskop
-                </th>
-                <th className="w-[8%] px-4  sm:px-4 md:px-4 lg:px-0">Arus R</th>
-                <th className="w-[8%] px-4 sm:px-4 md:px-4 lg:px-0">Arus S</th>
-                <th className="w-[8%] px-4 sm:px-4 md:px-4 lg:px-0">Arus T</th>
-                <th className="w-[8%] px-4 sm:px-4 md:px-4 lg:px-0">
-                  V DE mm/s
-                </th>
-                <th className="w-[8%] px-4 sm:px-4 md:px-4 lg:px-0">V DE gE</th>
-                <th className="w-[8%] px-4 sm:px-4 md:px-4 lg:px-0">
-                  V NDE mm/s
-                </th>
-                <th className="w-[8%] px-4 sm:px-4 md:px-4 lg:px-0">
-                  V NDE gE
-                </th>
-                <th className="w-[8%] px-4  sm:px-4 md:px-4 lg:px-0">
-                  T &deg; C
-                </th>
-                <th className="w-[10%] px-4  sm:px-4 md:px-4 lg:px-0">
-                  Anomali
-                </th>
+                <th className="px-4 lg:px-0">Motor</th>
+                <th className="px-4 sm:px-2 md:px-2 lg:px-0">Stetoskop</th>
+                <th className="px-4 sm:px-2 md:px-2 lg:px-0">Arus R</th>
+                <th className="px-4 sm:px-2 md:px-2 lg:px-0">Arus S</th>
+                <th className="px-4 sm:px-2 md:px-2 lg:px-0">Arus T</th>
+                <th className="px-4 sm:px-2 md:px-2 lg:px-0">V DE mm/s</th>
+                <th className="px-4 sm:px-2 md:px-2 lg:px-0">V DE gE</th>
+                <th className="px-4 sm:px-2 md:px-2 lg:px-0">V NDE mm/s</th>
+                <th className="px-4 sm:px-2 md:px-2 lg:px-0">V NDE gE</th>
+                <th className="px-4 sm:px-2 md:px-2 lg:px-0">T &deg; C</th>
+                <th className="px-4 sm:px-2 md:px-2 lg:px-0">Anomali</th>
               </tr>
             </thead>
             <tbody>
@@ -64,35 +52,35 @@ function ChecklistCT() {
                   </select>
                 </td>
                 <td className=" ">
-                  <input className="w-full border" type="number"></input>
+                  <input className="w-[90%] border" type="number"></input>
                 </td>
                 <td className=" ">
-                  <input className="w-full border" type="number"></input>
+                  <input className="w-[90%] border" type="number"></input>
                 </td>
                 <td className=" ">
-                  <input className="w-full border" type="number"></input>
-                </td>
-
-                <td className=" ">
-                  <input className="w-full border" type="number"></input>
-                </td>
-                <td className=" ">
-                  <input className="w-full border" type="number"></input>
+                  <input className="w-[90%] border" type="number"></input>
                 </td>
 
                 <td className=" ">
-                  <input className="w-full border" type="number"></input>
+                  <input className="w-[90%] border" type="number"></input>
                 </td>
                 <td className=" ">
-                  <input className="w-full border" type="number"></input>
-                </td>
-
-                <td className=" ">
-                  <input className="w-full border" type="number"></input>
+                  <input className="w-[90%] border" type="number"></input>
                 </td>
 
                 <td className=" ">
-                  <input className="w-full border" type="text"></input>
+                  <input className="w-[90%] border" type="number"></input>
+                </td>
+                <td className=" ">
+                  <input className="w-[90%] border" type="number"></input>
+                </td>
+
+                <td className=" ">
+                  <input className="w-[90%] border" type="number"></input>
+                </td>
+
+                <td className=" ">
+                  <input className="w-[90%] border" type="text"></input>
                 </td>
               </tr>
             </tbody>
