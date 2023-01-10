@@ -27,7 +27,7 @@ function Login() {
   };
 
   async function sendAuthdata(data) {
-    const response = await fetch("http://localhost:3000/loginAuth", {
+    const response = await fetch("http://localhost:5000/loginAuth", {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
