@@ -22,7 +22,7 @@ function Login() {
         password: password,
       };
     }
-    console.log(datauser);
+    //console.log(datauser);
     //sendAuthdata(datauser);
   };
 
@@ -51,7 +51,9 @@ function Login() {
             onSubmit={handleSubmit}
             className="flex flex-col h-full w-full bg-[#E0F2FE] gap-2 border-2 border-[#173D6E] rounded-md p-4"
           >
-            <span className="self-center py-2 text-lg font-bold text-[#173D6E]">Login</span>
+            <span className="self-center py-2 text-lg font-bold text-[#173D6E]">
+              Login
+            </span>
             <input
               type="number"
               value={nik}
@@ -66,21 +68,21 @@ function Login() {
               className="mx-2 my-2 px-2 py-2 rounded-md"
               placeholder="Password"
             />
-            <div className="flex flex-row justify-center">  
-            <button
-              className="self-center text-white bg-[#173D6E] hover:bg-[#9BB6D5] font-medium rounded-md text-sm px-5 py-2.5 mr-2 mb-2"
-              to="/dashbord"
-            >
-              Sign In
-            </button>
+            <div className="flex flex-row justify-center">
+              <button
+                className="self-center text-white bg-[#173D6E] hover:bg-[#9BB6D5] font-medium rounded-md text-sm px-5 py-2.5 mr-2 mb-2"
+                to="/dashbord"
+              >
+                Sign In
+              </button>
 
-            <Link
-              className="self-center text-white bg-[#173D6E] hover:bg-[#9BB6D5] font-medium rounded-md text-sm px-5 py-2.5 ml-2 mb-2"
-              to="/register"
-            >
-              Register
-            </Link></div>
-          
+              <Link
+                className="self-center text-white bg-[#173D6E] hover:bg-[#9BB6D5] font-medium rounded-md text-sm px-5 py-2.5 ml-2 mb-2"
+                to="/register"
+              >
+                Register
+              </Link>
+            </div>
           </form>
         </div>
 
