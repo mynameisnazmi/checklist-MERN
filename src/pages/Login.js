@@ -22,7 +22,7 @@ function Login() {
         password: password,
       };
     }
-    console.log(datauser);
+    //console.log(datauser);
     //sendAuthdata(datauser);
   };
 
