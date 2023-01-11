@@ -4,13 +4,13 @@ function Register() {
   return (
     <>
       <div className="flex h-screen bg-slate-100 justify-center">
-        <div className="flex flex-col self-center mb-20">
+        <div className="flex flex-col self-center mb-20 w-full sm:w-2/4">
           <img
             className="flex h-20 object-contain mb-4"
             alt="logo"
             src={logo}
           />
-          <form className="flex flex-col h-fit w-4/5 sm:w-[100%] bg-[#E0F2FE] border-2 border-[#173D6E] rounded-md p-1 self-center ">
+          <form className="flex flex-col h-fit w-4/5 sm:w-[100%] bg-[#E0F2FE] border-2 border-[#173D6E] rounded-md p-1 self-center">
             <span className="self-center py-1 text-lg font-bold text-[#173D6E]">
               Create Account
             </span>

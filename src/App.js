@@ -4,6 +4,7 @@ import ChecklistCT from "./pages/ChecklistCT";
 import { Routes, Route } from "react-router-dom";
 import Register from "./pages/Register";
 import ChecklistLine from "./pages/ChecklistLine";
+import ReviewSpecific from "./pages/ReviewSpecific";
 
 export default function App() {
   return (
@@ -15,6 +16,7 @@ export default function App() {
         <Route path="checklistCT" element={<ChecklistCT />} />
         <Route path="register" element={<Register />} />
         <Route path="checklistLine" element={<ChecklistLine />} />
+        <Route path="reviewspecific" element={<ReviewSpecific />} />
       </Routes>
     </>
   );

@@ -8,7 +8,7 @@ function ChecklistCT() {
           <SectionHeader />
           <div className="flex text-xl items-center justify-center h-fit m-2 self-center sm:flex-row sm:text-4xl">
             <span>Line-4</span>
-            <select className="border-2 mx-2 rounded-lg text-center">
+            <select className="border-2 mx-2 rounded-lg text-center shadow-sm">
               <option>Grinder</option>
               <option>Casting</option>
               <option>MDO</option>
@@ -127,7 +127,7 @@ function ChecklistCT() {
                   <input className="w-[90%] border" type="number"></input>
                 </td>
                 <td className="border">
-                  <input className="w-[90%] border" type="number"></input>
+                  <input className="w-[90%] border" type="text"></input>
                 </td>
               </tr>
             </tbody>

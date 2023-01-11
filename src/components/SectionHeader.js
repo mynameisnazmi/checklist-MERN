@@ -40,40 +40,38 @@ function SectionHeader() {
     <>
       <div
         name="section-head"
-        className="relative sm:static row-span-1 h-fit flex flex-col bg-[#E0F2FE] border-2 border-blue-900 sm:flex-row sm:h-[23vh]"
+        className="relative sm:static row-span-1 h-fit flex flex-col bg-[#E0F2FE] border-2 border-blue-900 sm:flex-row sm:h-[15vh]"
       >
         {/* Row1 */}
-        <div className="basis-3/12 flex flex-col pt-2">
-          <div className="basis-3/5 flex">
-            <img
-              className="mx-auto w-1/3 h-auto self-center sm:w-2/3 md:w-10/12"
-              alt="logo"
-              src={logo}
-            />
-          </div>
 
-          <div className="basis-1/5 mx-auto flex">
-            <p className="self-center text-sm text-center sm:text-base md:text-xl ">
+        <div className="basis-1/4 flex flex-col">
+          <img
+            className="m-auto w-1/3 h-auto sm:w-2/3 md:w-full px-2"
+            alt="logo"
+            src={logo}
+          />
+        </div>
+
+        {/* Row1 end */}
+
+        <div className="flex justify-center text text-center flex-col basis-1/5 sm:basis-[70%] w-full lg:h-full ">
+          <p className=" font-semibold text-xl sm:text-4xl lg:text-6xl">
+            Online&nbsp;Checklist
+          </p>
+          <div className="">
+            <p className="text-sm sm:text-base md:text-xl ">
               Danang wijiyanto / Calibration
             </p>
           </div>
-
-          <div className="basis-1/5 mx-auto flex">
-            <p className="self-center text-sm sm:text-base md:text-xl">
-              {realTime}
-            </p>
+          <div className="">
+            <p className="text-sm sm:text-base md:text-xl">{realTime}</p>
           </div>
         </div>
-        {/* Row1 end */}
 
-        <div className="basis-1/5 sm:basis-3/5 flex w-full border font-semibold text-xl lg:h-full sm:text-4xl lg:text-6xl sm:border-x-blue-900 border-y-[#E0F2FE]">
-          <p className="mx-auto self-center">Online&nbsp;Checklist</p>
-        </div>
-
-        <div className="absolute sm:static basis-1/6 right-0 top-[30%]">
+        <div className="basis-1/4">
           <Link to={loc.pathname === "/dashbord" ? "/login" : "/dashbord"}>
-            <div className="flex w-full h-full self center">
-              <ArrowLeftOnRectangleIcon className="mx-auto h-auto w-2/3 max-sm:h-16" />
+            <div className="flex flex-row justify-end w-full h-full">
+              <ArrowLeftOnRectangleIcon className="h-[86%] self-center w-2/3 max-sm:h-16" />
             </div>
           </Link>
         </div>
