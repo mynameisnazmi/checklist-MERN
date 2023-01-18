@@ -5,6 +5,7 @@ import { Routes, Route } from "react-router-dom";
 import Register from "./pages/Register";
 import ChecklistLine from "./pages/ChecklistLine";
 import ReviewSpecific from "./pages/ReviewSpecific";
+import ArghapediaHome from "./pages/ArghapediaHome";
 
 export default function App() {
   return (
@@ -17,6 +18,7 @@ export default function App() {
         <Route path="register" element={<Register />} />
         <Route path="checklistLine" element={<ChecklistLine />} />
         <Route path="reviewspecific" element={<ReviewSpecific />} />
+        <Route path="arghapediahome" element={<ArghapediaHome />} />
       </Routes>
     </>
   );

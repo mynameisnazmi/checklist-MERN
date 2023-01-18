@@ -1,0 +1,23 @@
+{
+    "Coating_1":{
+        "Daily" : ["Unwind","Main Drive","Gravur","Cooling Roll 1","Gravur Roll Latex","Suction Roll","Cooling Roll 2","Rewind A","Rewind B"],
+        "Weekly": ["Fan Turret Unwind","Fan Unwind","Fan Main Drive","Blower Corona","Exhaust Corona","Fan Gravur Rool Primer","Pump Coater Prime","Dryer #1 Sectoin #1.1","Dryer #1 Sectoin #1.2","Dryer #1 Sectoin #2.1","Dryer #1 Sectoin #2.2","Fan Cooling roll 1","Fan Gravur Rool Latex","Pump Coater Latex","Mixer Silo Coater Latex","Exhaust Infra Red","Exhaust Suction Roll","Dryer #2 Sectoin #1","Dryer #2 Sectoin #2","Dryer #2 Sectoin #3","Dryer #2 Sectoin #4","Dryer #2 Sectoin #5","Dryer Exhaust In","Dryer Exhaust Out","Fan Cooling roll 2","Fan Rewind A","Fan Rewind B"],
+        "Monthly": ["U/W Turret","R/W Turret","Pump Oil Dryer #1.1","Pump Oil Dryer #1.2","Pump Oil Dryer #2.1","Pump Oil Dryer #2.2","Pump Oil Dryer #2.3","Pump Oil Dryer #2.5","Electroda Corona","Dryer IR.1","Dryer IR.2","Dryer IR.3","Dryer IR.4","Dryer IR.5","Dryer IR.6","Dryer IR.7","Dryer IR.8","Dryer IR.9"]
+    },
+    "Coating_3":{
+        "Daily":["Unwind A","Unwind B","Infeed 1","Primary Roll","Vacuum Roll 1","Oven Roll 1","Chiller Roll 1","Infeed 2","Coater Roll","Vacuum Roll 2","Oven Roll 2","Chiller Roll 2"],
+        "Weekly":["Fan motor Unwind A","Fan motor Unwind B","Corona Blower","Fan Motor Infeed 1","Fan Motor Primary Roll","Fan Motor Vacuum Roll 1","Fan Motor Oven Roll 1","Fan Motor Chiller 1","Fan Motor Infeed 2","Fan Motor Coater Roll","Fan Motor Vacuum Roll 2","Fan Motor Oven Roll 2","Fan Motor Chiller 2","Fan Motor Trace Roll","Fan Motor Rewind A","Fan Motor Rewind B","Exhaust Infrared 2","Blower #1 Infrared 2","Blower #2 Infrared 2","Oven 1 Blower 1","Oven 1 Blower 2","Oven 1 Blower 3","Oven 1 Blower 4","Oven 1 Blower 5","Oven 2 Blower 1","Oven 2 Blower 2","Oven 2 Blower 3","Oven 2 Blower 4","Oven 2 Blower 5"],
+    "Monthly":["U/W Turret","R/W Turret","Motor Oscilation 1","Motor Oscilation 2","Electroda Corona","Dryer IR"]
+    },
+    "Coating_4":{
+        "Daily":["Unwind A","Unwind B","Infeed Corona","Expender 1","Gravure Roll Primer","Outfeed 1","Gravure Roll Latex","Expender 2","Suction Roll","Outfeed 2","Rewinder A","Rewinder B"],
+        "Weekly":["Fan Motor Unwind A","Fan Motor Unwind B","Fan Motor Rewind A","Fan Motor Rewind B","Corona Blower","Dryer 1","Dryer 2","Dryer 3","Dryer 4","Dryer 5","Dryer 6","Dryer 7","Dryer 1-2","Dryer 3-4","Dryer 5-7","Couter Outfeed Suction","Coater Oscilation 1","Coater Oscilation 2","Coater Pump Primer","Coater Pump Latex 1","Coater Pump Latex 2","Mixer Silo Coater Latex","Rewind Near Roll"],
+        "Monthly":["U/W Turret","R/W Turret","Motor Pump Edge guide U/W","Motor Pump Edge guide R/W","Electroda Corona","Dryer IR"]
+    },
+    "Metalize_1":{
+        "Daily":[],
+        "Weekly":[],
+        "Monthly":[]
+    }
+
+}
