@@ -9,13 +9,6 @@ function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
     let datauser;
-
-    if (nik.length < 1) {
-      alert("NIK Empty !");
-    }
-    if (password.length < 1) {
-      alert("Password Empty !");
-    }
     if (nik.length > 1 && password.length > 1) {
       datauser = {
         nik: nik,
@@ -60,6 +53,7 @@ function Login() {
               onChange={(e) => setnik(e.target.value)}
               className="mx-2 my-2 px-2 py-2 rounded-md shadow-md"
               placeholder="NIK"
+              required
             />
             <input
               type="password"
@@ -67,12 +61,10 @@ function Login() {
               onChange={(e) => setpassword(e.target.value)}
               className="mx-2 my-2 px-2 py-2 rounded-md shadow-md"
               placeholder="Password"
+              required
             />
             <div className="flex flex-row justify-center">
-              <button
-                className="self-center text-white bg-[#173D6E] hover:bg-[#9BB6D5] font-medium rounded-md text-sm px-5 py-2.5 mr-2 mb-2 shadow-lg"
-                to="/dashbord"
-              >
+              <button className="self-center text-white bg-[#173D6E] hover:bg-[#9BB6D5] font-medium rounded-md text-sm px-5 py-2.5 mr-2 mb-2 shadow-lg">
                 Sign In
               </button>
 
