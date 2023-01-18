@@ -23,21 +23,21 @@ function Login() {
       };
     }
     //console.log(datauser);
-    //sendAuthdata(datauser);
+    sendAuthdata(datauser);
   };
 
-  // async function sendAuthdata(data) {
-  //   const response = await fetch("http://localhost:3000/loginAuth", {
-  //     method: "POST",
-  //     body: JSON.stringify(data),
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       Accept: "application/json",
-  //     },
-  //   });
-  //   const dataresponse = await response.json();
-  //   console.log(dataresponse);
-  // }
+  async function sendAuthdata(data) {
+    const response = await fetch("http://localhost:5000/users", {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    });
+    const dataresponse = await response.json();
+    console.log(dataresponse);
+  }
 
   return (
     <>
