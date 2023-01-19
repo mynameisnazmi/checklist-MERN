@@ -1,10 +1,11 @@
 import logo from "../Asset/logo.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 
 function Login() {
   const [nik, setnik] = useState("");
   const [password, setpassword] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -29,7 +30,12 @@ function Login() {
       },
     });
     const dataresponse = await response.json();
-    console.log(dataresponse);
+    if (dataresponse.payload.status_code === 200) {
+      //alert(dataresponse.message);
+      navigate("/Dashbord");
+    } else {
+      alert(dataresponse.message);
+    }
   }
 
   return (

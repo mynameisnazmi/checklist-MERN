@@ -8,7 +8,7 @@ function ChecklistCT() {
           <SectionHeader />
           <div className="flex flex-col  text-xl  items-center justify-center h-fit m-2 self-center sm:flex-row sm:text-4xl">
             <span>Coating-1</span>
-            {/* <select className="border-2 mx-10">
+            <select className="border-2 mx-10">
               <option>Grinder</option>
               <option>Casting</option>
               <option>MDO</option>
@@ -16,7 +16,7 @@ function ChecklistCT() {
               <option>Silo</option>
               <option>TDO</option>
               <option>Extruder</option>
-            </select> */}
+            </select>
           </div>
         </div>
         <div className="relative basis-[69%] bg-white items-start justify-center w-screen overflow-x-auto ">

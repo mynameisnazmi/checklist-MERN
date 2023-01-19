@@ -1,5 +1,5 @@
 import logo from "../Asset/logo.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 function Register() {
@@ -7,7 +7,8 @@ function Register() {
   const [password, setpassword] = useState("");
   const [nama, setnama] = useState("");
   const [department, setdepartment] = useState("");
-  const [grade, setgrade] = useState("");
+  const [level, setgrade] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -18,15 +19,15 @@ function Register() {
         password: password,
         nama: nama,
         department: department,
-        grade: grade,
+        level: level,
       };
     }
-    console.log(datauser);
-    //sendAuthdata(datauser);
+    //console.log(datauser);
+    sendAuthdata(datauser);
   };
 
   async function sendAuthdata(data) {
-    const response = await fetch("http://localhost:5000/users", {
+    const response = await fetch("http://localhost:5000/users/register", {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
@@ -35,7 +36,13 @@ function Register() {
       },
     });
     const dataresponse = await response.json();
-    console.log(dataresponse);
+    //console.log(dataresponse);
+    if (dataresponse.payload.status_code === 200) {
+      alert(dataresponse.message);
+      navigate("/Login");
+    } else {
+      alert(dataresponse.message);
+    }
   }
   return (
     <>
@@ -59,6 +66,7 @@ function Register() {
               onChange={(e) => setnik(e.target.value)}
               className="mx-2 my-2 px-2 py-2 rounded-md shadow-md"
               placeholder="NIK"
+              required
             />
 
             <input
@@ -67,11 +75,13 @@ function Register() {
               onChange={(e) => setnama(e.target.value)}
               className="mx-2 my-2 px-2 py-2 rounded-md"
               placeholder="Nama"
+              required
             />
             <select
               value={department}
               onChange={(e) => setdepartment(e.target.value)}
               className=" mx-2 my-2 px-2 py-2 rounded-md"
+              required
             >
               <option disabled value="">
                 --Choose Department--
@@ -95,11 +105,13 @@ function Register() {
               onChange={(e) => setpassword(e.target.value)}
               className="mx-2 my-2 px-2 py-2 rounded-md shadow-md"
               placeholder="Password"
+              required
             />
             <select
-              value={grade}
+              value={level}
               onChange={(e) => setgrade(e.target.value)}
               className=" mx-2 my-2 px-2 py-2 rounded-md"
+              required
             >
               <option disabled value="">
                 --Choose Grade--
