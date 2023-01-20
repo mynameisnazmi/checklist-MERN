@@ -76,7 +76,7 @@ function Login() {
 
               <Link
                 className="self-center text-white bg-[#173D6E] hover:bg-[#9BB6D5] font-medium rounded-md text-sm px-5 py-2.5 ml-2 mb-2 shadow-lg"
-                to="/register"
+                to="/Register"
               >
                 Register
               </Link>
