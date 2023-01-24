@@ -27,6 +27,7 @@ function ChecklistCT() {
                   No
                 </th>
                 <th className="px-4 lg:px-0">Motor</th>
+                <th className="px-4 sm:px-2 md:px-2 lg:px-0">Visual</th>
                 <th className="px-4 sm:px-2 md:px-2 lg:px-0">Stetoskop</th>
                 <th className="px-4 sm:px-2 md:px-2 lg:px-0">Arus R</th>
                 <th className="px-4 sm:px-2 md:px-2 lg:px-0">Arus S</th>
@@ -45,6 +46,12 @@ function ChecklistCT() {
                   1
                 </td>
                 <td className="">Fan Turret Unwind Fan Turret Unwind</td>
+                <td className="">
+                  <select>
+                    <option>Bersih</option>
+                    <option>Kotor</option>
+                  </select>
+                </td>
                 <td className="">
                   <select>
                     <option>Halus</option>
