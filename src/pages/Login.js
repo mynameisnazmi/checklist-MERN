@@ -1,8 +1,9 @@
 import logo from "../Asset/logo.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
+import Cookies from "universal-cookie";
 
 function Login() {
   const [nik, setnik] = useState("");
@@ -10,8 +11,8 @@ function Login() {
   // const [error, setError] = useState(false);
   // const [success, setSuccess] = useState(false);
   // const [user, setUser] = useState(null);
-  // const navigate = useNavigate();
-
+  const navigate = useNavigate();
+  const cookies = new Cookies();
   // const refreshToken = async () => {
   //   try {
   //     const res = await axios.post("/refresh", { token: user.refreshToken });
@@ -47,14 +48,20 @@ function Login() {
     e.preventDefault();
     try {
       const res = await axios.post("/users", { nik, password });
-      const response = res.data;
-      console.log(response);
-      // if (dataresponse.payload.status_code === 200) {
-      //   //alert(dataresponse.message);
-      //   navigate("/Dashbord");
-      // } else {
-      //   alert(dataresponse.message);
-      // }
+      if (res.data.payload.status_code === 200) {
+        const response = jwt_decode(res.data.payload.data);
+        cookies.set("nik", response.nik, { path: "/" });
+        cookies.set("name", response.name, { path: "/" });
+        cookies.set("level", response.level, { path: "/" });
+        cookies.set("department", response.department, { path: "/" });
+        // console.log(cookies.get("nik"));
+        // console.log(cookies.get("name"));
+        // console.log(cookies.get("level"));
+        // console.log(cookies.get("department"));
+        navigate("/Dashbord");
+      } else {
+        alert(res.message);
+      }
     } catch (err) {
       console.log(err);
     }
