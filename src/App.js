@@ -6,8 +6,11 @@ import Register from "./pages/Register";
 import ChecklistLine from "./pages/ChecklistLine";
 import ReviewSpecific from "./pages/ReviewSpecific";
 import ArghapediaHome from "./pages/ArghapediaHome";
+import axios from "axios";
 
 export default function App() {
+  axios.defaults.baseURL = "http://localhost:5000";
+  axios.defaults.headers.post["Content-Type"] = "application/json";
   return (
     <>
       <Routes>

@@ -1,42 +1,77 @@
 import logo from "../Asset/logo.png";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import React, { useState } from "react";
+import axios from "axios";
+import jwt_decode from "jwt-decode";
 
 function Login() {
   const [nik, setnik] = useState("");
   const [password, setpassword] = useState("");
-  const navigate = useNavigate();
+  // const [error, setError] = useState(false);
+  // const [success, setSuccess] = useState(false);
+  // const [user, setUser] = useState(null);
+  // const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  // const refreshToken = async () => {
+  //   try {
+  //     const res = await axios.post("/refresh", { token: user.refreshToken });
+  //     setUser({
+  //       ...user,
+  //       accessToken: res.data.accessToken,
+  //       refreshToken: res.data.refreshToken,
+  //     });
+  //     return res.data;
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
+
+  // const axiosJWT = axios.create();
+
+  // axiosJWT.interceptors.request.use(
+  //   async (config) => {
+  //     let currentDate = new Date();
+  //     const decodedToken = jwt_decode(user.accessToken);
+  //     if (decodedToken.exp * 1000 < currentDate.getTime()) {
+  //       const data = await refreshToken();
+  //       config.headers["authorization"] = "Bearer " + data.accessToken;
+  //     }
+  //     return config;
+  //   },
+  //   (error) => {
+  //     return Promise.reject(error);
+  //   }
+  // );
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    let datauser;
-    if (nik.length > 1 && password.length > 1) {
-      datauser = {
-        nik: nik,
-        password: password,
-      };
+    try {
+      const res = await axios.post("/users", { nik, password });
+      const response = res.data;
+      console.log(response);
+      // if (dataresponse.payload.status_code === 200) {
+      //   //alert(dataresponse.message);
+      //   navigate("/Dashbord");
+      // } else {
+      //   alert(dataresponse.message);
+      // }
+    } catch (err) {
+      console.log(err);
     }
-    //console.log(datauser);
-    sendAuthdata(datauser);
   };
 
-  async function sendAuthdata(data) {
-    const response = await fetch("http://localhost:5000/users", {
-      method: "POST",
-      body: JSON.stringify(data),
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-    });
-    const dataresponse = await response.json();
-    if (dataresponse.payload.status_code === 200) {
-      //alert(dataresponse.message);
-      navigate("/Dashbord");
-    } else {
-      alert(dataresponse.message);
-    }
-  }
+  // const handleDelete = async (id) => {
+  //   setSuccess(false);
+  //   setError(false);
+  //   try {
+  //     await axiosJWT.delete("/users/" + id, {
+  //       headers: { authorization: "Bearer " + user.accessToken },
+  //     });
+  //     setSuccess(true);
+  //   } catch (err) {
+  //     setError(true);
+  //   }
+  // };
 
   return (
     <>
