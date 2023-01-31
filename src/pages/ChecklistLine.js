@@ -1,6 +1,22 @@
 import SectionHeader from "../components/SectionHeader";
 import SectionFooter from "../components/SectionFooter";
-function ChecklistCT() {
+import line4 from "../Asset/Data-parts/Line_4.json";
+import { useState } from "react";
+// import line5 from "../Asset/Data-parts/Line_5.json";
+// import line6 from "../Asset/Data-parts/Line_6.json";
+// import line7 from "../Asset/Data-parts/Line_7.json";
+
+function ChecklistLine() {
+  const [part, setPart] = useState("");
+  const arrpart = Object.keys(line4);
+  //console.log(line4.casting);
+  //console.log(Object.keys(line4)[0]);
+  //console.log(arrpart);
+
+  const test = () => {
+    console.log(part);
+  };
+
   return (
     <>
       <div className="flex flex-col h-screen bg-slate-100">
@@ -8,14 +24,16 @@ function ChecklistCT() {
           <SectionHeader />
           <div className="flex text-xl items-center justify-center h-fit m-2 self-center sm:flex-row sm:text-4xl">
             <span>Line-4</span>
-            <select className="border-2 mx-2 rounded-lg text-center shadow-sm">
-              <option>Grinder</option>
-              <option>Casting</option>
-              <option>MDO</option>
-              <option>Pull Roll</option>
-              <option>Silo</option>
-              <option>TDO</option>
-              <option>Extruder</option>
+            <select
+              value={part}
+              onChange={(e) => setPart(e.target.value)}
+              className="border-2 mx-2 rounded-lg text-center shadow-sm"
+            >
+              {arrpart.map((data, index) => (
+                <option value={data} key={index}>
+                  {data}
+                </option>
+              ))}
             </select>
           </div>
         </div>
@@ -23,7 +41,6 @@ function ChecklistCT() {
           <form>
             <table className="table-fixed text-center border-2 whitespace-nowrap text-[80%] sm:text-lg md:text-2xl lg:text-base">
               <thead className="border-collapse w-auto">
-                {}
                 <tr>
                   <th
                     rowSpan="3"
@@ -91,127 +108,142 @@ function ChecklistCT() {
                   <th className="w-[5%] px-4 sm:px-4 md:px-2 border-2">T</th>
                 </tr>
               </thead>
+
               <tbody className="border-collapse">
-                <tr className="h-10">
-                  <td className="sticky left-0 max-w-[40px] min-w-[40px] bg-white border">
-                    1
-                  </td>
-                  <td className=" border px-2">Transfer Waste Grinder</td>
-                  <td className=" border">
-                    <input
-                      className="w-[90%] border"
-                      type="number"
-                      step="any"
-                      name="data[$k]"
-                      size="3"
-                    />
-                  </td>
-                  <td className="border">
-                    <input
-                      className="w-[90%] border"
-                      type="number"
-                      step="any"
-                      name="data[$k]"
-                      size="3"
-                    />
-                  </td>
-                  <td className="border">
-                    <input
-                      className="w-[90%] border"
-                      type="number"
-                      step="any"
-                      name="data[$k]"
-                      size="3"
-                    />
-                  </td>
+                {line4.casting.map((data, index) => (
+                  <tr className="h-10" key={index}>
+                    <td className="sticky left-0 max-w-[40px] min-w-[40px] bg-white border">
+                      {index + 1}
+                    </td>
+                    <td className=" border px-2">{data}</td>
+                    <td className=" border">
+                      <input
+                        defaultValue={0}
+                        className="w-[90%] border"
+                        type="number"
+                        step="any"
+                        name="data[$k]"
+                        size="3"
+                      />
+                    </td>
+                    <td className="border">
+                      <input
+                        defaultValue={0}
+                        className="w-[90%] border"
+                        type="number"
+                        step="any"
+                        name="data[$k]"
+                        size="3"
+                      />
+                    </td>
+                    <td className="border">
+                      <input
+                        defaultValue={0}
+                        className="w-[90%] border"
+                        type="number"
+                        step="any"
+                        name="data[$k]"
+                        size="3"
+                      />
+                    </td>
 
-                  <td className="border">
-                    <input
-                      className="w-[90%] border"
-                      type="number"
-                      step="any"
-                      name="data[$k]"
-                      size="3"
-                    />
-                  </td>
-                  <td className="border">
-                    <input
-                      className="w-[90%] border"
-                      type="number"
-                      step="any"
-                      name="data[$k]"
-                      size="3"
-                    />
-                  </td>
+                    <td className="border">
+                      <input
+                        defaultValue={0}
+                        className="w-[90%] border"
+                        type="number"
+                        step="any"
+                        name="data[$k]"
+                        size="3"
+                      />
+                    </td>
+                    <td className="border">
+                      <input
+                        defaultValue={0}
+                        className="w-[90%] border"
+                        type="number"
+                        step="any"
+                        name="data[$k]"
+                        size="3"
+                      />
+                    </td>
 
-                  <td className="border">
-                    <input
-                      className="w-[90%] border"
-                      type="number"
-                      step="any"
-                      name="data[$k]"
-                      size="3"
-                    />
-                  </td>
-                  <td className="border">
-                    <input
-                      className="w-[90%] border"
-                      type="number"
-                      step="any"
-                      name="data[$k]"
-                      size="3"
-                    />
-                  </td>
+                    <td className="border">
+                      <input
+                        defaultValue={0}
+                        className="w-[90%] border"
+                        type="number"
+                        step="any"
+                        name="data[$k]"
+                        size="3"
+                      />
+                    </td>
+                    <td className="border">
+                      <input
+                        defaultValue={0}
+                        className="w-[90%] border"
+                        type="number"
+                        step="any"
+                        name="data[$k]"
+                        size="3"
+                      />
+                    </td>
 
-                  <td className="border">
-                    <input
-                      className="w-[90%] border"
-                      type="number"
-                      step="any"
-                      name="data[$k]"
-                      size="3"
-                    />
-                  </td>
-                  <td className="border">
-                    <input
-                      className="w-[90%] border"
-                      type="number"
-                      step="any"
-                      name="data[$k]"
-                      size="3"
-                    />
-                  </td>
-                  <td className="border">
-                    <input
-                      className="w-[90%] border"
-                      type="number"
-                      step="any"
-                      name="data[$k]"
-                      size="3"
-                    />
-                  </td>
-                  <td className="border">
-                    <input
-                      className="w-[90%] border"
-                      type="number"
-                      step="any"
-                      name="data[$k]"
-                      size="3"
-                    />
-                  </td>
-                  <td className="border">
-                    <input
-                      className="w-[90%] border"
-                      type="number"
-                      step="any"
-                      name="data[$k]"
-                      size="3"
-                    />
-                  </td>
-                  <td className="border">
-                    <textarea className="w-[90%] border" type="text" />
-                  </td>
-                </tr>
+                    <td className="border">
+                      <input
+                        defaultValue={0}
+                        className="w-[90%] border"
+                        type="number"
+                        step="any"
+                        name="data[$k]"
+                        size="3"
+                      />
+                    </td>
+                    <td className="border">
+                      <input
+                        defaultValue={0}
+                        className="w-[90%] border"
+                        type="number"
+                        step="any"
+                        name="data[$k]"
+                        size="3"
+                      />
+                    </td>
+                    <td className="border">
+                      <input
+                        defaultValue={0}
+                        className="w-[90%] border"
+                        type="number"
+                        step="any"
+                        name="data[$k]"
+                        size="3"
+                      />
+                    </td>
+                    <td className="border">
+                      <input
+                        defaultValue={0}
+                        className="w-[90%] border"
+                        type="number"
+                        step="any"
+                        name="data[$k]"
+                        size="3"
+                      />
+                    </td>
+                    <td className="border">
+                      <input
+                        defaultValue={0}
+                        className="w-[90%] border"
+                        type="number"
+                        step="any"
+                        name="data[$k]"
+                        size="3"
+                      />
+                    </td>
+                    <td className="border">
+                      <textarea className="w-[90%] border" type="text" />
+                    </td>
+                  </tr>
+                ))}
               </tbody>
             </table>
           </form>
@@ -221,7 +253,10 @@ function ChecklistCT() {
             <button className=" w-fit text-white bg-[#173D6E] hover:bg-[#9BB6D5] font-medium rounded-md px-5 py-2.5 mr-2">
               Reset
             </button>
-            <button className=" w-fit text-white bg-[#173D6E] hover:bg-[#9BB6D5] font-medium rounded-md px-5 py-2.5 ml-2">
+            <button
+              onClick={test}
+              className=" w-fit text-white bg-[#173D6E] hover:bg-[#9BB6D5] font-medium rounded-md px-5 py-2.5 ml-2"
+            >
               Submit
             </button>
           </div>
@@ -233,4 +268,4 @@ function ChecklistCT() {
   );
 }
 
-export default ChecklistCT;
+export default ChecklistLine;

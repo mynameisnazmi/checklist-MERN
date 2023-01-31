@@ -2,7 +2,18 @@ import { Link, useLocation } from "react-router-dom";
 import { ArrowLeftOnRectangleIcon } from "@heroicons/react/24/solid";
 import logo from "../Asset/logo.png";
 import { useEffect, useState } from "react";
+import Cookies from "universal-cookie";
+
 function SectionHeader() {
+  const cookies = new Cookies();
+
+  // console.log(cookies.get("ID"));
+  // console.log(cookies.get("name"));
+  // console.log(cookies.get("departemen"));
+  // console.log(cookies.get("typeUser"));
+  const name = cookies.get("name");
+  const departemen = cookies.get("departemen");
+
   const loc = useLocation();
   const [time, setTime] = useState(new Date());
   useEffect(() => {
@@ -60,7 +71,7 @@ function SectionHeader() {
           </p>
           <div className="">
             <p className="text-sm sm:text-base md:text-xl ">
-              Danang wijiyanto / Calibration
+              {name} / {departemen}
             </p>
           </div>
           <div className="">

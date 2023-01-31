@@ -2,7 +2,6 @@ import logo from "../Asset/logo.png";
 import { Link, useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 import axios from "axios";
-import jwt_decode from "jwt-decode";
 import Cookies from "universal-cookie";
 
 function Login() {
@@ -47,17 +46,19 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("/users", { nik, password });
-      if (res.data.payload.status_code === 200) {
-        const response = jwt_decode(res.data.payload.data);
-        cookies.set("nik", response.nik, { path: "/" });
-        cookies.set("name", response.name, { path: "/" });
-        cookies.set("level", response.level, { path: "/" });
-        cookies.set("department", response.department, { path: "/" });
-        // console.log(cookies.get("nik"));
+      const res = await axios.post("/users/auth", { nik, password });
+      if (res.data.status_code === 200) {
+        cookies.set("ID", res.data.info[0].ID, { path: "/" });
+        cookies.set("typeUser", res.data.info[0].typeUser, { path: "/" });
+        cookies.set("name", res.data.info[0].first_name, { path: "/" });
+        cookies.set("departemen", res.data.info[0].departemen, {
+          path: "/",
+        });
+        // console.log(res.data.info[0].first_name);
+        // console.log(cookies.get("ID"));
         // console.log(cookies.get("name"));
-        // console.log(cookies.get("level"));
-        // console.log(cookies.get("department"));
+        // console.log(cookies.get("departemen"));
+        // console.log(cookies.get("typeUser"));
         navigate("/Dashbord");
       } else {
         alert(res.message);

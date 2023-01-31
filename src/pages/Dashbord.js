@@ -1,10 +1,16 @@
 import checklist from "../Asset/centang.png";
 import review from "../Asset/review.png";
 import { Link } from "react-router-dom";
+import React, { useState } from "react";
 import SectionHeader from "../components/SectionHeader";
 import SectionFooter from "../components/SectionFooter";
 
 function Dashbord() {
+  const [mode, setMode] = useState("");
+  const [line, setLine] = useState("");
+  const [form, setForm] = useState("");
+  const [view, setView] = useState("");
+
   return (
     <>
       <div className="grid grid-rows-8 h-screen  w-fit bg-slate-100">
@@ -21,23 +27,24 @@ function Dashbord() {
               name="border"
               className="flex flex-col w-[90%] h-auto ml-[3vw] border border-blue-900 rounded-lg sm:ml-[15vw] sm:w-2/3 lg:mr-[4vw] lg:w-[40vh] shadow-xl"
             >
-              <label htmlFor="checklist" className="basis-1/2 ">
+              <label htmlFor="chklst" className="basis-1/2 ">
                 <img
                   className="mx-auto w-4/5 mt-3"
                   alt="checklist"
                   src={checklist}
                 />
               </label>
-              <label htmlFor="checklist" className="basis-1/4 py-1 mx-auto">
+              <label htmlFor="chklst" className="basis-1/4 py-1 mx-auto">
                 <p className="text-sm sm:text-xl md:text-2xl">Checklist</p>
               </label>
               <div className="basis-1/4 pb-2 mx-auto">
                 <input
-                  id="checklist"
-                  className=""
                   type="radio"
                   name="mode"
-                  value=""
+                  value="checklist"
+                  id="chklst"
+                  checked={mode === "checklist"}
+                  onChange={(e) => setMode(e.target.value)}
                 />
               </div>
             </div>
@@ -50,14 +57,21 @@ function Dashbord() {
               name="border"
               className="flex flex-col w-[90%] h-auto mr-[3vw] border border-blue-900 rounded-lg sm:mr-[15vw] sm:w-2/3 lg:ml-[4vw] lg:w-[40vh] shadow-xl"
             >
-              <label htmlFor="review" className="basis-1/2 ">
+              <label htmlFor="rvw" className="basis-1/2 ">
                 <img className="mx-auto w-4/5 mt-3" alt="review" src={review} />
               </label>
-              <label htmlFor="review" className="basis-1/4 py-1 mx-auto">
+              <label htmlFor="rvw" className="basis-1/4 py-1 mx-auto">
                 <p className="text-sm sm:text-xl md:text-2xl">View Data</p>
               </label>
               <div className="basis-1/4 pb-2 mx-auto">
-                <input id="review" className="" type="radio" name="mode" />
+                <input
+                  type="radio"
+                  name="mode"
+                  value="review"
+                  id="rvw"
+                  checked={mode === "review"}
+                  onChange={(e) => setMode(e.target.value)}
+                />
               </div>
             </div>
           </div>
@@ -71,20 +85,27 @@ function Dashbord() {
                 className="flex flex-col w-full text-base sm:text-base md:text-xl"
               >
                 <span className="self-center">Line</span>
-                <select className="border shadow-md">
-                  <option>Line OPP 4</option>
-                  <option>Line OPP 5</option>
-                  <option>Line OPP 6</option>
-                  <option>Line OPP 7</option>
-                  <option>Line OPP 8</option>
-                  <option>PET</option>
-                  <option>Coating 1</option>
-                  <option>Coating 3</option>
-                  <option>Coating 4</option>
-                  <option>Metallize 1 </option>
-                  <option>Metallize 2 </option>
-                  <option>Metallize 3 </option>
-                  <option>Metallize 4 </option>
+                <select
+                  value={line}
+                  onChange={(e) => setLine(e.target.value)}
+                  className="border shadow-md"
+                >
+                  <option disabled value="">
+                    --Choose Line--
+                  </option>
+                  <option value="line_4">Line OPP 4</option>
+                  <option value="line_5">Line OPP 5</option>
+                  <option value="line_6">Line OPP 6</option>
+                  <option value="line_7">Line OPP 7</option>
+                  <option value="line_8">Line OPP 8</option>
+                  <option value="PET">PET</option>
+                  <option value="Coat_1">Coating 1</option>
+                  <option value="Coat_3">Coating 3</option>
+                  <option value="Coat_4">Coating 4</option>
+                  <option value="Metz_1">Metallize 1 </option>
+                  <option value="Metz_2">Metallize 2 </option>
+                  <option value="Metz_3">Metallize 3 </option>
+                  <option value="Metz_4">Metallize 4 </option>
                 </select>
               </div>
               <div
@@ -92,8 +113,15 @@ function Dashbord() {
                 className="flex flex-col w-full text-base sm:text-base md:text-xl"
               >
                 <span className="self-center">Form</span>
-                <select className="border shadow-md">
-                  <option>Electrical</option>
+                <select
+                  value={form}
+                  onChange={(e) => setForm(e.target.value)}
+                  className="border shadow-md"
+                >
+                  <option disabled value="">
+                    --Choose Form--
+                  </option>
+                  <option value="elc">Electrical</option>
                 </select>
               </div>
               {/* Hanya muncu ketika klik review */}
@@ -102,13 +130,20 @@ function Dashbord() {
                 className="flex flex-col w-full text-base sm:text-base md:text-xl"
               >
                 <span className="self-center">View</span>
-                <select className="border shadow-md">
-                  <option>Specified</option>
-                  <option>General</option>
+                <select
+                  value={view}
+                  onChange={(e) => setView(e.target.value)}
+                  className="border shadow-md"
+                >
+                  <option disabled value="">
+                    --Choose View--
+                  </option>
+                  <option value="spc">Specified</option>
+                  <option value="gnr">General</option>
                 </select>
               </div>
-              {/* Hanya muncul ketika pilih coat metz */}
-              <div
+
+              {/* <div
                 name="Periode choose"
                 className="flex flex-col w-full text-base sm:text-base md:text-xl"
               >
@@ -118,11 +153,12 @@ function Dashbord() {
                   <option>Weekly</option>
                   <option>Monthly</option>
                 </select>
-              </div>
+              </div> */}
             </div>
             <div className="flex pt-[1%] place-content-center text-base sm:text-lg md:text-xl">
               <Link
-                to="/checklistCT"
+                to="/checklistLine"
+                //onClick={test}
                 className="self-center max-w-fit max-h-fit text-white bg-[#173D6E] hover:bg-[#9BB6D5] font-medium rounded-md px-5 py-2.5 shadow-md"
               >
                 Submit
