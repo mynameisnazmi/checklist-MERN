@@ -23,6 +23,7 @@ function ChecklistCT() {
           <form>
             <table className="table-fixed text-center border-2 whitespace-nowrap text-[80%] sm:text-lg md:text-2xl lg:text-base">
               <thead className="border-collapse w-auto">
+                {}
                 <tr>
                   <th
                     rowSpan="3"
@@ -31,7 +32,7 @@ function ChecklistCT() {
                     No
                   </th>
                   <th rowSpan="3" className="px-4 border-2 w-[20%]">
-                    Grinder
+                    Content
                   </th>
                   <th colSpan="8 " className="border-2">
                     Vibrasi Motor
