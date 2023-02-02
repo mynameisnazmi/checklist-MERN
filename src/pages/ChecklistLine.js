@@ -7,14 +7,34 @@ import { useState } from "react";
 // import line7 from "../Asset/Data-parts/Line_7.json";
 
 function ChecklistLine() {
-  const [part, setPart] = useState("");
+  const arr = [
+    line4.casting,
+    line4.ext,
+    line4.grinder,
+    line4.mdo,
+    line4.pullroll,
+    line4.silo,
+    line4.tdo,
+  ]; //
   const arrpart = Object.keys(line4);
+  const [part, setPart] = useState(arrpart[0]); // awalnya "" diganti jadi arrpart[0]
   //console.log(line4.casting);
   //console.log(Object.keys(line4)[0]);
   //console.log(arrpart);
 
+  const selectHandler = (event) => {
+    setPart(event.target.value);
+    console.log(event.target.value);
+  };
+  //
+  var index = arrpart.indexOf(part);
+  let type = null;
+  if (part === arrpart[index]) {
+    type = arr[index];
+  }
+  //
   const test = () => {
-    console.log(part);
+    console.log(index);
   };
 
   return (
@@ -26,7 +46,7 @@ function ChecklistLine() {
             <span>Line-4</span>
             <select
               value={part}
-              onChange={(e) => setPart(e.target.value)}
+              onChange={selectHandler}
               className="border-2 mx-2 rounded-lg text-center shadow-sm"
             >
               {arrpart.map((data, index) => (
@@ -110,7 +130,8 @@ function ChecklistLine() {
               </thead>
 
               <tbody className="border-collapse">
-                {line4.casting.map((data, index) => (
+                {/* dari line.casting jadi type */}
+                {type.map((data, index) => (
                   <tr className="h-10" key={index}>
                     <td className="sticky left-0 max-w-[40px] min-w-[40px] bg-white border">
                       {index + 1}
