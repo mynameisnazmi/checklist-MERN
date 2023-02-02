@@ -8,8 +8,8 @@ import App from "./App";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   // BrowserRouter for activate route
-
-  <Router basename={process.env.PUBLIC_URL}>
+  // basename={process.env.PUBLIC_URL}
+  <Router>
     <App />
   </Router>
 );

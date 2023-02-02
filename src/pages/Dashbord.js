@@ -28,7 +28,7 @@ function Dashbord() {
       if (form === "elc") {
         mchslice.current = machine.slice(0, 4);
         // console.log(mchslice);
-        if (mchslice.current === "line") {
+        if (mchslice.current === "Line") {
           setlinkvar("/ChecklistLine");
         } else {
           setlinkvar("/ChecklistCT");
@@ -37,7 +37,7 @@ function Dashbord() {
     } else if (mode === "review") {
       if (form === "elc") {
         mchslice.current = machine.slice(0, 4);
-        if (mchslice.current === "line") {
+        if (mchslice.current === "Line") {
           if (view === "gnr") {
             setlinkvar("/ReviewGnr");
           } else {
@@ -130,19 +130,19 @@ function Dashbord() {
                   <option disabled value="">
                     --Choose Machine--
                   </option>
-                  <option value="line_4">Line OPP 4</option>
-                  <option value="line_5">Line OPP 5</option>
-                  <option value="line_6">Line OPP 6</option>
-                  <option value="line_7">Line OPP 7</option>
-                  <option value="line_8">Line OPP 8</option>
-                  <option value="line_PET">PET</option>
-                  <option value="Coat_1">Coating 1</option>
-                  <option value="Coat_3">Coating 3</option>
-                  <option value="Coat_4">Coating 4</option>
-                  <option value="Metz_1">Metallize 1 </option>
-                  <option value="Metz_2">Metallize 2 </option>
-                  <option value="Metz_3">Metallize 3 </option>
-                  <option value="Metz_4">Metallize 4 </option>
+                  <option value="Line-4">Line OPP 4</option>
+                  <option value="Line-5">Line OPP 5</option>
+                  <option value="Line-6">Line OPP 6</option>
+                  <option value="Line-7">Line OPP 7</option>
+                  <option value="Line-8">Line OPP 8</option>
+                  <option value="Line-PET">PET</option>
+                  <option value="Coat-1">Coating 1</option>
+                  <option value="Coat-3">Coating 3</option>
+                  <option value="Coat-4">Coating 4</option>
+                  <option value="Metz-1">Metallize 1 </option>
+                  <option value="Metz-2">Metallize 2 </option>
+                  <option value="Metz-3">Metallize 3 </option>
+                  <option value="Metz-4">Metallize 4 </option>
                 </select>
               </div>
               <div

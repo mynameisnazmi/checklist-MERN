@@ -1,35 +1,47 @@
 import SectionHeader from "../components/SectionHeader";
 import SectionFooter from "../components/SectionFooter";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
-import line4 from "../Asset/Data-parts/Line_4.json";
-import line5 from "../Asset/Data-parts/Line_5.json";
-import line6 from "../Asset/Data-parts/Line_6.json";
-import line7 from "../Asset/Data-parts/Line_7.json";
+//import linedatas from "../Asset/Data-parts/Line_4.json";
+
+let linedatas = require("../Asset/Data-parts/Line_4.json");
+let linedatadef = Object.keys(linedatas);
 
 function ChecklistLine() {
   const objectname = "casting";
+
   let { state } = useLocation();
-  const [part, setPart] = useState("");
+  const [selpart, setSelpart] = useState("");
+  const [machinename, setMachinename] = useState("");
   const [arrpart, setArrpart] = useState([]);
+  const [linedata, setLinedata] = useState([]);
 
+  // setDatapart({
+  //   ...datapart,
+  //   line,
+  // });
+  //console.log(linedatadef[0]);
+  setArrpart([Object.keys(linedatas)]);
   useEffect(() => {
-    if (state.machine === "line_4") {
-      setArrpart(Object.keys(line4)); //part
-      setPart(arrpart[0]);
-    } else {
-      console.log("ee");
-    }
-  });
+    setMachinename(state.machine);
+    async function test() {
+      //setLinedata((linedata) => [...linedata, arrpart]);
+      console.log(arrpart);
+      //   setTimeout(function () {
 
-  //console.log(line4.casting);
-  //console.log(Object.keys(line4)[0]);
-  //console.log(arrpart);
+      //     //const part = Object.keys(datapart.line);
+      //     setArrpart(datapart);
+      //     console.log(Object.keys(datapart.line));
+      //   }, 10000);
+    }
+    test();
+  }, [arrpart]);
 
   const selectHandler = (event) => {
-    setPart(event.target.value);
-    console.log(event.target.value);
+    setSelpart(event.target.value);
+    // console.log(event.target.value);
   };
+
   //
   // var index = arrpart.indexOf(part);
   // let type = null;
@@ -37,9 +49,9 @@ function ChecklistLine() {
   //   type = arr[index];
   // }
   //
-  const test = () => {
-    //console.log(location.state);
-  };
+  // const test = () => {
+  //   console.log(location.state);
+  // };
 
   return (
     <>
@@ -47,17 +59,17 @@ function ChecklistLine() {
         <div className="basis-[16%] flex-col">
           <SectionHeader />
           <div className="flex text-xl items-center justify-center h-fit m-2 self-center sm:flex-row sm:text-4xl">
-            <span>Line-4</span>
+            <span>{machinename}</span>
             <select
-              value={part}
+              value={selpart}
               onChange={selectHandler}
               className="border-2 mx-2 rounded-lg text-center shadow-sm"
             >
-              {arrpart.map((data, index) => (
+              {/* {arrpart.map((data, index) => (
                 <option value={data} key={index}>
                   {data}
                 </option>
-              ))}
+              ))} */}
             </select>
           </div>
         </div>
@@ -135,8 +147,7 @@ function ChecklistLine() {
 
               <tbody className="border-collapse">
                 {/* dari line.casting jadi type */}
-
-                {line4.casting.map((data, index) => (
+                {/* {datapart.casting.map((data, index) => (
                   <tr className="h-10" key={index}>
                     <td className="sticky left-0 max-w-[40px] min-w-[40px] bg-white border">
                       {index + 1}
@@ -271,7 +282,7 @@ function ChecklistLine() {
                       />
                     </td>
                   </tr>
-                ))}
+                ))} */}
               </tbody>
             </table>
           </form>
@@ -285,7 +296,7 @@ function ChecklistLine() {
               Reset
             </button>
             <button
-              onClick={test}
+              // onClick={test}
               className=" w-fit text-white bg-[#173D6E] hover:bg-[#9BB6D5] font-medium rounded-md px-5 py-2.5 ml-2"
             >
               Submit
