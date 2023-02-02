@@ -1,23 +1,27 @@
 import SectionHeader from "../components/SectionHeader";
 import SectionFooter from "../components/SectionFooter";
+import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import line4 from "../Asset/Data-parts/Line_4.json";
-import { useState } from "react";
-// import line5 from "../Asset/Data-parts/Line_5.json";
-// import line6 from "../Asset/Data-parts/Line_6.json";
-// import line7 from "../Asset/Data-parts/Line_7.json";
+import line5 from "../Asset/Data-parts/Line_5.json";
+import line6 from "../Asset/Data-parts/Line_6.json";
+import line7 from "../Asset/Data-parts/Line_7.json";
 
 function ChecklistLine() {
-  const arr = [
-    line4.casting,
-    line4.ext,
-    line4.grinder,
-    line4.mdo,
-    line4.pullroll,
-    line4.silo,
-    line4.tdo,
-  ]; //
-  const arrpart = Object.keys(line4);
-  const [part, setPart] = useState(arrpart[0]); // awalnya "" diganti jadi arrpart[0]
+  const objectname = "casting";
+  let { state } = useLocation();
+  const [part, setPart] = useState("");
+  const [arrpart, setArrpart] = useState([]);
+
+  useEffect(() => {
+    if (state.machine === "line_4") {
+      setArrpart(Object.keys(line4)); //part
+      setPart(arrpart[0]);
+    } else {
+      console.log("ee");
+    }
+  });
+
   //console.log(line4.casting);
   //console.log(Object.keys(line4)[0]);
   //console.log(arrpart);
@@ -27,14 +31,14 @@ function ChecklistLine() {
     console.log(event.target.value);
   };
   //
-  var index = arrpart.indexOf(part);
-  let type = null;
-  if (part === arrpart[index]) {
-    type = arr[index];
-  }
+  // var index = arrpart.indexOf(part);
+  // let type = null;
+  // if (part === arrpart[index]) {
+  //   type = arr[index];
+  // }
   //
   const test = () => {
-    console.log(index);
+    //console.log(location.state);
   };
 
   return (
@@ -131,7 +135,8 @@ function ChecklistLine() {
 
               <tbody className="border-collapse">
                 {/* dari line.casting jadi type */}
-                {type.map((data, index) => (
+
+                {line4.casting.map((data, index) => (
                   <tr className="h-10" key={index}>
                     <td className="sticky left-0 max-w-[40px] min-w-[40px] bg-white border">
                       {index + 1}
@@ -140,7 +145,16 @@ function ChecklistLine() {
                     <td className=" border">
                       <input
                         defaultValue={0}
-                        className="w-[90%] border"
+                        className={objectname + " w-[90%] border"}
+                        type="number"
+                        step="any"
+                        size="3"
+                      />
+                    </td>
+                    <td className="border">
+                      <input
+                        defaultValue={0}
+                        className={objectname + " w-[90%] border"}
                         type="number"
                         step="any"
                         name="data[$k]"
@@ -150,17 +164,7 @@ function ChecklistLine() {
                     <td className="border">
                       <input
                         defaultValue={0}
-                        className="w-[90%] border"
-                        type="number"
-                        step="any"
-                        name="data[$k]"
-                        size="3"
-                      />
-                    </td>
-                    <td className="border">
-                      <input
-                        defaultValue={0}
-                        className="w-[90%] border"
+                        className={objectname + " w-[90%] border"}
                         type="number"
                         step="any"
                         name="data[$k]"
@@ -171,7 +175,7 @@ function ChecklistLine() {
                     <td className="border">
                       <input
                         defaultValue={0}
-                        className="w-[90%] border"
+                        className={objectname + " w-[90%] border"}
                         type="number"
                         step="any"
                         name="data[$k]"
@@ -181,7 +185,7 @@ function ChecklistLine() {
                     <td className="border">
                       <input
                         defaultValue={0}
-                        className="w-[90%] border"
+                        className={objectname + " w-[90%] border"}
                         type="number"
                         step="any"
                         name="data[$k]"
@@ -192,7 +196,7 @@ function ChecklistLine() {
                     <td className="border">
                       <input
                         defaultValue={0}
-                        className="w-[90%] border"
+                        className={objectname + " w-[90%] border"}
                         type="number"
                         step="any"
                         name="data[$k]"
@@ -202,7 +206,7 @@ function ChecklistLine() {
                     <td className="border">
                       <input
                         defaultValue={0}
-                        className="w-[90%] border"
+                        className={objectname + " w-[90%] border"}
                         type="number"
                         step="any"
                         name="data[$k]"
@@ -213,7 +217,7 @@ function ChecklistLine() {
                     <td className="border">
                       <input
                         defaultValue={0}
-                        className="w-[90%] border"
+                        className={objectname + " w-[90%] border"}
                         type="number"
                         step="any"
                         name="data[$k]"
@@ -223,7 +227,7 @@ function ChecklistLine() {
                     <td className="border">
                       <input
                         defaultValue={0}
-                        className="w-[90%] border"
+                        className={objectname + " w-[90%] border"}
                         type="number"
                         step="any"
                         name="data[$k]"
@@ -233,7 +237,7 @@ function ChecklistLine() {
                     <td className="border">
                       <input
                         defaultValue={0}
-                        className="w-[90%] border"
+                        className={objectname + " w-[90%] border"}
                         type="number"
                         step="any"
                         name="data[$k]"
@@ -243,7 +247,7 @@ function ChecklistLine() {
                     <td className="border">
                       <input
                         defaultValue={0}
-                        className="w-[90%] border"
+                        className={objectname + " w-[90%] border"}
                         type="number"
                         step="any"
                         name="data[$k]"
@@ -253,7 +257,7 @@ function ChecklistLine() {
                     <td className="border">
                       <input
                         defaultValue={0}
-                        className="w-[90%] border"
+                        className={objectname + " w-[90%] border"}
                         type="number"
                         step="any"
                         name="data[$k]"
@@ -261,7 +265,10 @@ function ChecklistLine() {
                       />
                     </td>
                     <td className="border">
-                      <textarea className="w-[90%] border" type="text" />
+                      <textarea
+                        className={objectname + " w-[90%] border"}
+                        type="text"
+                      />
                     </td>
                   </tr>
                 ))}
@@ -271,7 +278,10 @@ function ChecklistLine() {
         </div>
         <div className="flex flex-col basis-[5%] h-full bg-slate-1004">
           <div className="flex flex-row justify-center pt-3 py-3 text-base sm:text-lg md:text-xl">
-            <button className=" w-fit text-white bg-[#173D6E] hover:bg-[#9BB6D5] font-medium rounded-md px-5 py-2.5 mr-2">
+            <button
+              //onClick={reset}
+              className=" w-fit text-white bg-[#173D6E] hover:bg-[#9BB6D5] font-medium rounded-md px-5 py-2.5 mr-2"
+            >
               Reset
             </button>
             <button

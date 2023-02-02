@@ -56,7 +56,7 @@ export const data = {
   ],
 };
 
-function ReviewSpecific() {
+function ReviewSpc() {
   return (
     <>
       <div className="flex flex-col h-screen bg-slate-100 ">
@@ -158,4 +158,4 @@ function ReviewSpecific() {
   );
 }
 
-export default ReviewSpecific;
+export default ReviewSpc;

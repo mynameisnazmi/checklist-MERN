@@ -1,15 +1,52 @@
 import checklist from "../Asset/centang.png";
 import review from "../Asset/review.png";
-import { Link } from "react-router-dom";
-import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect, useRef } from "react";
 import SectionHeader from "../components/SectionHeader";
 import SectionFooter from "../components/SectionFooter";
 
 function Dashbord() {
+  const navigate = useNavigate();
   const [mode, setMode] = useState("");
-  const [line, setLine] = useState("");
+  const [machine, setMachine] = useState("");
   const [form, setForm] = useState("");
   const [view, setView] = useState("");
+  const [linkvar, setlinkvar] = useState("");
+  const mchslice = useRef("");
+
+  //console.log(data);
+
+  const gotoChecklist = () => {
+    navigate(linkvar, {
+      state: {
+        machine: machine,
+      },
+    });
+  };
+  useEffect(() => {
+    if (mode === "checklist") {
+      if (form === "elc") {
+        mchslice.current = machine.slice(0, 4);
+        // console.log(mchslice);
+        if (mchslice.current === "line") {
+          setlinkvar("/ChecklistLine");
+        } else {
+          setlinkvar("/ChecklistCT");
+        }
+      }
+    } else if (mode === "review") {
+      if (form === "elc") {
+        mchslice.current = machine.slice(0, 4);
+        if (mchslice.current === "line") {
+          if (view === "gnr") {
+            setlinkvar("/ReviewGnr");
+          } else {
+            setlinkvar("/ReviewSpc");
+          }
+        }
+      }
+    }
+  }, [mode, machine, form, view]);
 
   return (
     <>
@@ -86,19 +123,19 @@ function Dashbord() {
               >
                 <span className="self-center">Line</span>
                 <select
-                  value={line}
-                  onChange={(e) => setLine(e.target.value)}
+                  value={machine}
+                  onChange={(e) => setMachine(e.target.value)}
                   className="border shadow-md"
                 >
                   <option disabled value="">
-                    --Choose Line--
+                    --Choose Machine--
                   </option>
                   <option value="line_4">Line OPP 4</option>
                   <option value="line_5">Line OPP 5</option>
                   <option value="line_6">Line OPP 6</option>
                   <option value="line_7">Line OPP 7</option>
                   <option value="line_8">Line OPP 8</option>
-                  <option value="PET">PET</option>
+                  <option value="line_PET">PET</option>
                   <option value="Coat_1">Coating 1</option>
                   <option value="Coat_3">Coating 3</option>
                   <option value="Coat_4">Coating 4</option>
@@ -125,23 +162,28 @@ function Dashbord() {
                 </select>
               </div>
               {/* Hanya muncu ketika klik review */}
-              <div
-                name="View choose"
-                className="flex flex-col w-full text-base sm:text-base md:text-xl"
-              >
-                <span className="self-center">View</span>
-                <select
-                  value={view}
-                  onChange={(e) => setView(e.target.value)}
-                  className="border shadow-md"
+
+              {mode === "review" ? (
+                <div
+                  name="View choose"
+                  className="flex flex-col w-full text-base sm:text-base md:text-xl"
                 >
-                  <option disabled value="">
-                    --Choose View--
-                  </option>
-                  <option value="spc">Specified</option>
-                  <option value="gnr">General</option>
-                </select>
-              </div>
+                  <span className="self-center">View</span>
+                  <select
+                    value={view}
+                    onChange={(e) => setView(e.target.value)}
+                    className="border shadow-md"
+                  >
+                    <option disabled value="">
+                      --Choose View--
+                    </option>
+                    <option value="spc">Specified</option>
+                    <option value="gnr">General</option>
+                  </select>
+                </div>
+              ) : (
+                ""
+              )}
 
               {/* <div
                 name="Periode choose"
@@ -156,13 +198,12 @@ function Dashbord() {
               </div> */}
             </div>
             <div className="flex pt-[1%] place-content-center text-base sm:text-lg md:text-xl">
-              <Link
-                to="/checklistLine"
-                //onClick={test}
+              <button
+                onClick={gotoChecklist}
                 className="self-center max-w-fit max-h-fit text-white bg-[#173D6E] hover:bg-[#9BB6D5] font-medium rounded-md px-5 py-2.5 shadow-md"
               >
                 Submit
-              </Link>
+              </button>
             </div>
           </div>
         </div>
