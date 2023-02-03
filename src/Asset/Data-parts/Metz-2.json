@@ -1,0 +1,5 @@
+{
+    "Daily":["Unwind","Fan Motor Unwind","Rewind","Fan Motor Rewind"],
+    "Weekly":["Pivot Motor","Shutter Motor","Coating Window","Trolley Drive","Stroboscope","Holding Pump","Prevacuum Pump 1 Coating","Prevacuum Pump 2 Coating","Prevacuum Pump Winding","Root Pump Coating","Root Pump 1 Winding","Root Pump 2 Winding","Root Pump 3 Winding","Compressor 1 Celviplast","Compressor 2 Celviplast","Pump Cooling Internal","Pump Cooling External","Wire Feed 1","Wire Feed 2","Wire Feed 3","Wire Feed 4","Wire Feed 5","Wire Feed 6","Wire Feed 7","Wire Feed 8","Wire Feed 9","Wire Feed 10"],
+    "Monthly":["Heater Difusi 1","Heater Difusi 2","Heater Difusi 3","Heater Difusi 4","Plasma","Lauda 1.1","Lauda 1.2","Polycold"]
+}

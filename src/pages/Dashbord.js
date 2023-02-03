@@ -134,8 +134,8 @@ function Dashbord() {
                   <option value="Line-5">Line OPP 5</option>
                   <option value="Line-6">Line OPP 6</option>
                   <option value="Line-7">Line OPP 7</option>
-                  <option value="Line-8">Line OPP 8</option>
-                  <option value="Line-PET">PET</option>
+                  {/* <option value="Line-8">Line OPP 8</option>
+                  <option value="Line-PET">PET</option> */}
                   <option value="Coat-1">Coating 1</option>
                   <option value="Coat-3">Coating 3</option>
                   <option value="Coat-4">Coating 4</option>

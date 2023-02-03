@@ -1,0 +1,5 @@
+{
+    "Daily":["Unwind A","Unwind B","Infeed 1","Primary Roll","Vacuum Roll 1","Oven Roll 1","Chiller Roll 1","Infeed 2","Coater Roll","Vacuum Roll 2","Oven Roll 2","Chiller Roll 2"],
+    "Weekly":["Fan motor Unwind A","Fan motor Unwind B","Corona Blower","Fan Motor Infeed 1","Fan Motor Primary Roll","Fan Motor Vacuum Roll 1","Fan Motor Oven Roll 1","Fan Motor Chiller 1","Fan Motor Infeed 2","Fan Motor Coater Roll","Fan Motor Vacuum Roll 2","Fan Motor Oven Roll 2","Fan Motor Chiller 2","Fan Motor Trace Roll","Fan Motor Rewind A","Fan Motor Rewind B","Exhaust Infrared 2","Blower #1 Infrared 2","Blower #2 Infrared 2","Oven 1 Blower 1","Oven 1 Blower 2","Oven 1 Blower 3","Oven 1 Blower 4","Oven 1 Blower 5","Oven 2 Blower 1","Oven 2 Blower 2","Oven 2 Blower 3","Oven 2 Blower 4","Oven 2 Blower 5"],
+"Monthly":["U/W Turret","R/W Turret","Motor Oscilation 1","Motor Oscilation 2","Electroda Corona","Dryer IR"]
+}

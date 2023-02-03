@@ -1,0 +1,5 @@
+{
+    "Daily":["Unwind A","Unwind B","Infeed Corona","Expender 1","Gravure Roll Primer","Outfeed 1","Gravure Roll Latex","Expender 2","Suction Roll","Outfeed 2","Rewinder A","Rewinder B"],
+    "Weekly":["Fan Motor Unwind A","Fan Motor Unwind B","Fan Motor Rewind A","Fan Motor Rewind B","Corona Blower","Dryer 1","Dryer 2","Dryer 3","Dryer 4","Dryer 5","Dryer 6","Dryer 7","Dryer 1-2","Dryer 3-4","Dryer 5-7","Couter Outfeed Suction","Coater Oscilation 1","Coater Oscilation 2","Coater Pump Primer","Coater Pump Latex 1","Coater Pump Latex 2","Mixer Silo Coater Latex","Rewind Near Roll"],
+    "Monthly":["U/W Turret","R/W Turret","Motor Pump Edge guide U/W","Motor Pump Edge guide R/W","Electroda Corona","Dryer IR"]
+}
