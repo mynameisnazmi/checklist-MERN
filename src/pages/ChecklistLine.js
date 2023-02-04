@@ -13,8 +13,9 @@ function ChecklistLine() {
   const parts = Object.keys(dataparts); //load part machine
   const [arrpart, setArrpart] = useState(parts); //state for selection
   const [selpart, setSelpart] = useState(arrpart[0]);
+  const [datafromdb, setDatafromdb] = useState(arrpart[0]);
   const [linedata, setLinedata] = useState(dataparts); ///state for selection
-  const sel = useRef(arrpart[0]);
+  const sel = useRef(arrpart[0]); //send to db
 
   const handleFetchData = async () => {
     const requestOptions = {
@@ -27,7 +28,7 @@ function ChecklistLine() {
       requestOptions
     );
     const data = await response.json();
-    console.log(data.result[0]);
+    setDatafromdb(data.result[0]);
   };
 
   const selectHandler = (event) => {
@@ -161,7 +162,7 @@ function ChecklistLine() {
                     <td className=" border px-2">{data}</td>
                     <td className=" border px-1">
                       <input
-                        defaultValue={"_VDE_Vms"}
+                        value={datafromdb["Air_Knf_ArusT"]}
                         className={selpart + " w-[90%] border pl-1"}
                         type="number"
                         step="any"
