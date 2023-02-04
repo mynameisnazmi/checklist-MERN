@@ -13,7 +13,7 @@ function ChecklistLine() {
   const parts = Object.keys(dataparts); //load part machine
   const [arrpart, setArrpart] = useState(parts); //state for selection
   const [selpart, setSelpart] = useState(arrpart[0]);
-  const [linedata, setLinedata] = useState(dataparts); //state for selection
+  const [linedata, setLinedata] = useState(dataparts); ///state for selection
   const sel = useRef(arrpart[0]);
 
   const handleFetchData = async () => {
