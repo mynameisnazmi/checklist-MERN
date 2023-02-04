@@ -15,6 +15,7 @@ function ChecklistLine() {
   const [selpart, setSelpart] = useState(arrpart[0]);
   const [datafromdb, setDatafromdb] = useState(arrpart[0]);
   const [linedata, setLinedata] = useState(dataparts); ///state for selection
+  const [linevalue, setLinevalue] = useState(dataparts); ///state for selection
   const sel = useRef(arrpart[0]); //send to db
 
   const handleFetchData = async () => {
