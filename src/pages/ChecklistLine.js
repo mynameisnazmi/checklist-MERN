@@ -10,10 +10,11 @@ function ChecklistLine() {
   const [machinename, setMachinename] = useState(state.machine); //setmachine name
   const found = machine.find((element) => element === machinename); //search machine name
   const dataparts = require(`../Asset/Data-parts/${found}.json`); //load data base on machine name
-  const parts = Object.keys(dataparts); //load part machine
+  const parts = Object.keys(dataparts.dataparts); //load part machine
   const [arrpart, setArrpart] = useState(parts); //state for selection
   const [selpart, setSelpart] = useState(arrpart[0]);
-  const [linedata, setLinedata] = useState(dataparts); //state for selection
+  const [linedata, setLinedata] = useState(dataparts.dataparts); //state content data/line
+  const [linevalue, setLinevalue] = useState(dataparts.dbalias); //state value data/line
   const sel = useRef(arrpart[0]);
 
   const handleFetchData = async () => {
@@ -27,20 +28,20 @@ function ChecklistLine() {
       requestOptions
     );
     const data = await response.json();
-    console.log(data.result[0]);
+    //console.log(data.result[0]);
   };
 
   const selectHandler = (event) => {
     setSelpart(event.target.value);
     sel.current = event.target.value;
-    handleFetchData();
+    // handleFetchData();
   };
 
   useEffect(() => {
-    handleFetchData();
+    //handleFetchData();
   }, []);
   const test = () => {
-    // console.log(linedata[selpart]);
+    console.log(linevalue["casting"][0]);
   };
 
   return (
@@ -159,9 +160,16 @@ function ChecklistLine() {
                       {index + 1}
                     </td>
                     <td className=" border px-2">{data}</td>
+
+                    {/* {linevalue["casting"].map((data, index) => (
+                      <> */}
+
                     <td className=" border px-1">
                       <input
-                        defaultValue={"_VDE_Vms"}
+                        defaultValue={
+                          /*
+                          data.result[0].linevalue["casting"][0] +*/ "_VDE_Vms"
+                        }
                         className={selpart + " w-[90%] border pl-1"}
                         type="number"
                         step="any"
@@ -288,6 +296,8 @@ function ChecklistLine() {
                         type="text"
                       />
                     </td>
+                    {/* </>
+                    ))} */}
                   </tr>
                 ))}
               </tbody>
