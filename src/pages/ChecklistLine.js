@@ -13,9 +13,10 @@ function ChecklistLine() {
   const parts = Object.keys(dataparts.dataparts); //load part machine
   const [arrpart, setArrpart] = useState(parts); //state for selection
   const [selpart, setSelpart] = useState(arrpart[0]);
-  const [datafromdb, setDatafromdb] = useState(arrpart[0]);
-  const [linedata, setLinedata] = useState(dataparts); ///state for selection
-  const [linevalue, setLinevalue] = useState(dataparts); ///state for selection
+  const [datafromdb, setDatafromdb] = useState([]);
+  const [linedata, setLinedata] = useState(dataparts.dataparts); ///state for selection
+  const [linevalue, setLinevalue] = useState(dataparts.dbalias); ///state for selection
+  const [datastatus, setDatastatus] = useState(false); ///state for selection
   const sel = useRef(arrpart[0]); //send to db
 
   const handleFetchData = async () => {
@@ -28,21 +29,37 @@ function ChecklistLine() {
       `http://localhost:5000/checklist/line/`,
       requestOptions
     );
-    const data = await response.json();
-    setDatafromdb(data.result[0]);
+    if (response.status === 200) {
+      const data = await response.json();
+      setDatafromdb(data.result[0]);
+      //setDatastatus(true);
+    } else {
+      console.log(response.status);
+      //setDatastatus(false);
+    }
+
+    // if (data.result[0].length < 1) {
+    //   setDatafromdb([]);
+    // } else {
+    //   ;
+    // }
   };
 
   const selectHandler = (event) => {
     setSelpart(event.target.value);
     sel.current = event.target.value;
-    // handleFetchData();
+    handleFetchData();
   };
 
   useEffect(() => {
-    //handleFetchData();
+    handleFetchData();
   }, []);
   const test = () => {
-    console.log(linevalue["casting"][0]);
+    //console.log(linedata["casting"]);
+    //console.log(linevalue["casting"][0]);
+    // console.log(linevalue["casting"][0] + "_ArusT");
+    //console.log(datafromdb.length);
+    console.log(datastatus);
   };
 
   return (
@@ -155,6 +172,7 @@ function ChecklistLine() {
 
               <tbody className="border-collapse">
                 {/* dari line.casting jadi type */}
+
                 {linedata[selpart].map((data, index) => (
                   <tr className="h-10" key={index}>
                     <td className="sticky left-0 max-w-[40px] min-w-[40px] bg-white border text-center">
@@ -162,12 +180,13 @@ function ChecklistLine() {
                     </td>
                     <td className=" border px-2">{data}</td>
 
-                    {/* {linevalue["casting"].map((data, index) => (
-                      <> */}
-
                     <td className=" border px-1">
                       <input
-                        value={datafromdb["Air_Knf_ArusT"]}
+                        defaultValue={
+                          Object.keys(datafromdb).length > 0
+                            ? datafromdb[linevalue[selpart][index] + "_VDE_Vms"]
+                            : 0
+                        }
                         className={selpart + " w-[90%] border pl-1"}
                         type="number"
                         step="any"
@@ -176,28 +195,9 @@ function ChecklistLine() {
                     </td>
                     <td className="border px-1">
                       <input
-                        defaultValue={"_VDE_Vge"}
-                        className={selpart + " w-[90%] border pl-1"}
-                        type="number"
-                        step="any"
-                        name="data[$k]"
-                        size="3"
-                      />
-                    </td>
-                    <td className="border px-1">
-                      <input
-                        defaultValue={"_VDE_Hms"}
-                        className={selpart + " w-[90%] border pl-1"}
-                        type="number"
-                        step="any"
-                        name="data[$k]"
-                        size="3"
-                      />
-                    </td>
-
-                    <td className="border px-1">
-                      <input
-                        defaultValue={"_VDE_Hge"}
+                        defaultValue={
+                          datafromdb[linevalue[selpart][index] + "_VDE_Vge"]
+                        }
                         className={selpart + " w-[90%] border pl-1"}
                         type="number"
                         step="any"
@@ -207,7 +207,9 @@ function ChecklistLine() {
                     </td>
                     <td className="border px-1">
                       <input
-                        defaultValue={"_VNDE_Vms"}
+                        defaultValue={
+                          datafromdb[linevalue[selpart][index] + "_VDE_Hms"]
+                        }
                         className={selpart + " w-[90%] border pl-1"}
                         type="number"
                         step="any"
@@ -218,7 +220,9 @@ function ChecklistLine() {
 
                     <td className="border px-1">
                       <input
-                        defaultValue={"_VNDE_Vge"}
+                        defaultValue={
+                          datafromdb[linevalue[selpart][index] + "_VDE_Hge"]
+                        }
                         className={selpart + " w-[90%] border pl-1"}
                         type="number"
                         step="any"
@@ -228,7 +232,9 @@ function ChecklistLine() {
                     </td>
                     <td className="border px-1">
                       <input
-                        defaultValue={"_VNDE_Hms"}
+                        defaultValue={
+                          datafromdb[linevalue[selpart][index] + "_VNDE_Vms"]
+                        }
                         className={selpart + " w-[90%] border pl-1"}
                         type="number"
                         step="any"
@@ -239,7 +245,9 @@ function ChecklistLine() {
 
                     <td className="border px-1">
                       <input
-                        defaultValue={"_VNDE_Hge"}
+                        defaultValue={
+                          datafromdb[linevalue[selpart][index] + "_VNDE_Vge"]
+                        }
                         className={selpart + " w-[90%] border pl-1"}
                         type="number"
                         step="any"
@@ -249,7 +257,22 @@ function ChecklistLine() {
                     </td>
                     <td className="border px-1">
                       <input
-                        defaultValue={"_TempM"}
+                        defaultValue={
+                          datafromdb[linevalue[selpart][index] + "_VNDE_Hms"]
+                        }
+                        className={selpart + " w-[90%] border pl-1"}
+                        type="number"
+                        step="any"
+                        name="data[$k]"
+                        size="3"
+                      />
+                    </td>
+
+                    <td className="border px-1">
+                      <input
+                        defaultValue={
+                          datafromdb[linevalue[selpart][index] + "_VNDE_Hge"]
+                        }
                         className={selpart + " w-[90%] border pl-1"}
                         type="number"
                         step="any"
@@ -259,7 +282,21 @@ function ChecklistLine() {
                     </td>
                     <td className="border px-1">
                       <input
-                        defaultValue={"_ArusR"}
+                        defaultValue={
+                          datafromdb[linevalue[selpart][index] + "_TempM"]
+                        }
+                        className={selpart + " w-[90%] border pl-1"}
+                        type="number"
+                        step="any"
+                        name="data[$k]"
+                        size="3"
+                      />
+                    </td>
+                    <td className="border px-1">
+                      <input
+                        defaultValue={
+                          datafromdb[linevalue[selpart][index] + "_ArusR"]
+                        }
                         className={selpart + " w-full border pl-1"}
                         type="number"
                         step="any"
@@ -269,7 +306,9 @@ function ChecklistLine() {
                     </td>
                     <td className="border px-1 ">
                       <input
-                        defaultValue={"_ArusS"}
+                        defaultValue={
+                          datafromdb[linevalue[selpart][index] + "_ArusS"]
+                        }
                         className={selpart + " w-full border pl-1"}
                         type="number"
                         step="any"
@@ -279,7 +318,9 @@ function ChecklistLine() {
                     </td>
                     <td className="border px-1 ">
                       <input
-                        defaultValue={"_ArusT"}
+                        defaultValue={
+                          datafromdb[linevalue[selpart][index] + "_ArusT"]
+                        }
                         className={selpart + " w-full border pl-1"}
                         type="number"
                         step="any"
@@ -289,13 +330,13 @@ function ChecklistLine() {
                     </td>
                     <td className="border px-1 pt-1">
                       <textarea
-                        defaultValue={"_Ket"}
+                        defaultValue={
+                          datafromdb[linevalue[selpart][index] + "_Ket"]
+                        }
                         className={selpart + " w-[90%] border pl-1"}
                         type="text"
                       />
                     </td>
-                    {/* </>
-                    ))} */}
                   </tr>
                 ))}
               </tbody>
