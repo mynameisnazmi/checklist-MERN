@@ -17,7 +17,7 @@ function ChecklistLine() {
   const [datafromdb, setDatafromdb] = useState([]);
   const [linedata, setLinedata] = useState(dataparts.dataparts); ///state for selection
   const [linevalue, setLinevalue] = useState(dataparts.dbalias); ///state for selection
-  const [datalength, setDatalength] = useState(0); ///state for selection
+  const [dataform, setDataform] = useState(); ///state for selection
   const sel = useRef(arrpart[0]); //send to db
 
   const handleFetchData = async () => {
@@ -27,36 +27,31 @@ function ChecklistLine() {
         partname: sel.current,
       });
       setDatafromdb(res.data.result[0]);
-      setDatalength(Object.keys(datafromdb).length);
-      test();
     } catch (error) {
       console.log(error.message);
     }
+  };
 
-    //console.log(datafromdb);
-    //setDatalength(Object.keys(datafromdb).length);
-    //console.log(datalength);
+  const handleSubmit = (event) => {
+    //send data here
+    event.preventDefault();
+    console.log(dataform);
+    // console.log(Object.keys(dataform).length);
+  };
 
-    // const requestOptions = {
-    //   method: "POST",
-    //   headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify({ machinename: machinename, partname: sel.current }),
-    // };
-    // const response = await fetch(
-    //   `http://localhost:5000/checklist/line/`,
-    //   requestOptions
-    // );
-    // if (response.status === 200) {
-    //   const data = await response.json();
-    //   setDatafromdb(data.result[0]);
-    // } else {
-    //   console.log(response.status);
-    // }
+  const handleChange = (evt) => {
+    const value = evt.target.value;
+    setDataform({
+      ...dataform,
+      [evt.target.name]: value,
+    });
   };
 
   const selectHandler = (event) => {
     setSelpart(event.target.value);
     sel.current = event.target.value;
+    setDataform({});
+    document.getElementById("forms").reset();
     handleFetchData();
   };
 
@@ -64,17 +59,11 @@ function ChecklistLine() {
     handleFetchData();
   }, []);
 
-  // console.log(Object.keys(datafromdb).length);
-  // if (Object.keys(datafromdb).length > 0) {
-  //   setDatalength(true);
-  // } else {
-  //   setDatalength(false);
-  // }
   const test = () => {
     //console.log(linedata["casting"]);
     //console.log(linevalue["casting"][0]);
     // console.log(linevalue["casting"][0] + "_ArusT");
-    console.log(datalength);
+    //console.log(datalength);
     console.log(Object.keys(datafromdb).length);
     console.log(datafromdb);
   };
@@ -100,7 +89,7 @@ function ChecklistLine() {
           </div>
         </div>
         <div className="relative basis-[69%] bg-white items-start justify-center w-screen overflow-x-auto">
-          <form>
+          <form id="forms" onSubmit={handleSubmit}>
             <table className="table-fixed border-2 whitespace-nowrap text-[80%] sm:text-lg md:text-2xl lg:text-base">
               <thead className="border-collapse w-auto">
                 <tr>
@@ -199,7 +188,6 @@ function ChecklistLine() {
                       {data}
                     </td>
                     <td className=" border px-1">
-                      {console.log(datalength)}
                       <input
                         defaultValue={
                           datafromdb[linevalue[selpart][index] + "_VDE_Vms"]
@@ -209,6 +197,7 @@ function ChecklistLine() {
                         type="number"
                         step="any"
                         size="3"
+                        onChange={handleChange}
                       />
                     </td>
                     <td className="border px-1">
@@ -220,8 +209,8 @@ function ChecklistLine() {
                         className={" w-[90%] border pl-1"}
                         type="number"
                         step="any"
-                        // name="data[$k]"
                         size="3"
+                        onChange={handleChange}
                       />
                     </td>
                     <td className="border px-1">
@@ -233,8 +222,8 @@ function ChecklistLine() {
                         className={" w-[90%] border pl-1"}
                         type="number"
                         step="any"
-                        // name="data[$k]"
                         size="3"
+                        onChange={handleChange}
                       />
                     </td>
 
@@ -247,8 +236,8 @@ function ChecklistLine() {
                         className={" w-[90%] border pl-1"}
                         type="number"
                         step="any"
-                        // name="data[$k]"
                         size="3"
+                        onChange={handleChange}
                       />
                     </td>
                     <td className="border px-1">
@@ -260,8 +249,8 @@ function ChecklistLine() {
                         className={" w-[90%] border pl-1"}
                         type="number"
                         step="any"
-                        // name="data[$k]"
                         size="3"
+                        onChange={handleChange}
                       />
                     </td>
 
@@ -274,8 +263,8 @@ function ChecklistLine() {
                         className={" w-[90%] border pl-1"}
                         type="number"
                         step="any"
-                        // name="data[$k]"
                         size="3"
+                        onChange={handleChange}
                       />
                     </td>
                     <td className="border px-1">
@@ -287,8 +276,8 @@ function ChecklistLine() {
                         className={" w-[90%] border pl-1"}
                         type="number"
                         step="any"
-                        // name="data[$k]"
                         size="3"
+                        onChange={handleChange}
                       />
                     </td>
 
@@ -301,8 +290,8 @@ function ChecklistLine() {
                         className={" w-[90%] border pl-1"}
                         type="number"
                         step="any"
-                        // name="data[$k]"
                         size="3"
+                        onChange={handleChange}
                       />
                     </td>
                     <td className="border px-1">
@@ -314,8 +303,8 @@ function ChecklistLine() {
                         className={" w-[90%] border pl-1"}
                         type="number"
                         step="any"
-                        // name="data[$k]"
                         size="3"
+                        onChange={handleChange}
                       />
                     </td>
                     <td className="border px-1">
@@ -327,8 +316,8 @@ function ChecklistLine() {
                         className={" w-full border pl-1"}
                         type="number"
                         step="any"
-                        // name="data[$k]"
                         size="3"
+                        onChange={handleChange}
                       />
                     </td>
                     <td className="border px-1 ">
@@ -340,8 +329,8 @@ function ChecklistLine() {
                         className={" w-full border pl-1"}
                         type="number"
                         step="any"
-                        // name="data[$k]"
                         size="3"
+                        onChange={handleChange}
                       />
                     </td>
                     <td className="border px-1 ">
@@ -353,8 +342,8 @@ function ChecklistLine() {
                         className={" w-full border pl-1"}
                         type="number"
                         step="any"
-                        // name="data[$k]"
                         size="3"
+                        onChange={handleChange}
                       />
                     </td>
                     <td className="border px-1 pt-1">
@@ -365,31 +354,32 @@ function ChecklistLine() {
                         name={linevalue[selpart][index] + "_Ket"}
                         className={"w-[90%] border pl-1"}
                         type="text"
+                        onChange={handleChange}
                       />
                     </td>
                   </tr>
                 ))}
               </tbody>
             </table>
+            <div className="flex flex-col basis-[5%] h-full bg-slate-1004">
+              <div className="flex flex-row justify-center pt-3 py-3 text-base sm:text-lg md:text-xl">
+                <button
+                  //onClick={reset}
+                  className=" w-fit text-white bg-[#173D6E] hover:bg-[#9BB6D5] font-medium rounded-md px-5 py-2.5 mr-2"
+                >
+                  Reset
+                </button>
+                <button
+                  type="submit"
+                  //onClick={test}
+                  className=" w-fit text-white bg-[#173D6E] hover:bg-[#9BB6D5] font-medium rounded-md px-5 py-2.5 ml-2"
+                >
+                  Submit
+                </button>
+              </div>
+              <SectionFooter />
+            </div>
           </form>
-        </div>
-        <div className="flex flex-col basis-[5%] h-full bg-slate-1004">
-          <div className="flex flex-row justify-center pt-3 py-3 text-base sm:text-lg md:text-xl">
-            <button
-              //onClick={reset}
-              className=" w-fit text-white bg-[#173D6E] hover:bg-[#9BB6D5] font-medium rounded-md px-5 py-2.5 mr-2"
-            >
-              Reset
-            </button>
-            <button
-              onClick={test}
-              className=" w-fit text-white bg-[#173D6E] hover:bg-[#9BB6D5] font-medium rounded-md px-5 py-2.5 ml-2"
-            >
-              Submit
-            </button>
-          </div>
-
-          <SectionFooter />
         </div>
       </div>
     </>
