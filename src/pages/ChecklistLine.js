@@ -74,7 +74,7 @@ function ChecklistLine() {
     //console.log(linedata["casting"]);
     //console.log(linevalue["casting"][0]);
     // console.log(linevalue["casting"][0] + "_ArusT");
-    //console.log(datalength);
+    console.log(datalength);
     console.log(Object.keys(datafromdb).length);
     console.log(datafromdb);
   };
