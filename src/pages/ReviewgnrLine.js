@@ -32,7 +32,6 @@ function ChecklistLine() {
     } catch (error) {
       console.log(error.message);
     }
-
     //console.log(datafromdb);
     //setDatalength(Object.keys(datafromdb).length);
     //console.log(datalength);
@@ -97,6 +96,8 @@ function ChecklistLine() {
                 </option>
               ))}
             </select>
+            <span className="pl-3">Select date</span>
+            <input className="pl-3" type="date"></input>
           </div>
         </div>
         <div className="relative basis-[69%] bg-white items-start justify-center w-screen overflow-x-auto">
@@ -112,7 +113,7 @@ function ChecklistLine() {
                   </th>
                   <th
                     rowSpan="3"
-                    className="text-center items-start px-4 border-2 w-[15%]"
+                    className="text-center items-start px-4 border-2 w-[20%]"
                   >
                     Content
                   </th>
@@ -121,7 +122,7 @@ function ChecklistLine() {
                   </th>
                   <th
                     rowSpan="3"
-                    className="text-sm text-center border-2 w-[6%]"
+                    className="text-sm text-center border-2 w-[11%]"
                   >
                     Temp
                   </th>
@@ -154,13 +155,13 @@ function ChecklistLine() {
                   <th className="text-sm text-center w-[5%] px-4 sm:px-4 md:px-2 border-2">
                     DE mm/s
                   </th>
-                  <th className="text-sm text-center w-[6%] px-4 sm:px-4 md:px-2 border-2">
+                  <th className="text-sm text-center w-[5%] px-4 sm:px-4 md:px-2 border-2">
                     DE gE
                   </th>
                   <th className="text-sm text-center w-[5%] px-4 sm:px-4 md:px-2 border-2">
                     DE mm/s
                   </th>
-                  <th className="text-sm text-center w-[6%] px-4 sm:px-4 md:px-2 border-2">
+                  <th className="text-sm text-center w-[5%] px-4 sm:px-4 md:px-2 border-2">
                     DE gE
                   </th>
                   <th className="text-sm text-center w-[5%] px-4 sm:px-4 md:px-2 border-2">
@@ -188,16 +189,14 @@ function ChecklistLine() {
               </thead>
 
               <tbody className="border-collapse">
-                {/* isi */}
+                {/* dari line.casting jadi type */}
 
                 {linedata[selpart].map((data, index) => (
                   <tr className="h-10" key={index}>
                     <td className="sticky left-0 max-w-[40px] min-w-[40px] bg-white border text-center">
                       {index + 1}
                     </td>
-                    <td className="break-words border px-2 whitespace-pre-line">
-                      {data}
-                    </td>
+                    <td className=" border px-2">{data}</td>
                     <td className=" border px-1">
                       {console.log(datalength)}
                       <input
@@ -363,7 +362,7 @@ function ChecklistLine() {
                           datafromdb[linevalue[selpart][index] + "_Ket"]
                         }
                         name={linevalue[selpart][index] + "_Ket"}
-                        className={"w-[90%] border pl-1"}
+                        className={" w-[90%] border pl-1"}
                         type="text"
                       />
                     </td>
