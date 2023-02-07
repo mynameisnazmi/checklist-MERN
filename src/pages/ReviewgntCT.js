@@ -34,6 +34,7 @@ function ChecklistCT() {
   const test = () => {
     console.log(linedata[selpart]);
   };
+
   return (
     <>
       <div className="flex flex-col h-screen bg-slate-100">

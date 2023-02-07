@@ -3,9 +3,12 @@ import SectionFooter from "../components/SectionFooter";
 import { useState, useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
+import Cookies from "universal-cookie";
 //import linedatas from "../Asset/Data-parts/Line_4.json";
 
 function ChecklistLine() {
+  const cookies = new Cookies();
+  const dates = new Date();
   const { state } = useLocation();
   const machine = ["Line-4", "Line-5", "Line-6", "Line-7"];
   const [machinename, setMachinename] = useState(state.machine); //setmachine name
@@ -17,42 +20,65 @@ function ChecklistLine() {
   const [datafromdb, setDatafromdb] = useState([]);
   const [linedata, setLinedata] = useState(dataparts.dataparts); ///state for selection
   const [linevalue, setLinevalue] = useState(dataparts.dbalias); ///state for selection
-  const [dataform, setDataform] = useState(); ///state for selection
   const sel = useRef(arrpart[0]); //send to db
+  const [dataform, setDataform] = useState({}); ///state for selection
 
   const handleFetchData = async () => {
     try {
       const res = await axios.post("http://localhost:5000/checklist/line/", {
         machinename: machinename,
         partname: sel.current,
+        Tanggal: dates.toISOString().slice(0, 10).replace("T", " "),
+        Nama: cookies.get("name"),
       });
+      console.log(res);
       setDatafromdb(res.data.result[0]);
     } catch (error) {
       console.log(error.message);
     }
   };
 
-  const handleSubmit = (event) => {
+  const handleUpData = async (event) => {
     //send data here
     event.preventDefault();
-    console.log(dataform);
-    // console.log(Object.keys(dataform).length);
+    try {
+      await axios.post(
+        "http://localhost:5000/checklist/line/update/",
+        dataform
+      );
+    } catch (error) {
+      console.log(error.message);
+    }
   };
+  // const handleAddData = async (event) => {
+  //   //send data here
+  //   //event.preventDefault();
+  //   try {
+  //     await axios.post("http://localhost:5000/checklist/line/add/", dataform);
+  //   } catch (error) {
+  //     console.log(error.message);
+  //   }
+  // };
 
   const handleChange = (evt) => {
     const value = evt.target.value;
     setDataform({
       ...dataform,
       [evt.target.name]: value,
+      Nama: cookies.get("name"),
+      Tanggal: dates.toISOString().slice(0, 10).replace("T", " "),
+      machinename: machinename,
+      partname: sel.current,
     });
   };
 
   const selectHandler = (event) => {
-    setSelpart(event.target.value);
-    sel.current = event.target.value;
     setDataform({});
     document.getElementById("forms").reset();
+    setSelpart(event.target.value);
+    sel.current = event.target.value;
     handleFetchData();
+    //console.log(machinename);
   };
 
   useEffect(() => {
@@ -89,7 +115,7 @@ function ChecklistLine() {
           </div>
         </div>
         <div className="relative basis-[69%] bg-white items-start justify-center w-screen overflow-x-auto">
-          <form id="forms" onSubmit={handleSubmit}>
+          <form id="forms" onSubmit={handleUpData}>
             <table className="table-fixed border-2 whitespace-nowrap text-[80%] sm:text-lg md:text-2xl lg:text-base">
               <thead className="border-collapse w-auto">
                 <tr>
