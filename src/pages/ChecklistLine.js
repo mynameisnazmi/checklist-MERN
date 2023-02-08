@@ -1,7 +1,7 @@
 import SectionHeader from "../components/SectionHeader";
 import SectionFooter from "../components/SectionFooter";
 import { useState, useEffect, useRef } from "react";
-import { useLocation } from "react-router-dom";
+import { json, useLocation } from "react-router-dom";
 import axios from "axios";
 import Cookies from "universal-cookie";
 //import linedatas from "../Asset/Data-parts/Line_4.json";
@@ -22,30 +22,69 @@ function ChecklistLine() {
   const [linevalue, setLinevalue] = useState(dataparts.dbalias); ///state for selection
   const sel = useRef(arrpart[0]); //send to db
   const [dataform, setDataform] = useState({}); ///state for selection
+  const [Loading, setLoading] = useState(false); ///state for selection
 
-  const handleFetchData = async () => {
-    try {
-      const res = await axios.post("http://localhost:5000/checklist/line/", {
+  const handleFetchData = () => {
+    console.log("fetching");
+    setDataform({
+      ...dataform,
+      Nama: cookies.get("name"),
+      Tanggal: dates.toISOString().slice(0, 10).replace("T", " "),
+      machinename: machinename,
+      partname: sel.current,
+    });
+    setLoading(true);
+    fetch("http://localhost:5000/checklist/line/", {
+      method: "post",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
         machinename: machinename,
         partname: sel.current,
         Tanggal: dates.toISOString().slice(0, 10).replace("T", " "),
         Nama: cookies.get("name"),
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        //console.log(data.result[0]);
+        Promise.all(data.result).then((values) => {
+          setDatafromdb(values[0]);
+          //console.log(values);
+          setLoading(false);
+        });
+      })
+      .catch((err) => {
+        console.log(err.message);
       });
-      console.log(res);
-      setDatafromdb(res.data.result[0]);
-    } catch (error) {
-      console.log(error.message);
-    }
   };
+  console.log(Loading);
+  // const handleFetchData = async () => {
+  //   try {
+  //     const res = await axios.post("http://localhost:5000/checklist/line/", {
+  //       machinename: machinename,
+  //       partname: sel.current,
+  //       Tanggal: dates.toISOString().slice(0, 10).replace("T", " "),
+  //       Nama: cookies.get("name"),
+  //     });
+  //     console.log(res);
+  //     setDatafromdb(res.data.result[0]);
+  //   } catch (error) {
+  //     console.log(error.message);
+  //   }
+  // };
 
   const handleUpData = async (event) => {
+    console.log("updating");
     //send data here
     event.preventDefault();
+    // setLoading(true);
+    console.log(dataform);
     try {
       await axios.post(
         "http://localhost:5000/checklist/line/update/",
         dataform
       );
+      setLoading(false);
     } catch (error) {
       console.log(error.message);
     }
@@ -61,19 +100,17 @@ function ChecklistLine() {
   // };
 
   const handleChange = (evt) => {
+    console.log("change value");
     const value = evt.target.value;
     setDataform({
       ...dataform,
       [evt.target.name]: value,
-      Nama: cookies.get("name"),
-      Tanggal: dates.toISOString().slice(0, 10).replace("T", " "),
-      machinename: machinename,
-      partname: sel.current,
     });
   };
 
   const selectHandler = (event) => {
-    setDataform({});
+    console.log("change part");
+    setDataform();
     document.getElementById("forms").reset();
     setSelpart(event.target.value);
     sel.current = event.target.value;
@@ -204,7 +241,6 @@ function ChecklistLine() {
 
               <tbody className="border-collapse">
                 {/* isi */}
-
                 {linedata[selpart].map((data, index) => (
                   <tr className="h-10" key={index}>
                     <td className="sticky left-0 max-w-[40px] min-w-[40px] bg-white border text-center">
