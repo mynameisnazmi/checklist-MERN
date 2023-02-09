@@ -1,11 +1,14 @@
 import SectionHeader from "../components/SectionHeader";
 import SectionFooter from "../components/SectionFooter";
 import { useState, useEffect, useRef } from "react";
-import { useLocation } from "react-router-dom";
+import { json, useLocation } from "react-router-dom";
 import axios from "axios";
+import Cookies from "universal-cookie";
 //import linedatas from "../Asset/Data-parts/Line_4.json";
 
 function ChecklistLine() {
+  const cookies = new Cookies();
+  const dates = new Date();
   const { state } = useLocation();
   const machine = ["Line-4", "Line-5", "Line-6", "Line-7"];
   const [machinename, setMachinename] = useState(state.machine); //setmachine name
@@ -17,65 +20,142 @@ function ChecklistLine() {
   const [datafromdb, setDatafromdb] = useState([]);
   const [linedata, setLinedata] = useState(dataparts.dataparts); ///state for selection
   const [linevalue, setLinevalue] = useState(dataparts.dbalias); ///state for selection
-  const [datalength, setDatalength] = useState(0); ///state for selection
   const sel = useRef(arrpart[0]); //send to db
+  const [dataform, setDataform] = useState({}); ///state for selection
+  const [Loading, setLoading] = useState(false); ///state for selection
+  const [Tanggal, setTanggal] = useState("");
 
-  const handleFetchData = async () => {
-    try {
-      const res = await axios.post("http://localhost:5000/checklist/line/", {
+  const handleTanggal = (e) => {
+    const Tanggal = e.target.value;
+    console.log(Tanggal);
+  };
+  const handleFetchData = () => {
+    console.log("fetching");
+    setDataform({
+      ...dataform,
+      Nama: cookies.get("name"),
+      Tanggal: Tanggal,
+      machinename: machinename,
+      partname: sel.current,
+    });
+    setLoading(true);
+    fetch("http://localhost:5000/checklist/line/", {
+      method: "post",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
         machinename: machinename,
         partname: sel.current,
+        Tanggal: Tanggal,
+        Nama: cookies.get("name"),
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        //console.log(data.result[0]);
+        Promise.all(data.result).then((values) => {
+          setDatafromdb(values[0]);
+          //console.log(values);
+          setLoading(false);
+        });
+      })
+      .catch((err) => {
+        console.log(err.message);
       });
-      setDatafromdb(res.data.result[0]);
-      setDatalength(Object.keys(datafromdb).length);
-      test();
-    } catch (error) {
-      console.log(error.message);
-    }
-    //console.log(datafromdb);
-    //setDatalength(Object.keys(datafromdb).length);
-    //console.log(datalength);
+  };
+  //console.log(Loading);
+  console.log(dataform);
+  console.log(sel.current);
+  // const handleFetchData = async () => {
+  //   try {
+  //     const res = await axios.post("http://localhost:5000/checklist/line/", {
+  //       machinename: machinename,
+  //       partname: sel.current,
+  //       Tanggal: dates.toISOString().slice(0, 10).replace("T", " "),
+  //       Nama: cookies.get("name"),
+  //     });
+  //     console.log(res);
+  //     setDatafromdb(res.data.result[0]);
+  //   } catch (error) {
+  //     console.log(error.message);
+  //   }
+  // };
 
-    // const requestOptions = {
-    //   method: "POST",
-    //   headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify({ machinename: machinename, partname: sel.current }),
-    // };
-    // const response = await fetch(
-    //   `http://localhost:5000/checklist/line/`,
-    //   requestOptions
-    // );
-    // if (response.status === 200) {
-    //   const data = await response.json();
-    //   setDatafromdb(data.result[0]);
-    // } else {
-    //   console.log(response.status);
+  const handleUpData = async (event) => {
+    console.log("updating");
+    //send data here
+    event.preventDefault();
+    //setLoading(true);
+    console.log(dataform);
+    const response = await fetch(
+      "http://localhost:5000/checklist/line/update/",
+      {
+        method: "get",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(dataform),
+      }
+    );
+    // const data = await response.json();
+    //console.log(data);
+
+    setDataform({});
+    console.log(sel.current);
+    console.log(dataform);
+    // try {
+    //   await axios.post(
+    //     "http://localhost:5000/checklist/line/update/",
+    //     dataform,{
+    //       headers: {
+    //         'Content-Type': 'application/json',
+    //     }
+    //     }
+    //   );
+    //   setLoading(false);
+    // } catch (error) {
+    //   console.log(error.message);
     // }
   };
 
+  // const handleAddData = async (event) => {
+  //   //send data here
+  //   //event.preventDefault();
+  //   try {
+  //     await axios.post("http://localhost:5000/checklist/line/add/", dataform);
+  //   } catch (error) {
+  //     console.log(error.message);
+  //   }
+  // };
+
+  const handleChange = (evt) => {
+    console.log("change value");
+    const value = evt.target.value;
+    setDataform({
+      ...dataform,
+      [evt.target.name]: value,
+    });
+  };
+
   const selectHandler = (event) => {
+    console.log("change part");
+    //setDataform();
+    document.getElementById("forms").reset();
     setSelpart(event.target.value);
     sel.current = event.target.value;
     handleFetchData();
+    //console.log(machinename);
   };
 
   useEffect(() => {
     handleFetchData();
   }, []);
 
-  // console.log(Object.keys(datafromdb).length);
-  // if (Object.keys(datafromdb).length > 0) {
-  //   setDatalength(true);
-  // } else {
-  //   setDatalength(false);
-  // }
   const test = () => {
     //console.log(linedata["casting"]);
     //console.log(linevalue["casting"][0]);
     // console.log(linevalue["casting"][0] + "_ArusT");
     //console.log(datalength);
-    console.log(Object.keys(datafromdb).length);
-    console.log(datafromdb);
+    // console.log(Object.keys(datafromdb).length);
+    // console.log(datafromdb);
+    console.log(dataform);
   };
 
   return (
@@ -96,12 +176,18 @@ function ChecklistLine() {
                 </option>
               ))}
             </select>
-            <span className="pl-3">Select date</span>
-            <input className="pl-3" type="date"></input>
+            <input type="date" onChange={handleTanggal}></input>
+            <button
+              type="submit"
+              onClick={test}
+              className="text-sm w-fit text-white bg-[#173D6E] hover:bg-[#9BB6D5] font-medium rounded-md px-5 py-2.5 ml-2"
+            >
+              Submit
+            </button>
           </div>
         </div>
         <div className="relative basis-[69%] bg-white items-start justify-center w-screen overflow-x-auto">
-          <form>
+          <form id="forms">
             <table className="table-fixed border-2 whitespace-nowrap text-[80%] sm:text-lg md:text-2xl lg:text-base">
               <thead className="border-collapse w-auto">
                 <tr>
@@ -113,7 +199,7 @@ function ChecklistLine() {
                   </th>
                   <th
                     rowSpan="3"
-                    className="text-center items-start px-4 border-2 w-[20%]"
+                    className="text-center items-start px-4 border-2 w-[15%]"
                   >
                     Content
                   </th>
@@ -122,7 +208,7 @@ function ChecklistLine() {
                   </th>
                   <th
                     rowSpan="3"
-                    className="text-sm text-center border-2 w-[11%]"
+                    className="text-sm text-center border-2 w-[6%]"
                   >
                     Temp
                   </th>
@@ -155,13 +241,13 @@ function ChecklistLine() {
                   <th className="text-sm text-center w-[5%] px-4 sm:px-4 md:px-2 border-2">
                     DE mm/s
                   </th>
-                  <th className="text-sm text-center w-[5%] px-4 sm:px-4 md:px-2 border-2">
+                  <th className="text-sm text-center w-[6%] px-4 sm:px-4 md:px-2 border-2">
                     DE gE
                   </th>
                   <th className="text-sm text-center w-[5%] px-4 sm:px-4 md:px-2 border-2">
                     DE mm/s
                   </th>
-                  <th className="text-sm text-center w-[5%] px-4 sm:px-4 md:px-2 border-2">
+                  <th className="text-sm text-center w-[6%] px-4 sm:px-4 md:px-2 border-2">
                     DE gE
                   </th>
                   <th className="text-sm text-center w-[5%] px-4 sm:px-4 md:px-2 border-2">
@@ -189,16 +275,16 @@ function ChecklistLine() {
               </thead>
 
               <tbody className="border-collapse">
-                {/* dari line.casting jadi type */}
-
+                {/* isi */}
                 {linedata[selpart].map((data, index) => (
                   <tr className="h-10" key={index}>
                     <td className="sticky left-0 max-w-[40px] min-w-[40px] bg-white border text-center">
                       {index + 1}
                     </td>
-                    <td className=" border px-2">{data}</td>
+                    <td className="break-words border px-2 whitespace-pre-line">
+                      {data}
+                    </td>
                     <td className=" border px-1">
-                      {console.log(datalength)}
                       <input
                         defaultValue={
                           datafromdb[linevalue[selpart][index] + "_VDE_Vms"]
@@ -208,6 +294,7 @@ function ChecklistLine() {
                         type="number"
                         step="any"
                         size="3"
+                        onChange={handleChange}
                       />
                     </td>
                     <td className="border px-1">
@@ -219,8 +306,8 @@ function ChecklistLine() {
                         className={" w-[90%] border pl-1"}
                         type="number"
                         step="any"
-                        // name="data[$k]"
                         size="3"
+                        onChange={handleChange}
                       />
                     </td>
                     <td className="border px-1">
@@ -232,8 +319,8 @@ function ChecklistLine() {
                         className={" w-[90%] border pl-1"}
                         type="number"
                         step="any"
-                        // name="data[$k]"
                         size="3"
+                        onChange={handleChange}
                       />
                     </td>
 
@@ -246,8 +333,8 @@ function ChecklistLine() {
                         className={" w-[90%] border pl-1"}
                         type="number"
                         step="any"
-                        // name="data[$k]"
                         size="3"
+                        onChange={handleChange}
                       />
                     </td>
                     <td className="border px-1">
@@ -259,8 +346,8 @@ function ChecklistLine() {
                         className={" w-[90%] border pl-1"}
                         type="number"
                         step="any"
-                        // name="data[$k]"
                         size="3"
+                        onChange={handleChange}
                       />
                     </td>
 
@@ -273,8 +360,8 @@ function ChecklistLine() {
                         className={" w-[90%] border pl-1"}
                         type="number"
                         step="any"
-                        // name="data[$k]"
                         size="3"
+                        onChange={handleChange}
                       />
                     </td>
                     <td className="border px-1">
@@ -286,8 +373,8 @@ function ChecklistLine() {
                         className={" w-[90%] border pl-1"}
                         type="number"
                         step="any"
-                        // name="data[$k]"
                         size="3"
+                        onChange={handleChange}
                       />
                     </td>
 
@@ -300,8 +387,8 @@ function ChecklistLine() {
                         className={" w-[90%] border pl-1"}
                         type="number"
                         step="any"
-                        // name="data[$k]"
                         size="3"
+                        onChange={handleChange}
                       />
                     </td>
                     <td className="border px-1">
@@ -313,8 +400,8 @@ function ChecklistLine() {
                         className={" w-[90%] border pl-1"}
                         type="number"
                         step="any"
-                        // name="data[$k]"
                         size="3"
+                        onChange={handleChange}
                       />
                     </td>
                     <td className="border px-1">
@@ -326,8 +413,8 @@ function ChecklistLine() {
                         className={" w-full border pl-1"}
                         type="number"
                         step="any"
-                        // name="data[$k]"
                         size="3"
+                        onChange={handleChange}
                       />
                     </td>
                     <td className="border px-1 ">
@@ -339,8 +426,8 @@ function ChecklistLine() {
                         className={" w-full border pl-1"}
                         type="number"
                         step="any"
-                        // name="data[$k]"
                         size="3"
+                        onChange={handleChange}
                       />
                     </td>
                     <td className="border px-1 ">
@@ -352,8 +439,8 @@ function ChecklistLine() {
                         className={" w-full border pl-1"}
                         type="number"
                         step="any"
-                        // name="data[$k]"
                         size="3"
+                        onChange={handleChange}
                       />
                     </td>
                     <td className="border px-1 pt-1">
@@ -362,34 +449,21 @@ function ChecklistLine() {
                           datafromdb[linevalue[selpart][index] + "_Ket"]
                         }
                         name={linevalue[selpart][index] + "_Ket"}
-                        className={" w-[90%] border pl-1"}
+                        className={"w-[90%] border pl-1"}
                         type="text"
+                        onChange={handleChange}
                       />
                     </td>
                   </tr>
                 ))}
               </tbody>
             </table>
+            <div className="flex flex-col basis-[5%] h-full bg-slate-1004">
+              <div className="flex flex-row justify-center pt-3 py-3 text-base sm:text-lg md:text-xl"></div>
+            </div>
           </form>
         </div>
-        <div className="flex flex-col basis-[5%] h-full bg-slate-1004">
-          <div className="flex flex-row justify-center pt-3 py-3 text-base sm:text-lg md:text-xl">
-            <button
-              //onClick={reset}
-              className=" w-fit text-white bg-[#173D6E] hover:bg-[#9BB6D5] font-medium rounded-md px-5 py-2.5 mr-2"
-            >
-              Reset
-            </button>
-            <button
-              onClick={test}
-              className=" w-fit text-white bg-[#173D6E] hover:bg-[#9BB6D5] font-medium rounded-md px-5 py-2.5 ml-2"
-            >
-              Submit
-            </button>
-          </div>
-
-          <SectionFooter />
-        </div>
+        <SectionFooter />
       </div>
     </>
   );

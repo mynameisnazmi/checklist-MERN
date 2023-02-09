@@ -5,6 +5,8 @@ import { Routes, Route } from "react-router-dom";
 import Register from "./pages/Register";
 import ChecklistLine from "./pages/ChecklistLine";
 import ReviewSpc from "./pages/ReviewSpc";
+import ReviewgnrLine from "./pages/ReviewgnrLine";
+import ReviewgntCT from "./pages/ReviewgntCT";
 import axios from "axios";
 
 export default function App() {
@@ -20,6 +22,8 @@ export default function App() {
         <Route path="register" element={<Register />} />
         <Route path="checklistLine" element={<ChecklistLine />} />
         <Route path="reviewspc" element={<ReviewSpc />} />
+        <Route path="reviewgnrLine" element={<ReviewgnrLine />} />
+        <Route path="reviewgntCT" element={<ReviewgntCT />} />
       </Routes>
     </>
   );

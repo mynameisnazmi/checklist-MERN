@@ -37,12 +37,14 @@ function Dashbord() {
     } else if (mode === "review") {
       if (form === "elc") {
         mchslice.current = machine.slice(0, 4);
-        if (mchslice.current === "Line") {
-          if (view === "gnr") {
-            setlinkvar("/ReviewGnr");
+        if (view === "gnr") {
+          if (mchslice.current === "Line") {
+            setlinkvar("/reviewgnrLine");
           } else {
-            setlinkvar("/ReviewSpc");
+            setlinkvar("/reviewgnrCT");
           }
+        } else {
+          setlinkvar("/ReviewSpc");
         }
       }
     }

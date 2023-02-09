@@ -1,14 +1,14 @@
 import SectionHeader from "../components/SectionHeader";
 import SectionFooter from "../components/SectionFooter";
 import { useState, useEffect, useRef } from "react";
-import { json, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import Cookies from "universal-cookie";
-//import linedatas from "../Asset/Data-parts/Line_4.json";
 
 function ChecklistLine() {
   const cookies = new Cookies();
   const dates = new Date();
+  const navigate = useNavigate();
   const { state } = useLocation();
   const machine = ["Line-4", "Line-5", "Line-6", "Line-7"];
   const [machinename, setMachinename] = useState(state.machine); //setmachine name
@@ -21,19 +21,13 @@ function ChecklistLine() {
   const [linedata, setLinedata] = useState(dataparts.dataparts); ///state for selection
   const [linevalue, setLinevalue] = useState(dataparts.dbalias); ///state for selection
   const sel = useRef(arrpart[0]); //send to db
-  const [dataform, setDataform] = useState({}); ///state for selection
+  let refdata = useRef();
+  const [dataform, setDataform] = useState(); ///state for selection
   const [Loading, setLoading] = useState(false); ///state for selection
 
   const handleFetchData = () => {
     console.log("fetching");
-    setDataform({
-      ...dataform,
-      Nama: cookies.get("name"),
-      Tanggal: dates.toISOString().slice(0, 10).replace("T", " "),
-      machinename: machinename,
-      partname: sel.current,
-    });
-    setLoading(true);
+    //setLoading(true);
     fetch("http://localhost:5000/checklist/line/", {
       method: "post",
       headers: { "Content-Type": "application/json" },
@@ -50,14 +44,15 @@ function ChecklistLine() {
         Promise.all(data.result).then((values) => {
           setDatafromdb(values[0]);
           //console.log(values);
-          setLoading(false);
+          //setLoading(false);
         });
       })
       .catch((err) => {
         console.log(err.message);
       });
   };
-  console.log(Loading);
+  //console.log(Loading);
+
   // const handleFetchData = async () => {
   //   try {
   //     const res = await axios.post("http://localhost:5000/checklist/line/", {
@@ -72,23 +67,36 @@ function ChecklistLine() {
   //     console.log(error.message);
   //   }
   // };
+  const resetStt = () => {};
 
-  const handleUpData = async (event) => {
+  const handleUpData = async () => {
     console.log("updating");
+    refdata.current = {
+      ...refdata.current,
+      Nama: cookies.get("name"),
+      Tanggal: dates.toISOString().slice(0, 10).replace("T", " "),
+      machinename: machinename,
+      partname: sel.current,
+    };
     //send data here
-    event.preventDefault();
-    // setLoading(true);
-    console.log(dataform);
+    //setLoading(true);
+
+    console.log(refdata.current);
     try {
-      await axios.post(
+      const res = await axios.post(
         "http://localhost:5000/checklist/line/update/",
-        dataform
+        refdata.current
       );
-      setLoading(false);
+      if (res.status === 200) {
+        refdata.current = {};
+        console.log(refdata.current);
+      }
+      //setLoading(false);
     } catch (error) {
       console.log(error.message);
     }
   };
+
   // const handleAddData = async (event) => {
   //   //send data here
   //   //event.preventDefault();
@@ -102,15 +110,16 @@ function ChecklistLine() {
   const handleChange = (evt) => {
     console.log("change value");
     const value = evt.target.value;
-    setDataform({
-      ...dataform,
-      [evt.target.name]: value,
-    });
+    // setDataform({
+    //   ...dataform,
+    //   [evt.target.name]: value,
+    // });
+    refdata.current = { ...refdata.current, [evt.target.name]: value };
   };
 
   const selectHandler = (event) => {
     console.log("change part");
-    setDataform();
+    //setDataform();
     document.getElementById("forms").reset();
     setSelpart(event.target.value);
     sel.current = event.target.value;
@@ -122,10 +131,11 @@ function ChecklistLine() {
     handleFetchData();
   }, []);
 
+  //console.log(sel.current);
   const test = () => {
     //console.log(linedata["casting"]);
     //console.log(linevalue["casting"][0]);
-    // console.log(linevalue["casting"][0] + "_ArusT");
+    //console.log(linevalue["casting"][0] + "_ArusT");
     //console.log(datalength);
     console.log(Object.keys(datafromdb).length);
     console.log(datafromdb);
@@ -152,7 +162,7 @@ function ChecklistLine() {
           </div>
         </div>
         <div className="relative basis-[69%] bg-white items-start justify-center w-screen overflow-x-auto">
-          <form id="forms" onSubmit={handleUpData}>
+          <form id="forms">
             <table className="table-fixed border-2 whitespace-nowrap text-[80%] sm:text-lg md:text-2xl lg:text-base">
               <thead className="border-collapse w-auto">
                 <tr>
@@ -423,25 +433,25 @@ function ChecklistLine() {
                 ))}
               </tbody>
             </table>
-            <div className="flex flex-col basis-[5%] h-full bg-slate-1004">
-              <div className="flex flex-row justify-center pt-3 py-3 text-base sm:text-lg md:text-xl">
-                <button
-                  //onClick={reset}
-                  className=" w-fit text-white bg-[#173D6E] hover:bg-[#9BB6D5] font-medium rounded-md px-5 py-2.5 mr-2"
-                >
-                  Reset
-                </button>
-                <button
-                  type="submit"
-                  //onClick={test}
-                  className=" w-fit text-white bg-[#173D6E] hover:bg-[#9BB6D5] font-medium rounded-md px-5 py-2.5 ml-2"
-                >
-                  Submit
-                </button>
-              </div>
-              <SectionFooter />
-            </div>
           </form>
+        </div>
+        <div className="flex flex-col basis-[5%] h-full bg-slate-1004">
+          <div className="flex flex-row justify-center pt-3 py-3 text-base sm:text-lg md:text-xl">
+            <button
+              onClick={resetStt}
+              className=" w-fit text-white bg-[#173D6E] hover:bg-[#9BB6D5] font-medium rounded-md px-5 py-2.5 mr-2"
+            >
+              Reset
+            </button>
+            <button
+              type="submit"
+              onClick={handleUpData}
+              className=" w-fit text-white bg-[#173D6E] hover:bg-[#9BB6D5] font-medium rounded-md px-5 py-2.5 ml-2"
+            >
+              Submit
+            </button>
+          </div>
+          <SectionFooter />
         </div>
       </div>
     </>
