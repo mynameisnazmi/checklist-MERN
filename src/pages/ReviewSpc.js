@@ -1,5 +1,9 @@
 import SectionHeader from "../components/SectionHeader";
 import SectionFooter from "../components/SectionFooter";
+import Cookies from "universal-cookie";
+import axios from "axios";
+import { useLocation } from "react-router-dom";
+import { useState, useEffect, useRef } from "react";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -57,69 +61,125 @@ export const data = {
 };
 
 function ReviewSpc() {
+  const cookies = new Cookies();
+  const dates = new Date();
+  const { state } = useLocation();
+  const machine = ["Line-4", "Line-5", "Line-6", "Line-7"];
+  const machinename = useRef(state.machine); //setmachine name
+  const found = machine.find((element) => element === machinename.current); //search machine name
+  const dataparts = require(`../Asset/Data-parts/${found}.json`); //load data base on machine name
+  const parts = Object.keys(dataparts.dataparts); //load part machine
+  const arrpart = useRef(parts); //state for selection
+  const [selpart, setSelpart] = useState(arrpart.current[0]);
+  const [datafromdb, setDatafromdb] = useState([]);
+  const linedata = useRef(dataparts.dataparts); ///state for selection
+  const linevalue = useRef(dataparts.dbalias); ///state for selection
+  const [item, setItem] = useState(linedata.current[selpart][0]);
+  const sel = useRef(arrpart.current[0]); //send to db
+  let refdata = useRef();
+
+  const handleFetchData = () => {
+    console.log("fetching");
+    //setLoading(true);
+    fetch("http://localhost:5000/checklist/line/", {
+      method: "post",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        machinename: machinename.current,
+        partname: sel.current,
+        Tanggal: dates.toISOString().slice(0, 10).replace("T", " "),
+        Nama: cookies.get("name"),
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        //console.log(data.result[0]);
+        Promise.all(data.result).then((values) => {
+          setDatafromdb(values[0]);
+          //console.log(values);
+          //setLoading(false);
+        });
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  };
+
+  const selectHandler = (event) => {
+    console.log("change part");
+    //setDataform();
+    // document.getElementById("forms").reset();
+    setSelpart(event.target.value);
+    sel.current = event.target.value;
+    // handleFetchData();
+    //console.log(machinename.current);
+  };
+  const selclickItem = (evt) => {
+    setItem(evt.target.name);
+    console.log(item);
+  };
+
   return (
     <>
-      <div className="flex flex-col h-screen bg-slate-100 ">
-        <SectionHeader />
+      <SectionHeader />
+      <div className="flex flex-col h-fit bg-slate-100 ">
         <div className="flex flex-row">
-          <div className="flex flex-col basis-1/4 border-x border-black text overflow-auto max-h-[79vh]">
+          <div className="flex flex-col basis-1/4 overflow-y-scroll h-[74vh]">
             <div className="flex text-xl items-center justify-center h-fit m-2 self-center sm:flex-row sm:text-base">
-              <span>Area: </span>
-              <select className="border-2 mx-2 rounded-sm text-center shadow-sm">
-                <option>Silo</option>
-                <option>Extrusion</option>
-                <option>Chill Roll</option>
-                <option>MDO</option>
-                <option>TDO</option>
-                <option>Big Grinder</option>
-                <option>Pullroll</option>
+              <span className="text-xl pr-2">{machinename.current}</span>
+              <select
+                value={selpart}
+                onChange={selectHandler}
+                className="border-2 mx-2 rounded-md shadow-sm capitalize text-lg"
+              >
+                {arrpart.current.map((data, index) => (
+                  <option value={data} key={index}>
+                    {data}
+                  </option>
+                ))}
               </select>
             </div>
-            <div
-              name="konten"
-              className="flex  flex-row w-[80%] min-h-[7vh] border border-black text-center mx-auto my-8 bg-white shadow-lg rounded-md"
-            >
-              <div className="flex h-[4vh] border-b border-r border-black p-1">
-                no
+
+            {/* // */}
+            {linedata.current[selpart].map((data, index) => (
+              <div key={index} className="flex flex-row items-center">
+                <div className="mx-2 w-5">{index + 1}</div>
+                <button
+                  key={index}
+                  name={data}
+                  onClick={selclickItem}
+                  value={linevalue.current[selpart][index]}
+                  className="w-[80%] min-h-[7vh] border border-black text-center ml-3 my-3 bg-white shadow-lg rounded-sm"
+                >
+                  {data}
+                </button>
               </div>
-              <div className="flex m-auto">conveyor fan granulate</div>
-            </div>
+            ))}
+
+            {/* // */}
           </div>
 
           <div name="grafik" className="flex flex-col text-center basis-3/4">
             <div className="flex flex-col basis-[5%] mx-auto my-2">
-              <div>
-                <span className="text-xl">Trend Line-4</span>
-                <span className="text-xl ml-2">Fan Cvy Grn</span>
-                <span className="text-xl ml-2">Silo</span>
-              </div>
+              <span className="text-xl">{item}</span>
 
               <div className="flex flex-row">
-                <div className="flex flex-col mx-2">
-                  <label>From</label>
+                <div className="flex flex-row mx-2 items-center">
+                  <label className="text-lg pr-2">From</label>
                   <input
                     type="date"
                     className="shadow-md rounded-md px-2 py-1 h-8"
                   ></input>
                 </div>
 
-                <div className="flex flex-col mx-2">
-                  <label>Until</label>
+                <div className="flex flex-row mx-2 items-center">
+                  <label className="text-lg pr-2">Until</label>
                   <input
                     type="date"
                     className="shadow-md rounded-md px-2 py-1 h-8"
                   ></input>
                 </div>
-                <div className="flex flex-col mx-2">
-                  <label>Parameter</label>
-                  <select className="shadow-md rounded-md px-2 py-1 h-8">
-                    <option>Vibrasi</option>
-                    <option>Temperature</option>
-                    <option>Arus</option>
-                  </select>
-                </div>
                 <div className="flex flex-col">
-                  <label>&nbsp;</label>
                   <button className="w-fit shadow-md text-white bg-[#173D6E] hover:bg-[#9BB6D5] rounded-md px-2 py-1 h-8">
                     Open data
                   </button>

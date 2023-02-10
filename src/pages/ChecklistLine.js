@@ -1,29 +1,26 @@
 import SectionHeader from "../components/SectionHeader";
 import SectionFooter from "../components/SectionFooter";
 import { useState, useEffect, useRef } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import axios from "axios";
 import Cookies from "universal-cookie";
 
 function ChecklistLine() {
   const cookies = new Cookies();
   const dates = new Date();
-  const navigate = useNavigate();
   const { state } = useLocation();
   const machine = ["Line-4", "Line-5", "Line-6", "Line-7"];
-  const [machinename, setMachinename] = useState(state.machine); //setmachine name
-  const found = machine.find((element) => element === machinename); //search machine name
+  const machinename = useRef(state.machine); //setmachine name
+  const found = machine.find((element) => element === machinename.current); //search machine name
   const dataparts = require(`../Asset/Data-parts/${found}.json`); //load data base on machine name
   const parts = Object.keys(dataparts.dataparts); //load part machine
-  const [arrpart, setArrpart] = useState(parts); //state for selection
-  const [selpart, setSelpart] = useState(arrpart[0]);
+  const arrpart = useRef(parts); //state for selection
+  const [selpart, setSelpart] = useState(arrpart.current[0]);
   const [datafromdb, setDatafromdb] = useState([]);
-  const [linedata, setLinedata] = useState(dataparts.dataparts); ///state for selection
-  const [linevalue, setLinevalue] = useState(dataparts.dbalias); ///state for selection
-  const sel = useRef(arrpart[0]); //send to db
+  const linedata = useRef(dataparts.dataparts); ///state for selection
+  const linevalue = useRef(dataparts.dbalias); ///state for selection
+  const sel = useRef(arrpart.current[0]); //send to db
   let refdata = useRef();
-  const [dataform, setDataform] = useState(); ///state for selection
-  const [Loading, setLoading] = useState(false); ///state for selection
 
   const handleFetchData = () => {
     console.log("fetching");
@@ -32,7 +29,7 @@ function ChecklistLine() {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        machinename: machinename,
+        machinename: machinename.current,
         partname: sel.current,
         Tanggal: dates.toISOString().slice(0, 10).replace("T", " "),
         Nama: cookies.get("name"),
@@ -56,7 +53,7 @@ function ChecklistLine() {
   // const handleFetchData = async () => {
   //   try {
   //     const res = await axios.post("http://localhost:5000/checklist/line/", {
-  //       machinename: machinename,
+  //       machinename: machinename.current,
   //       partname: sel.current,
   //       Tanggal: dates.toISOString().slice(0, 10).replace("T", " "),
   //       Nama: cookies.get("name"),
@@ -75,7 +72,7 @@ function ChecklistLine() {
       ...refdata.current,
       Nama: cookies.get("name"),
       Tanggal: dates.toISOString().slice(0, 10).replace("T", " "),
-      machinename: machinename,
+      machinename: machinename.current,
       partname: sel.current,
     };
     //send data here
@@ -124,7 +121,7 @@ function ChecklistLine() {
     setSelpart(event.target.value);
     sel.current = event.target.value;
     handleFetchData();
-    //console.log(machinename);
+    //console.log(machinename.current);
   };
 
   useEffect(() => {
@@ -147,13 +144,13 @@ function ChecklistLine() {
         <div className="basis-[16%] flex-col">
           <SectionHeader />
           <div className="flex text-xl items-center justify-center h-fit m-2 self-center sm:flex-row sm:text-2xl">
-            <span>{machinename}</span>
+            <span>{machinename.current}</span>
             <select
               value={selpart}
               onChange={selectHandler}
               className="border-2 mx-2 rounded-sm shadow-sm capitalize text-xl"
             >
-              {arrpart.map((data, index) => (
+              {arrpart.current.map((data, index) => (
                 <option value={data} key={index}>
                   {data}
                 </option>
@@ -251,7 +248,7 @@ function ChecklistLine() {
 
               <tbody className="border-collapse">
                 {/* isi */}
-                {linedata[selpart].map((data, index) => (
+                {linedata.current[selpart].map((data, index) => (
                   <tr className="h-10" key={index}>
                     <td className="sticky left-0 max-w-[40px] min-w-[40px] bg-white border text-center">
                       {index + 1}
@@ -262,9 +259,11 @@ function ChecklistLine() {
                     <td className=" border px-1">
                       <input
                         defaultValue={
-                          datafromdb[linevalue[selpart][index] + "_VDE_Vms"]
+                          datafromdb[
+                            linevalue.current[selpart][index] + "_VDE_Vms"
+                          ]
                         }
-                        name={linevalue[selpart][index] + "_VDE_Vms"}
+                        name={linevalue.current[selpart][index] + "_VDE_Vms"}
                         className={" w-[90%] border pl-1"}
                         type="number"
                         step="any"
@@ -275,9 +274,11 @@ function ChecklistLine() {
                     <td className="border px-1">
                       <input
                         defaultValue={
-                          datafromdb[linevalue[selpart][index] + "_VDE_Vge"]
+                          datafromdb[
+                            linevalue.current[selpart][index] + "_VDE_Vge"
+                          ]
                         }
-                        name={linevalue[selpart][index] + "_VDE_Vge"}
+                        name={linevalue.current[selpart][index] + "_VDE_Vge"}
                         className={" w-[90%] border pl-1"}
                         type="number"
                         step="any"
@@ -288,36 +289,11 @@ function ChecklistLine() {
                     <td className="border px-1">
                       <input
                         defaultValue={
-                          datafromdb[linevalue[selpart][index] + "_VDE_Hms"]
+                          datafromdb[
+                            linevalue.current[selpart][index] + "_VDE_Hms"
+                          ]
                         }
-                        name={linevalue[selpart][index] + "_VDE_Hms"}
-                        className={" w-[90%] border pl-1"}
-                        type="number"
-                        step="any"
-                        size="3"
-                        onChange={handleChange}
-                      />
-                    </td>
-
-                    <td className="border px-1">
-                      <input
-                        defaultValue={
-                          datafromdb[linevalue[selpart][index] + "_VDE_Hge"]
-                        }
-                        name={linevalue[selpart][index] + "_VDE_Hge"}
-                        className={" w-[90%] border pl-1"}
-                        type="number"
-                        step="any"
-                        size="3"
-                        onChange={handleChange}
-                      />
-                    </td>
-                    <td className="border px-1">
-                      <input
-                        defaultValue={
-                          datafromdb[linevalue[selpart][index] + "_VNDE_Vms"]
-                        }
-                        name={linevalue[selpart][index] + "_VNDE_Vms"}
+                        name={linevalue.current[selpart][index] + "_VDE_Hms"}
                         className={" w-[90%] border pl-1"}
                         type="number"
                         step="any"
@@ -329,9 +305,11 @@ function ChecklistLine() {
                     <td className="border px-1">
                       <input
                         defaultValue={
-                          datafromdb[linevalue[selpart][index] + "_VNDE_Vge"]
+                          datafromdb[
+                            linevalue.current[selpart][index] + "_VDE_Hge"
+                          ]
                         }
-                        name={linevalue[selpart][index] + "_VNDE_Vge"}
+                        name={linevalue.current[selpart][index] + "_VDE_Hge"}
                         className={" w-[90%] border pl-1"}
                         type="number"
                         step="any"
@@ -342,9 +320,11 @@ function ChecklistLine() {
                     <td className="border px-1">
                       <input
                         defaultValue={
-                          datafromdb[linevalue[selpart][index] + "_VNDE_Hms"]
+                          datafromdb[
+                            linevalue.current[selpart][index] + "_VNDE_Vms"
+                          ]
                         }
-                        name={linevalue[selpart][index] + "_VNDE_Hms"}
+                        name={linevalue.current[selpart][index] + "_VNDE_Vms"}
                         className={" w-[90%] border pl-1"}
                         type="number"
                         step="any"
@@ -356,9 +336,11 @@ function ChecklistLine() {
                     <td className="border px-1">
                       <input
                         defaultValue={
-                          datafromdb[linevalue[selpart][index] + "_VNDE_Hge"]
+                          datafromdb[
+                            linevalue.current[selpart][index] + "_VNDE_Vge"
+                          ]
                         }
-                        name={linevalue[selpart][index] + "_VNDE_Hge"}
+                        name={linevalue.current[selpart][index] + "_VNDE_Vge"}
                         className={" w-[90%] border pl-1"}
                         type="number"
                         step="any"
@@ -369,9 +351,27 @@ function ChecklistLine() {
                     <td className="border px-1">
                       <input
                         defaultValue={
-                          datafromdb[linevalue[selpart][index] + "_TempM"]
+                          datafromdb[
+                            linevalue.current[selpart][index] + "_VNDE_Hms"
+                          ]
                         }
-                        name={linevalue[selpart][index] + "_TempM"}
+                        name={linevalue.current[selpart][index] + "_VNDE_Hms"}
+                        className={" w-[90%] border pl-1"}
+                        type="number"
+                        step="any"
+                        size="3"
+                        onChange={handleChange}
+                      />
+                    </td>
+
+                    <td className="border px-1">
+                      <input
+                        defaultValue={
+                          datafromdb[
+                            linevalue.current[selpart][index] + "_VNDE_Hge"
+                          ]
+                        }
+                        name={linevalue.current[selpart][index] + "_VNDE_Hge"}
                         className={" w-[90%] border pl-1"}
                         type="number"
                         step="any"
@@ -382,9 +382,26 @@ function ChecklistLine() {
                     <td className="border px-1">
                       <input
                         defaultValue={
-                          datafromdb[linevalue[selpart][index] + "_ArusR"]
+                          datafromdb[
+                            linevalue.current[selpart][index] + "_TempM"
+                          ]
                         }
-                        name={linevalue[selpart][index] + "_ArusR"}
+                        name={linevalue.current[selpart][index] + "_TempM"}
+                        className={" w-[90%] border pl-1"}
+                        type="number"
+                        step="any"
+                        size="3"
+                        onChange={handleChange}
+                      />
+                    </td>
+                    <td className="border px-1">
+                      <input
+                        defaultValue={
+                          datafromdb[
+                            linevalue.current[selpart][index] + "_ArusR"
+                          ]
+                        }
+                        name={linevalue.current[selpart][index] + "_ArusR"}
                         className={" w-full border pl-1"}
                         type="number"
                         step="any"
@@ -395,9 +412,11 @@ function ChecklistLine() {
                     <td className="border px-1 ">
                       <input
                         defaultValue={
-                          datafromdb[linevalue[selpart][index] + "_ArusS"]
+                          datafromdb[
+                            linevalue.current[selpart][index] + "_ArusS"
+                          ]
                         }
-                        name={linevalue[selpart][index] + "_ArusS"}
+                        name={linevalue.current[selpart][index] + "_ArusS"}
                         className={" w-full border pl-1"}
                         type="number"
                         step="any"
@@ -408,9 +427,11 @@ function ChecklistLine() {
                     <td className="border px-1 ">
                       <input
                         defaultValue={
-                          datafromdb[linevalue[selpart][index] + "_ArusT"]
+                          datafromdb[
+                            linevalue.current[selpart][index] + "_ArusT"
+                          ]
                         }
-                        name={linevalue[selpart][index] + "_ArusT"}
+                        name={linevalue.current[selpart][index] + "_ArusT"}
                         className={" w-full border pl-1"}
                         type="number"
                         step="any"
@@ -421,9 +442,9 @@ function ChecklistLine() {
                     <td className="border px-1 pt-1">
                       <textarea
                         defaultValue={
-                          datafromdb[linevalue[selpart][index] + "_Ket"]
+                          datafromdb[linevalue.current[selpart][index] + "_Ket"]
                         }
-                        name={linevalue[selpart][index] + "_Ket"}
+                        name={linevalue.current[selpart][index] + "_Ket"}
                         className={"w-[90%] border pl-1"}
                         type="text"
                         onChange={handleChange}
