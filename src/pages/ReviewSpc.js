@@ -3,7 +3,7 @@ import SectionFooter from "../components/SectionFooter";
 import Cookies from "universal-cookie";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef } from "react";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -75,34 +75,22 @@ function ReviewSpc() {
   const linedata = useRef(dataparts.dataparts); ///state for selection
   const linevalue = useRef(dataparts.dbalias); ///state for selection
   const [item, setItem] = useState(linedata.current[selpart][0]);
+  const [itemdb, setItemdb] = useState(linevalue.current[selpart][0]);
+  const [dateFrom, setdateFrom] = useState("");
+  const [dateUntil, setdateUntil] = useState("");
   const sel = useRef(arrpart.current[0]); //send to db
   let refdata = useRef();
 
   const handleFetchData = () => {
     console.log("fetching");
-    //setLoading(true);
-    fetch("http://localhost:5000/checklist/line/", {
-      method: "post",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        machinename: machinename.current,
-        partname: sel.current,
-        Tanggal: dates.toISOString().slice(0, 10).replace("T", " "),
-        Nama: cookies.get("name"),
-      }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        //console.log(data.result[0]);
-        Promise.all(data.result).then((values) => {
-          setDatafromdb(values[0]);
-          //console.log(values);
-          //setLoading(false);
-        });
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
+    const datas = {
+      item: itemdb,
+      datefrom: dateFrom,
+      dateuntil: dateUntil,
+      machinename: machinename.current,
+      partname: sel.current,
+    };
+    console.log(datas);
   };
 
   const selectHandler = (event) => {
@@ -116,7 +104,7 @@ function ReviewSpc() {
   };
   const selclickItem = (evt) => {
     setItem(evt.target.name);
-    console.log(item);
+    setItemdb(evt.target.value);
   };
 
   return (
@@ -169,6 +157,7 @@ function ReviewSpc() {
                   <input
                     type="date"
                     className="shadow-md rounded-md px-2 py-1 h-8"
+                    onChange={(e) => setdateFrom(e.target.value)}
                   ></input>
                 </div>
 
@@ -177,10 +166,14 @@ function ReviewSpc() {
                   <input
                     type="date"
                     className="shadow-md rounded-md px-2 py-1 h-8"
+                    onChange={(e) => setdateUntil(e.target.value)}
                   ></input>
                 </div>
                 <div className="flex flex-col">
-                  <button className="w-fit shadow-md text-white bg-[#173D6E] hover:bg-[#9BB6D5] rounded-md px-2 py-1 h-8">
+                  <button
+                    onClick={handleFetchData}
+                    className="w-fit shadow-md text-white bg-[#173D6E] hover:bg-[#9BB6D5] rounded-md px-2 py-1 h-8"
+                  >
                     Open data
                   </button>
                 </div>
