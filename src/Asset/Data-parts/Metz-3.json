@@ -1,10 +1,9 @@
 {"dataparts": {
-    "Daily":["Unwind","Fan Motor Unwind","Rewind","Fan Motor Rewind"],
-    "Weekly":["Coating Window","Pivot","Trolley Drive","Ruvac Pump 1","Ruvac Pump 2","Root Pump 1","Root Pump 2","Sogevac Pump 1","Sogevac Pump 2","Sogevac Pump 3","Compressor 1 GWK","Compressor 2 GWK","Cooling Pump","Heating Pump","Evaporator","Wire Feed 1","Wire Feed 2","Wire Feed 3","Wire Feed 4","Wire Feed 5","Wire Feed 6","Wire Feed 7","Wire Feed 8","Wire Feed 9","Wire Feed 10","Wire Feed 11","Wire Feed 12","Wire Feed 13","Wire Feed 14", "Wire Feed 15","Wire Feed 16","Wire Feed 17","Wire Feed 18","Wire Feed 19","Wire Feed 20","Wire Feed 21","Wire Feed 22","Wire Feed 23","Wire Feed 24","Wire Feed 25","Wire Feed 26","Wire Feed 27","Wire Feed 28","Wire Feed 29","Wire Feed 30","Wire Feed 31","Wire Feed 32"],
-    "Monthly":["Heater Difusi 1 ","Heater Difusi 2 ","Heater Difusi 3 ","Heater Difusi 4 ","Plasma ","Polycold #1 Winding ","Polycold #2 Winding ","Polycold Coating "]
+    "daily":["Unwind","Fan Motor Unwind","Rewind","Fan Motor Rewind"],
+    "weekly":["Coating Window","Pivot","Trolley Drive","Ruvac Pump 1","Ruvac Pump 2","Root Pump 1","Root Pump 2","Sogevac Pump 1","Sogevac Pump 2","Sogevac Pump 3","Compressor 1 GWK","Compressor 2 GWK","Cooling Pump","Heating Pump","Evaporator","Wire Feed 1","Wire Feed 2","Wire Feed 3","Wire Feed 4","Wire Feed 5","Wire Feed 6","Wire Feed 7","Wire Feed 8","Wire Feed 9","Wire Feed 10","Wire Feed 11","Wire Feed 12","Wire Feed 13","Wire Feed 14", "Wire Feed 15","Wire Feed 16","Wire Feed 17","Wire Feed 18","Wire Feed 19","Wire Feed 20","Wire Feed 21","Wire Feed 22","Wire Feed 23","Wire Feed 24","Wire Feed 25","Wire Feed 26","Wire Feed 27","Wire Feed 28","Wire Feed 29","Wire Feed 30","Wire Feed 31","Wire Feed 32"],
+    "monthly":["Heater Difusi 1 ","Heater Difusi 2 ","Heater Difusi 3 ","Heater Difusi 4 ","Plasma ","Polycold #1 Winding ","Polycold #2 Winding ","Polycold Coating "]
 },"dbalias":{
     "daily":[  "Unw",
-    "FanMtrUnwA",
     "FanMtrUnw",
     "Rwd",
     "FanMtrRwd",

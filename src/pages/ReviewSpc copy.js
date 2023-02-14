@@ -43,19 +43,7 @@ function ReviewSpc() {
   const cookies = new Cookies();
   const dates = new Date();
   const { state } = useLocation();
-  const machine = [
-    "Line-4",
-    "Line-5",
-    "Line-6",
-    "Line-7",
-    "Coat-1",
-    "Coat-3",
-    "Coat-4",
-    "Metz-1",
-    "Metz-2",
-    "Metz-3",
-    "Metz-4",
-  ];
+  const machine = ["Line-4", "Line-5", "Line-6", "Line-7"];
   const machinename = useRef(state.machine); //setmachine name
   const found = machine.find((element) => element === machinename.current); //search machine name
   const dataparts = require(`../Asset/Data-parts/${found}.json`); //load data base on machine name
@@ -101,9 +89,7 @@ function ReviewSpc() {
   };
 
   const handleTrenddata = async (dataarr, itemdb) => {
-    let machinenameslc = machinename.current.slice(0, 4);
-    let datavibrasi = {};
-    console.log(machinenameslc);
+    console.log(dataarr);
     let labels = [];
     let VDE_Vms = [];
     let VDE_Vge = [];
@@ -139,7 +125,7 @@ function ReviewSpc() {
     });
     // console.log(VDE_Vms);
 
-    const datavibrasiLine = {
+    const datavibrasi = {
       labels,
       datasets: [
         {
@@ -192,35 +178,6 @@ function ReviewSpc() {
         },
       ],
     };
-    const datavibrasiCT = {
-      labels,
-      datasets: [
-        {
-          label: "Vertical DE mm/s",
-          data: VDE_Vms,
-          borderColor: "rgb(255, 0, 0)",
-          backgroundColor: "rgba(255, 0, 0, 0.5)",
-        },
-        {
-          label: "Vertical DE gE",
-          data: VDE_Vge,
-          borderColor: "rgb(255, 128, 0)",
-          backgroundColor: "rgba(255, 128, 0, 0.5)",
-        },
-        {
-          label: "Vertical NDE mm/s",
-          data: VNDE_Vms,
-          borderColor: "rgb(0, 255, 255)",
-          backgroundColor: "rgba(0, 255, 255, 0.5)",
-        },
-        {
-          label: "Vertical NDE gE",
-          data: VNDE_Vge,
-          borderColor: "rgb(0, 128, 255)",
-          backgroundColor: "rgba(0, 128, 255, 0.5)",
-        },
-      ],
-    };
     const datatemp = {
       labels,
       datasets: [
@@ -255,9 +212,7 @@ function ReviewSpc() {
         },
       ],
     };
-    machinenameslc === "Coat" || machinenameslc === "Metz"
-      ? (datavibrasi = datavibrasiCT)
-      : (datavibrasi = datavibrasiLine);
+
     return { datavibrasi, datatemp, dataarus };
     // , datatemp, dataarus
   };
@@ -272,7 +227,7 @@ function ReviewSpc() {
     setItem(evt.target.name);
     setItemdb(evt.target.value);
   };
-  // console.log(dataVib);
+  console.log(dataVib);
   return (
     <>
       <SectionHeader />

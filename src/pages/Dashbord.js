@@ -180,7 +180,7 @@ function Dashbord() {
                       --Choose View--
                     </option>
                     <option value="spc">Specified</option>
-                    <option value="gnr">General</option>
+                    {/* <option value="gnr">General</option> */}
                   </select>
                 </div>
               ) : (

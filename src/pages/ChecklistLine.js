@@ -21,9 +21,10 @@ function ChecklistLine() {
   const linevalue = useRef(dataparts.dbalias); ///state for selection
   const sel = useRef(arrpart.current[0]); //send to db
   let refdata = useRef();
+  let datefromdb = useRef();
 
   const handleFetchData = () => {
-    console.log("fetching");
+    // console.log("fetching");
     //setLoading(true);
     fetch("http://localhost:5000/checklist/line/", {
       method: "post",
@@ -40,7 +41,8 @@ function ChecklistLine() {
         //console.log(data.result[0]);
         Promise.all(data.result).then((values) => {
           setDatafromdb(values[0]);
-          //console.log(values);
+          datefromdb.current = values[0].Tanggal;
+          // console.log(datefromdb.current);
           //setLoading(false);
         });
       })
@@ -71,14 +73,14 @@ function ChecklistLine() {
     refdata.current = {
       ...refdata.current,
       Nama: cookies.get("name"),
-      Tanggal: dates.toISOString().slice(0, 10).replace("T", " "),
+      Tanggal: datefromdb.current,
       machinename: machinename.current,
       partname: sel.current,
     };
     //send data here
     //setLoading(true);
 
-    console.log(refdata.current);
+    //console.log(refdata.current);
     try {
       const res = await axios.post(
         "http://localhost:5000/checklist/line/update/",
@@ -137,7 +139,7 @@ function ChecklistLine() {
     console.log(Object.keys(datafromdb).length);
     console.log(datafromdb);
   };
-
+  //console.log(datafromdb);
   return (
     <>
       <div className="flex flex-col h-screen bg-slate-100">
@@ -459,7 +461,7 @@ function ChecklistLine() {
         <div className="flex flex-col basis-[5%] h-full bg-slate-1004">
           <div className="flex flex-row justify-center pt-3 py-3 text-base sm:text-lg md:text-xl">
             <button
-              onClick={resetStt}
+              //onClick={resetStt}
               className=" w-fit text-white bg-[#173D6E] hover:bg-[#9BB6D5] font-medium rounded-md px-5 py-2.5 mr-2"
             >
               Reset

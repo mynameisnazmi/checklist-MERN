@@ -1,12 +1,13 @@
 {"dataparts":{
-    "Daily" : ["Unwind","Main Drive","Gravur","Cooling Roll 1","Gravur Roll Latex","Suction Roll","Cooling Roll 2","Rewind A","Rewind B"],
-    "Weekly": ["Fan Turret Unwind","Fan Unwind","Fan Main Drive","Blower Corona","Exhaust Corona","Fan Gravur Rool Primer","Pump Coater Prime","Dryer #1 Sectoin #1.1","Dryer #1 Sectoin #1.2","Dryer #1 Sectoin #2.1","Dryer #1 Sectoin #2.2","Fan Cooling roll 1","Fan Gravur Rool Latex","Pump Coater Latex","Mixer Silo Coater Latex","Exhaust Infra Red","Exhaust Suction Roll","Dryer #2 Sectoin #1","Dryer #2 Sectoin #2","Dryer #2 Sectoin #3","Dryer #2 Sectoin #4","Dryer #2 Sectoin #5","Dryer Exhaust In","Dryer Exhaust Out","Fan Cooling roll 2","Fan Rewind A","Fan Rewind B"],
-    "Monthly": ["U/W Turret","R/W Turret","Pump Oil Dryer #1.1","Pump Oil Dryer #1.2","Pump Oil Dryer #2.1","Pump Oil Dryer #2.2","Pump Oil Dryer #2.3","Pump Oil Dryer #2.5","Electroda Corona","Dryer IR.1","Dryer IR.2","Dryer IR.3","Dryer IR.4","Dryer IR.5","Dryer IR.6","Dryer IR.7","Dryer IR.8","Dryer IR.9"]
+    "daily" : ["Unwind","Main Drive","Gravur Roll Primer","Cooling Roll 1","Gravur Roll Latex","Suction Roll","Cooling Roll 2","Rewind A","Rewind B"],
+    "weekly": ["Fan Turret Unwind","Fan Unwind","Fan Main Drive","Blower Corona","Exhaust Corona","Fan Gravur Rool Primer","Pump Coater Prime","Dryer #1 Sectoin #1.1","Dryer #1 Sectoin #1.2","Dryer #1 Sectoin #2.1","Dryer #1 Sectoin #2.2","Fan Cooling roll 1","Fan Gravur Rool Latex","Pump Coater Latex","Mixer Silo Coater Latex","Exhaust Infra Red","Exhaust Suction Roll","Dryer #2 Sectoin #1","Dryer #2 Sectoin #2","Dryer #2 Sectoin #3","Dryer #2 Sectoin #4","Dryer #2 Sectoin #5","Dryer Exhaust In","Dryer Exhaust Out","Fan Cooling roll 2","Fan Rewind A","Fan Rewind B"],
+    "monthly": ["U/W Turret","R/W Turret","Pump Oil Dryer #1.1","Pump Oil Dryer #1.2","Pump Oil Dryer #2.1","Pump Oil Dryer #2.2","Pump Oil Dryer #2.3","Pump Oil Dryer #2.5","Electroda Corona","Dryer IR.1","Dryer IR.2","Dryer IR.3","Dryer IR.4","Dryer IR.5","Dryer IR.6","Dryer IR.7","Dryer IR.8","Dryer IR.9"]
 }, "dbalias":{
 "daily":[  "Unw",
 "MainDrv",
 "GrvRolPrm",
 "ColRol1",
+"GrvRolLtx",
 "SucRol",
 "ColRol2",
 "RwdA",
