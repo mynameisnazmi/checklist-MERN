@@ -9,7 +9,8 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   // BrowserRouter for activate route
   // basename={process.env.PUBLIC_URL}
-  <Router basename={process.env.PUBLIC_URL}>
+  <Router>
+    {/* basename={process.env.PUBLIC_URL} */}
     <App />
   </Router>
 );

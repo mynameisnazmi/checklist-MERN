@@ -12,9 +12,10 @@ import axios from "axios";
 export default function App() {
   axios.defaults.baseURL = "http://localhost:5000";
   axios.defaults.headers.post["Content-Type"] = "application/json";
+
   return (
     <>
-      <Routes>
+      <Routes forceRefresh={true}>
         <Route path="/" element={<Login />} />
         <Route path="login" element={<Login />} />
         <Route path="dashbord" element={<Dashbord />} />
