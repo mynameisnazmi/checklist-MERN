@@ -23,7 +23,7 @@ function ChecklistLine() {
   let refdata = useRef();
   let datefromdb = useRef();
 
-  const handleFetchData = () => {
+  const handleFetchData = async () => {
     // console.log("fetching");
     //setLoading(true);
     fetch("http://localhost:5000/checklist/line/", {
@@ -66,7 +66,9 @@ function ChecklistLine() {
   //     console.log(error.message);
   //   }
   // };
-  const resetStt = () => {};
+  const resetStt = () => {
+    document.getElementById("forms").reset();
+  };
 
   const handleUpData = async () => {
     console.log("updating");
@@ -131,14 +133,7 @@ function ChecklistLine() {
   }, []);
 
   //console.log(sel.current);
-  const test = () => {
-    //console.log(linedata["casting"]);
-    //console.log(linevalue["casting"][0]);
-    //console.log(linevalue["casting"][0] + "_ArusT");
-    //console.log(datalength);
-    console.log(Object.keys(datafromdb).length);
-    console.log(datafromdb);
-  };
+
   //console.log(datafromdb);
   return (
     <>
@@ -461,7 +456,7 @@ function ChecklistLine() {
         <div className="flex flex-col basis-[5%] h-full bg-slate-1004">
           <div className="flex flex-row justify-center pt-3 py-3 text-base sm:text-lg md:text-xl">
             <button
-              //onClick={resetStt}
+              onClick={resetStt}
               className=" w-fit text-white bg-[#173D6E] hover:bg-[#9BB6D5] font-medium rounded-md px-5 py-2.5 mr-2"
             >
               Reset

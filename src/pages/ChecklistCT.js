@@ -31,7 +31,7 @@ function ChecklistCT() {
   let refdata = useRef();
   let datefromdb = useRef();
 
-  const handleFetchData = () => {
+  const handleFetchData = async () => {
     // console.log("fetching");
     //setLoading(true);
     fetch("http://localhost:5000/checklist/line/", {
@@ -123,12 +123,6 @@ function ChecklistCT() {
         </td>
       );
     }
-  };
-  const tesat = {
-    machinename: machinename.current,
-    partname: sel.current,
-    Tanggal: dates.toISOString().slice(0, 10).replace("T", " "),
-    Nama: cookies.get("name"),
   };
   //console.log(tesat);
   return (
