@@ -1,13 +1,14 @@
 import SectionHeader from "../components/SectionHeader";
 import SectionFooter from "../components/SectionFooter";
 import { useState, useEffect, useRef } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Cookies from "universal-cookie";
 
 function ChecklistCT() {
   const cookies = new Cookies();
   const dates = new Date();
+  const navigate = useNavigate();
   const { state } = useLocation();
   const machine = [
     "Coat-1",
@@ -30,6 +31,13 @@ function ChecklistCT() {
   const sel = useRef(arrpart.current[0]); //send to db
   let refdata = useRef();
   let datefromdb = useRef();
+
+  const checkCookis = () => {
+    if (!cookies.get("name")) {
+      navigate("/login");
+    }
+    //console.log(cookies.get("name"));
+  };
 
   const handleFetchData = async () => {
     // console.log("fetching");
@@ -100,6 +108,7 @@ function ChecklistCT() {
     //console.log(machinename.current);
   };
   useEffect(() => {
+    checkCookis();
     handleFetchData();
   }, []);
 

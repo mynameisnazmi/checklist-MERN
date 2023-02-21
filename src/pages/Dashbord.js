@@ -2,11 +2,13 @@ import checklist from "../Asset/centang.png";
 import review from "../Asset/review.png";
 import { useNavigate } from "react-router-dom";
 import React, { useState, useEffect, useRef } from "react";
+import Cookies from "universal-cookie";
 import SectionHeader from "../components/SectionHeader";
 import SectionFooter from "../components/SectionFooter";
 
 function Dashbord() {
   const navigate = useNavigate();
+  const cookies = new Cookies();
   const [mode, setMode] = useState("");
   const [machine, setMachine] = useState("");
   const [form, setForm] = useState("");
@@ -23,7 +25,16 @@ function Dashbord() {
       },
     });
   };
+
+  const checkCookis = () => {
+    if (!cookies.get("name")) {
+      navigate("/login");
+    }
+    //console.log(cookies.get("name"));
+  };
+
   useEffect(() => {
+    checkCookis();
     if (mode === "checklist") {
       if (form === "elc") {
         mchslice.current = machine.slice(0, 4);
@@ -180,7 +191,7 @@ function Dashbord() {
                       --Choose View--
                     </option>
                     <option value="spc">Specified</option>
-                    <option value="gnr">General</option>
+                    {/* <option value="gnr">General</option> */}
                   </select>
                 </div>
               ) : (

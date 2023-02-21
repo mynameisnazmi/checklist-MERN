@@ -2,8 +2,8 @@ import SectionHeader from "../components/SectionHeader";
 import SectionFooter from "../components/SectionFooter";
 import Cookies from "universal-cookie";
 import axios from "axios";
-import { useLocation } from "react-router-dom";
-import { useState, useRef } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useState, useRef, useEffect } from "react";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -15,7 +15,6 @@ import {
   Legend,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
-import { faker } from "@faker-js/faker";
 
 ChartJS.register(
   CategoryScale,
@@ -40,8 +39,8 @@ export const options = {
 };
 
 function ReviewSpc() {
+  const navigate = useNavigate();
   const cookies = new Cookies();
-  const dates = new Date();
   const { state } = useLocation();
   const machine = [
     "Line-4",
@@ -62,7 +61,6 @@ function ReviewSpc() {
   const parts = Object.keys(dataparts.dataparts); //load part machine
   const arrpart = useRef(parts); //state for selection
   const [selpart, setSelpart] = useState(arrpart.current[0]);
-  const [datafromdb, setDatafromdb] = useState([]);
   const linedata = useRef(dataparts.dataparts); ///state for selection
   const linevalue = useRef(dataparts.dbalias); ///state for selection
   const [item, setItem] = useState(linedata.current[selpart][0]);
@@ -73,7 +71,13 @@ function ReviewSpc() {
   const [dataTem, setdataTem] = useState({ datasets: [], labels: [] });
   const [dataArs, setdataArs] = useState({ datasets: [], labels: [] });
   const sel = useRef(arrpart.current[0]); //send to db
-  let refdata = useRef();
+
+  const checkCookis = () => {
+    if (!cookies.get("name")) {
+      navigate("/login");
+    }
+    //console.log(cookies.get("name"));
+  };
 
   const handleFetchData = async () => {
     const datas = {
@@ -273,6 +277,11 @@ function ReviewSpc() {
     setItemdb(evt.target.value);
   };
   // console.log(dataVib);
+
+  useEffect(() => {
+    checkCookis();
+  }, []);
+
   return (
     <>
       <SectionHeader />

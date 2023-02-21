@@ -50,7 +50,9 @@ function Login() {
       if (res.data.status_code === 200) {
         cookies.set("ID", res.data.info[0].ID, { path: "/" });
         cookies.set("typeUser", res.data.info[0].typeUser, { path: "/" });
-        cookies.set("name", res.data.info[0].first_name, { path: "/" });
+        cookies.set("name", res.data.info[0].first_name, {
+          path: "/",
+        });
         cookies.set("departemen", res.data.info[0].departemen, {
           path: "/",
         });
