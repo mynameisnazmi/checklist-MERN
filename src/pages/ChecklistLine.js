@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Cookies from "universal-cookie";
+import ReactLoading from "react-loading";
 
 function ChecklistLine() {
   const cookies = new Cookies();
@@ -23,6 +24,7 @@ function ChecklistLine() {
   const sel = useRef(arrpart.current[0]); //send to db
   let refdata = useRef();
   let datefromdb = useRef();
+  const [loading, setLoading] = useState(false);
 
   const checkCookis = () => {
     if (!cookies.get("name")) {
@@ -32,31 +34,34 @@ function ChecklistLine() {
   };
 
   const handleFetchData = async () => {
-    // console.log("fetching");
-    //setLoading(true);
-    fetch("http://localhost:5000/checklist/line/", {
-      method: "post",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        machinename: machinename.current,
-        partname: sel.current,
-        Tanggal: dates.toISOString().slice(0, 10).replace("T", " "),
-        Nama: cookies.get("name"),
-      }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        //console.log(data.result[0]);
-        Promise.all(data.result).then((values) => {
-          setDatafromdb(values[0]);
-          datefromdb.current = values[0].Tanggal;
-          // console.log(datefromdb.current);
-          //setLoading(false);
-        });
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
+    setLoading(true);
+    const datas = {
+      machinename: machinename.current,
+      partname: sel.current,
+      Tanggal: dates.toISOString().slice(0, 10).replace("T", " "),
+      Nama: cookies.get("name"),
+    };
+    try {
+      const res = await axios.post("/checklist/line/", datas);
+      //console.log(res);
+      if (res.status === 200) {
+        if (res.data.result.length === 1) {
+          //console.log(res.data.result[0]);
+          Promise.all(res.data.result).then((values) => {
+            setDatafromdb(values[0]);
+            datefromdb.current = values[0].Tanggal;
+            //console.log(values);
+            //setLoading(false);
+          });
+          setLoading(false);
+        }
+      } else {
+        setLoading(false);
+        alert(res.message);
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
   //console.log(Loading);
 
@@ -74,12 +79,10 @@ function ChecklistLine() {
   //     console.log(error.message);
   //   }
   // };
-  const resetStt = () => {
-    document.getElementById("forms").reset();
-  };
 
   const handleUpData = async () => {
-    console.log("updating");
+    //console.log("updating");
+    setLoading(true);
     refdata.current = {
       ...refdata.current,
       Nama: cookies.get("name"),
@@ -92,13 +95,12 @@ function ChecklistLine() {
 
     //console.log(refdata.current);
     try {
-      const res = await axios.post(
-        "http://localhost:5000/checklist/line/update/",
-        refdata.current
-      );
+      const res = await axios.post("/checklist/line/update/", refdata.current);
+      // console.log(res.status);
       if (res.status === 200) {
         refdata.current = {};
-        console.log(refdata.current);
+        setLoading(false);
+        // console.log(refdata.current);
       }
       //setLoading(false);
     } catch (error) {
@@ -128,12 +130,10 @@ function ChecklistLine() {
 
   const selectHandler = (event) => {
     console.log("change part");
-    //setDataform();
     document.getElementById("forms").reset();
     setSelpart(event.target.value);
     sel.current = event.target.value;
     handleFetchData();
-    //console.log(machinename.current);
   };
 
   useEffect(() => {
@@ -162,6 +162,17 @@ function ChecklistLine() {
                 </option>
               ))}
             </select>
+            {loading === false ? (
+              <></>
+            ) : (
+              <ReactLoading
+                className="flex bg-slate-100"
+                type="bars"
+                color="#173D6E"
+                height={30}
+                width={50}
+              />
+            )}
           </div>
         </div>
         <div className="relative basis-[69%] bg-white items-start justify-center w-screen overflow-x-auto">
@@ -465,17 +476,11 @@ function ChecklistLine() {
         <div className="flex flex-col basis-[5%] h-full bg-slate-1004">
           <div className="flex flex-row justify-center pt-3 py-3 text-base sm:text-lg md:text-xl">
             <button
-              onClick={resetStt}
-              className=" w-fit text-white bg-[#173D6E] hover:bg-[#9BB6D5] font-medium rounded-md px-5 py-2.5 mr-2"
-            >
-              Reset
-            </button>
-            <button
               type="submit"
               onClick={handleUpData}
               className=" w-fit text-white bg-[#173D6E] hover:bg-[#9BB6D5] font-medium rounded-md px-5 py-2.5 ml-2"
             >
-              Submit
+              Save
             </button>
           </div>
           <SectionFooter />

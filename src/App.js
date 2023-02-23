@@ -8,9 +8,8 @@ import ReviewSpc from "./pages/ReviewSpc";
 import axios from "axios";
 
 export default function App() {
-  axios.defaults.baseURL = "http://localhost:5000";
-  axios.defaults.headers.post["Content-Type"] = "application/json";
-
+  axios.defaults.baseURL = "http://arghapedia:5000";
+  //axios.defaults.headers.post["Content-Type"] = "application/json";
   return (
     <>
       <Routes>

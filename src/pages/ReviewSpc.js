@@ -88,7 +88,7 @@ function ReviewSpc() {
       partname: sel.current,
     };
     try {
-      const fec = await axios.get("http://localhost:5000/checklist/line/", {
+      const fec = await axios.get("/checklist/line/", {
         params: datas,
       });
       let data = await handleTrenddata(fec.data.result, itemdb);

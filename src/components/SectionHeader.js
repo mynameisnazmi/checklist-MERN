@@ -1,4 +1,4 @@
-import { Link, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { ArrowLeftOnRectangleIcon } from "@heroicons/react/24/solid";
 import logo from "../Asset/logo.png";
 import { useEffect, useState } from "react";
@@ -13,8 +13,23 @@ function SectionHeader() {
   // console.log(cookies.get("typeUser"));
   const name = cookies.get("name");
   const departemen = cookies.get("departemen");
-
   const loc = useLocation();
+  const navigate = useNavigate();
+
+  const backButton = () => {
+    if (loc.pathname === "/dashbord") {
+      cookies.remove("ID", { path: "/" });
+      cookies.remove("typeUser", { path: "/" });
+      cookies.remove("name", { path: "/" });
+      cookies.remove("departemen", { path: "/" });
+      //console.log(cookies.get("name"));
+      navigate("/login");
+    } else {
+      //console.log(cookies.get("name"));
+      navigate("/dashbord");
+    }
+  };
+
   const [time, setTime] = useState(new Date());
   useEffect(() => {
     setInterval(() => setTime(new Date()), 1000);
@@ -51,13 +66,14 @@ function SectionHeader() {
     <>
       <div
         name="section-head"
-        className="relative sm:static row-span-1 h-fit flex flex-col bg-[#E0F2FE] border-2 border-blue-900 sm:flex-row sm:h-[15vh]"
+        className="py-2 row-span-1 h-fit flex flex-col bg-[#E0F2FE] border-2 border-blue-900 
+        sm:flex-row sm:h-[15vh] sm:static sm:py-0"
       >
         {/* Row1 */}
 
         <div className="basis-1/4 flex flex-col">
           <img
-            className="m-auto w-1/3 h-auto sm:w-2/3 md:w-full px-2"
+            className="m-auto w-1/3 h-auto sm:w-56 md:w-full px-2"
             alt="logo"
             src={logo}
           />
@@ -79,12 +95,13 @@ function SectionHeader() {
           </div>
         </div>
 
-        <div className="basis-1/4">
-          <Link to={loc.pathname === "/dashbord" ? "/login" : "/dashbord"}>
-            <div className="flex flex-row justify-end w-full h-full">
-              <ArrowLeftOnRectangleIcon className="h-[86%] self-center w-2/3 max-sm:h-16" />
-            </div>
-          </Link>
+        <div className="static h-full sm:flex basis-1/4 flex-row justify-end">
+          <button
+            onClick={backButton}
+            className="absolute w-[18%] sm:w-[50%] right-0 top-0 sm:static"
+          >
+            <ArrowLeftOnRectangleIcon className="self-center w-full" />
+          </button>
         </div>
       </div>
     </>
