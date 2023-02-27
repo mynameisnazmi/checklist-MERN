@@ -281,7 +281,7 @@ function ChecklistLine() {
                           ]
                         }
                         name={linevalue.current[selpart][index] + "_VDE_Vms"}
-                        className={" w-[90%] border pl-1"}
+                        className={" w-[90%]  pl-1"}
                         type="number"
                         step="any"
                         size="3"
@@ -296,7 +296,7 @@ function ChecklistLine() {
                           ]
                         }
                         name={linevalue.current[selpart][index] + "_VDE_Vge"}
-                        className={" w-[90%] border pl-1"}
+                        className={" w-[90%]  pl-1"}
                         type="number"
                         step="any"
                         size="3"
@@ -311,7 +311,7 @@ function ChecklistLine() {
                           ]
                         }
                         name={linevalue.current[selpart][index] + "_VDE_Hms"}
-                        className={" w-[90%] border pl-1"}
+                        className={" w-[90%]  pl-1"}
                         type="number"
                         step="any"
                         size="3"
@@ -327,7 +327,7 @@ function ChecklistLine() {
                           ]
                         }
                         name={linevalue.current[selpart][index] + "_VDE_Hge"}
-                        className={" w-[90%] border pl-1"}
+                        className={" w-[90%]  pl-1"}
                         type="number"
                         step="any"
                         size="3"
@@ -342,7 +342,7 @@ function ChecklistLine() {
                           ]
                         }
                         name={linevalue.current[selpart][index] + "_VNDE_Vms"}
-                        className={" w-[90%] border pl-1"}
+                        className={" w-[90%]  pl-1"}
                         type="number"
                         step="any"
                         size="3"
@@ -358,7 +358,7 @@ function ChecklistLine() {
                           ]
                         }
                         name={linevalue.current[selpart][index] + "_VNDE_Vge"}
-                        className={" w-[90%] border pl-1"}
+                        className={" w-[90%]  pl-1"}
                         type="number"
                         step="any"
                         size="3"
@@ -373,7 +373,7 @@ function ChecklistLine() {
                           ]
                         }
                         name={linevalue.current[selpart][index] + "_VNDE_Hms"}
-                        className={" w-[90%] border pl-1"}
+                        className={" w-[90%]  pl-1"}
                         type="number"
                         step="any"
                         size="3"
@@ -389,7 +389,7 @@ function ChecklistLine() {
                           ]
                         }
                         name={linevalue.current[selpart][index] + "_VNDE_Hge"}
-                        className={" w-[90%] border pl-1"}
+                        className={" w-[90%]  pl-1"}
                         type="number"
                         step="any"
                         size="3"
@@ -404,7 +404,7 @@ function ChecklistLine() {
                           ]
                         }
                         name={linevalue.current[selpart][index] + "_TempM"}
-                        className={" w-[90%] border pl-1"}
+                        className={" w-[90%]  pl-1"}
                         type="number"
                         step="any"
                         size="3"
@@ -419,7 +419,7 @@ function ChecklistLine() {
                           ]
                         }
                         name={linevalue.current[selpart][index] + "_ArusR"}
-                        className={" w-full border pl-1"}
+                        className={" w-full  pl-1"}
                         type="number"
                         step="any"
                         size="3"
@@ -434,7 +434,7 @@ function ChecklistLine() {
                           ]
                         }
                         name={linevalue.current[selpart][index] + "_ArusS"}
-                        className={" w-full border pl-1"}
+                        className={" w-full  pl-1"}
                         type="number"
                         step="any"
                         size="3"
@@ -449,7 +449,7 @@ function ChecklistLine() {
                           ]
                         }
                         name={linevalue.current[selpart][index] + "_ArusT"}
-                        className={" w-full border pl-1"}
+                        className={" w-full  pl-1"}
                         type="number"
                         step="any"
                         size="3"
@@ -462,7 +462,7 @@ function ChecklistLine() {
                           datafromdb[linevalue.current[selpart][index] + "_Ket"]
                         }
                         name={linevalue.current[selpart][index] + "_Ket"}
-                        className={"w-[90%] border pl-1"}
+                        className={"w-[90%]  pl-1"}
                         type="text"
                         onChange={handleChange}
                       />

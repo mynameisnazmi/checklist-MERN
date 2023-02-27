@@ -287,9 +287,11 @@ function ReviewSpc() {
       <SectionHeader />
       <div className="flex flex-col h-fit bg-slate-100 ">
         <div className="flex flex-row">
-          <div className="flex flex-col basis-1/4 overflow-y-scroll h-[74vh]">
+          <div className="flex flex-col basis-1/4 overflow-y-scroll h-[79vh]">
             <div className="flex text-xl items-center justify-center h-fit m-2 self-center sm:flex-row sm:text-base">
-              <span className="text-xl pr-2">{machinename.current}</span>
+              <span className="text-xl pr-2 font-normal ">
+                {machinename.current}
+              </span>
               <select
                 value={selpart}
                 onChange={selectHandler}
@@ -312,7 +314,7 @@ function ReviewSpc() {
                   name={data}
                   onClick={selclickItem}
                   value={linevalue.current[selpart][index]}
-                  className="w-[80%] min-h-[7vh] border border-black text-center ml-3 my-3 bg-white shadow-lg rounded-sm"
+                  className="w-[80%] min-h-[7vh] border border-black text-center ml-3 my-3 text-white bg-[#173D6E] shadow-lg rounded-md hover:bg-[#9BB6D5]"
                 >
                   {data}
                 </button>
@@ -323,12 +325,12 @@ function ReviewSpc() {
           </div>
 
           <div name="grafik" className="flex flex-col text-center basis-3/4">
-            <div className="flex flex-col basis-[5%] mx-auto my-2">
-              <span className="text-xl">{item}</span>
+            <div className="flex border-b-2 w-full flex-col basis-[5%] mx-auto my-2">
+              <span className="text-2xl mb-2 font-normal">{item}</span>
 
-              <div className="flex flex-row">
+              <div className="flex flex-row mx-auto mb-4">
                 <div className="flex flex-row mx-2 items-center">
-                  <label className="text-lg pr-2">From</label>
+                  <label className="text-lg pr-2 ">From</label>
                   <input
                     type="date"
                     className="shadow-md rounded-md px-2 py-1 h-8"
@@ -359,21 +361,21 @@ function ReviewSpc() {
               name="grafik"
               className="flex flex-col basis-[85%] bg-white overflow-auto max-h-[69vh]"
             >
-              <div name="chart" className="flex flex-col">
-                <div>Vibrasi</div>
-                <div className="bg-slate-200 h-full">
+              <div name="chart" className="flex flex-col bg-slate-100">
+                <span className=" text-2xl">Vibrasi</span>
+                <div className="">
                   <Line options={options} data={dataVib} />
                 </div>
               </div>
-              <div name="chart" className="flex flex-col">
-                <div>Temp</div>
-                <div className="bg-slate-200 h-full">
+              <div name="chart" className="flex flex-col bg-slate-100 pt-4">
+                <div className=" text-2xl">Temp</div>
+                <div className=" ">
                   <Line options={options} data={dataTem} />
                 </div>
               </div>
-              <div name="chart" className="flex flex-col">
-                <div>Arus</div>
-                <div className="bg-slate-200 h-full">
+              <div name="chart" className="flex flex-col bg-slate-100 pt-4">
+                <div className=" text-2xl">Arus</div>
+                <div className=" ">
                   <Line options={options} data={dataArs} />
                 </div>
               </div>
